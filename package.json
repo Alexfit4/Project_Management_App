@@ -1,0 +1,25 @@
+{
+  "name": "project_management_app",
+  "version": "1.0.0",
+  "description": "project management app for group project managment ",
+  "main": "server.js",
+  "scripts": {
+    "test": "npm test",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Alexfit4/Project_Management_App.git"
+  },
+  "author": "Amir Ashtiany, Lu Hao, Mengyue Zhang, Johnnie Simpson",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Alexfit4/Project_Management_App/issues"
+  },
+  "homepage": "https://github.com/Alexfit4/Project_Management_App#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "express-handlebars": "^5.2.0",
+    "mysql": "^2.18.1"
+  }
+}
