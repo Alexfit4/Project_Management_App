@@ -3,16 +3,16 @@ INSERT INTO
 VALUES
     ('Landing Page'),
     ('Game'),
-    ('Shopify'),
+    ('Napster'),
     ('Weather App');
     
     INSERT INTO
     role (title, salary, project_id)
 VALUES
     ('Tech Lead', 50000, 2),
-    ('Graphic Design Lead', 30000, 1),
+    ('Lead Graphic Design', 30000, 1),
     ('Lead Engineer', 60000, 4),
-    ('Lead Graphic Design', 30000, 3),
+    ('Lead Digital Marketer', 30000, 3),
 
 INSERT INTO
     employee (

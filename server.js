@@ -24,28 +24,20 @@ const runSearch = () => {
 			message: "What would you like to do?",
 			choices: [
 				"View View",
-				"Add Data",
-				"Remove Data",
-				"Update Data",
-				"View Total Revenue",
+				"View Employee",
+				"View Log in",
 			],
 		})
 		.then((answer) => {
 			switch (answer.action) {
 				case "View Data":
-					viewData();
+					viewAll();
 					break;
-				case "Add Data":
-					addData();
+				case "View Employee":
+					viewEmployee();
 					break;
-				case "Remove Data":
-					deleteData();
-					break;
-				case "Update Data":
-					updateData();
-					break;
-				case "View Total Revenue":
-					totalSum();
+				case "View Log in":
+					viewLogIn();
 					break;
 				default:
 					console.log(`Invalid action: ${answer.action}`);
@@ -61,7 +53,6 @@ const viewEmployee = () => {
 	});
 };
 
-viewEmployee()
 
 
 
@@ -72,7 +63,6 @@ const viewAll = () => {
 	});
 };
 
-viewAll()
 
 const viewLogIn = () => {
 	const query = "SELECT first_name, last_name, email, password FROM employee";
@@ -81,4 +71,3 @@ const viewLogIn = () => {
 	});
 };
 
-viewLogIn()
