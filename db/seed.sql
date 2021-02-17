@@ -12,7 +12,7 @@ VALUES
     ('Tech Lead', 50000, 2),
     ('Lead Graphic Design', 30000, 1),
     ('Lead Engineer', 60000, 4),
-    ('Lead Digital Marketer', 30000, 3),
+    ('Lead Digital Marketer', 30000, 3);
 
 INSERT INTO
     employee (
