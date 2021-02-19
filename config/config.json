@@ -2,21 +2,20 @@
   "development": {
     "username": "root",
     "password": "password",
-    "database": "projectmanagement_db",
-    "host": "localhost",
-    "port": 3306,
+    "database": "projectManagement_db",
+    "host": "127.0.0.1",
     "dialect": "mysql"
   },
   "test": {
     "username": "root",
-    "password": "",
+    "password": null,
     "database": "database_test",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },
   "production": {
     "username": "root",
-    "password": "",
+    "password": null,
     "database": "database_production",
     "host": "127.0.0.1",
     "dialect": "mysql"
