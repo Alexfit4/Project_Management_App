@@ -13,8 +13,8 @@ CREATE TABLE role (
   id INT NOT NULL AUTO_INCREMENT,
   title VARCHAR(30) NULL,
   salary DECIMAL NULL,
-  project_id INT NULL,
-  FOREIGN KEY (project_id) REFERENCES project(id),
+  employee_id INT NULL,
+  FOREIGN KEY (employee_id) REFERENCES employee(id),
   PRIMARY KEY (id)
 );
 
