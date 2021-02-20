@@ -9,7 +9,9 @@ module.exports = (sequelize, DataTypes) => {
 		 */
 		static associate({ Project }) {
 			// define association here
-			this.belongsTo(Project, {foreignKey: 'id'})
+			this.belongsTo(Project, {
+				through: 'project_id',
+				foreignKey: 'id'})
 		}
 	}
 	Manager.init(
