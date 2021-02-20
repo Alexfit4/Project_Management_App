@@ -33,8 +33,8 @@ module.exports = (app) => {
       },
     }).then((dbEmployee) => res.json(dbEmployee));
   });
-
-  // PUT route for updating todos. We can get the updated todo data from req.body
+};
+// PUT route for updating todos. We can get the updated todo data from req.body
 //   app.put('/api/employees', (req, res) => {
 //     db.Manager.update(
 //       {
@@ -52,5 +52,3 @@ module.exports = (app) => {
 //     ).then((dbManager) => res.json(dbManager));
 //   });
 // };
-
-// Testing my link to the repo
