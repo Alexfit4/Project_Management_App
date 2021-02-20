@@ -11,9 +11,16 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Project.belongsToMany(models.Manager, {
+				through: 'id',
+				foreignKey: 'project_id'});
+      Project.belongsToMany(models.Employee, {
+				through: 'id',
+				foreignKey: 'project_id'});
     }
   };
   Project.init({
+    
     name: DataTypes.STRING
   }, {
     sequelize,
