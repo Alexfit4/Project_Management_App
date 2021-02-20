@@ -1,96 +1,85 @@
-"use strict;"
+$(document).on(click,'DOMContentLoaded', () => {
+  console.log('DOM loaded! 🚀');
 
-//  Initialize Firebase
-//  try {
-//    var config = {
-//      apiKey: "AIzaSyAm2RSNolPA0-tTI2r6TgdzDjm-WOZzFcg",
-//      authDomain: "scheduler-b013c.firebaseapp.com",
-//      databaseURL: "https://scheduler-b013c.firebaseio.com",
-//      projectId: "scheduler-b013c",
-//      storageBucket: "scheduler-b013c.appspot.com",
-//      messagingSenderId: "880747413210"
-//    };
-//    firebase.initializeApp(config);
+   //Get Employee
+   const getEmployees = () => {
+    fetch('/api/employees', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data) {
+          console.log('Success in getting post:', data);
+  
+          // Populate the form
+          empFirstName.value = data.first_name;
+          empLastName.value = data.last_name;
+          empTitle = data.title;
+          empSalary = data.salary;
+          empEmail = data.email;
 
-//  } catch (err) {
-//    alert("Database connection failed.");
-//  }
+          var newRow = $("<tr>").append(
+            $("<td>").text(empFirstName),
+            $("<td>").text(empLastName),
+            $("<td>").text(empTitle),
+            $("<td>").text(empSalary),
+            $("<td>").text(empEmail),
+            $("<button>").text("Edit").addClass("edit-emp-btn"),
+            $("<button>").text("Delete").addClass("delete-emp-btn"),
+          );
+       
+          // Append the new row to the table
+          $("#employee-table > tbody").append(newRow)
+       
+        }
+      })
+      .catch((err) => console.error(err));
 
-//  var database = firebase.database();
+  };
+  getEmployees()
 
- $("#add-employee-btn").on("click", function (event) {
-   event.preventDefault();
+  //Add Employee
+  const addEmployee = (e) => {
+    e.preventDefault();
+    const newEmployee = {
+      first_name: $("#employee-first-name").val().trim(),
+      last_name = $("#employee-last-name").val().trim(),
+      title = $("#employee-title").val().trim(),
+      salary = $("#employee-salary").val().trim(),
+      email = $("#employee-email").val().trim(),
+      password = $("#employee-password").val().trim(),
+    };
+    if (newEmployee) {
+      fetch('/api/employees', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(newEmployee),
+      })
+        .then((response) => response.json())
+        .then(() =>  getEmployees());
+    }
+  };
+  $("#add-employee-btn").on("click",addEmployee())
 
-   // Grabs user input
-   var empName = $("#employee-name-input").val().trim();
-   var empRole = $("#role-input").val().trim();
-   var empStart = moment($("#start-input").val().trim(), "MM/DD/YYYY").format("X");
-   var empRate = $("#rate-input").val().trim();
+  //Delete Employee
+  const deleteEmployees = (e) => {
+    e.stopPropagation();
+    const { id } = e.target.dataset;
 
-   // Creates local "temporary" object for holding employee data
-   var newEmp = {
-     name: empName,
-     role: empRole,
-     start: empStart,
-     rate: empRate
-   };
+    fetch(`/api/employees/${id}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }).then(getEmployees);
+  };
 
-   // Uploads employee data to the database
-   database.ref().push(newEmp);
-
-   // Logs everything to console
-   console.log(newEmp.name);
-   console.log(newEmp.role);
-   console.log(newEmp.start);
-   console.log(newEmp.rate);
-
-   alert("Employee successfully added");
-
-   // Clears all of the text-boxes
-   $("#employee-name-input").val("");
-   $("#role-input").val("");
-   $("#start-input").val("");
-   $("#rate-input").val("");
- });
-
- // Create Firebase event for adding employee to the database and a row in the html when a user adds an entry
- database.ref().on("child_added", function (childSnapshot) {
-   console.log(childSnapshot.val());
-
-   // Store everything into a variable.
-   var empName = childSnapshot.val().name;
-   var empRole = childSnapshot.val().role;
-   var empStart = childSnapshot.val().start;
-   var empRate = childSnapshot.val().rate;
-
-   // Employee Info
-   console.log(empName);
-   console.log(empRole);
-   console.log(empStart);
-   console.log(empRate);
-
-   // Prettify the employee start
-   var empStartPretty = moment.unix(empStart).format("MM/DD/YYYY");
-
-   // Calculate the months worked using hardcore math
-   // To calculate the months worked
-   var empMonths = moment().diff(moment(empStart, "X"), "months");
-   console.log(empMonths);
-
-   // Calculate the total billed rate
-   var empBilled = empMonths * empRate;
-   console.log(empBilled);
-
-   // Create the new row
-   var newRow = $("<tr>").append(
-     $("<td>").text(empName),
-     $("<td>").text(empRole),
-     $("<td>").text(empStartPretty),
-     $("<td>").text(empMonths),
-     $("<td>").text(empRate),
-     $("<td>").text(empBilled)
-   );
-
-   // Append the new row to the table
-   $("#employee-table > tbody").append(newRow);
- });
+  $(".delete-emp-btn").on("click",deleteEmployees);
+  
+  // Edit Employee
+});
