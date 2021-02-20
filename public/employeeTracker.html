@@ -1,106 +1,123 @@
 <!DOCTYPE html>
 
 <html lang="en-us">
+	<head>
+		<meta charset="UTF-8" />
+		<title>Employee Tracker</title>
 
-<head>
+		<!-- Bootstrap -->
+		<link
+			rel="stylesheet"
+			href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+		/>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
-  <meta charset="UTF-8">
-  <title>Employee Tracker</title>
+		<!-- Firebase Reference -->
+		<script src="https://www.gstatic.com/firebasejs/4.12.0/firebase.js"></script>
 
-  <!-- Bootstrap -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+		<!-- Moment.js Reference -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
 
-  <!-- Firebase Reference -->
-  <script src="https://www.gstatic.com/firebasejs/4.12.0/firebase.js"></script>
+		<style>
+			#employee-table th,
+			td {
+				display: inline-block;
+				width: 16.575%;
+			}
+		</style>
+	</head>
 
-  <!-- Moment.js Reference -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+	<body>
+		<!-- Employee Tracker -->
+		<div class="container">
+			<!-- Jumbotron -->
+			<div class="jumbotron" style="background-color: black; color: white">
+				<h1 class="text-center">Employee Data Management</h1>
+			</div>
 
-  <style>
-    #employee-table th,
-    td {
-      display: inline-block;
-      width: 16.575%;
-    }
-  </style>
-</head>
+			<div class="row">
+				<div class="col-md-12">
+					<!-- Current Employees-->
+					<div class="card mb-4">
+						<div class="card-header">Current Employees</div>
+						<div class="card-body">
+							<table class="table table-sm table-hover" id="employee-table">
+								<thead>
+									<tr>
+										<th scope="col">Employee Name</th>
+										<th scope="col">Role</th>
+										<th scope="col">Start Date</th>
+										<th scope="col">Months Worked</th>
+										<th scope="col">Monthly Rate ($)</th>
+										<th scope="col">Total Billed ($)</th>
+									</tr>
+								</thead>
+								<tbody></tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
 
-<body>
+			<div class="row">
+				<div class="col-md-12">
+					<!-- Add Employee  -->
+					<div class="card mb-4">
+						<div class="card-header">Add Employee</div>
+						<div class="card-body">
+							<!-- Entry Form -->
+							<form>
+								<div class="form-group">
+									<label for="employee-name-input">Employee Name</label>
+									<input
+										class="form-control"
+										id="employee-name-input"
+										placeholder="Jane Doe"
+										type="text"
+									/>
+								</div>
+								<div class="form-group">
+									<label for="role-input">Role</label>
+									<input
+										class="form-control"
+										id="role-input"
+										placeholder="CEO"
+										type="text"
+									/>
+								</div>
+								<div class="form-group">
+									<label for="start-input">Start Date (MM/DD/YYYY)</label>
+									<input
+										class="form-control"
+										id="start-input"
+										placeholder="01/08/1989"
+										type="text"
+									/>
+								</div>
+								<div class="form-group">
+									<label for="rate-input">Monthly Rate</label>
+									<input
+										class="form-control"
+										id="rate-input"
+										placeholder="200000"
+										type="text"
+									/>
+								</div>
+								<button
+									class="btn btn-primary float-right"
+									id="add-employee-btn"
+								>
+									Submit
+								</button>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 
-  <!-- Employee Tracker -->
-  <div class="container">
-
-    <!-- Jumbotron -->
-    <div class="jumbotron" style="background-color: black; color: white">
-      <h1 class="text-center">Employee Data Management</h1>
-    </div>
-
-    <div class="row">
-
-      <div class="col-md-12">
-
-        <!-- Current Employees-->
-        <div class="card mb-4">
-          <div class="card-header">Current Employees</div>
-          <div class="card-body">
-            <table class="table table-sm table-hover" id='employee-table'>
-              <thead>
-                <tr>
-                  <th scope="col">Employee Name</th>
-                  <th scope="col">Role</th>
-                  <th scope="col">Start Date</th>
-                  <th scope="col">Months Worked</th>
-                  <th scope="col">Monthly Rate ($)</th>
-                  <th scope="col">Total Billed ($)</th>
-                </tr>
-              </thead>
-              <tbody>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-md-12">
-        <!-- Add Employee  -->
-        <div class="card mb-4">
-          <div class="card-header">Add Employee</div>
-          <div class="card-body">
-
-            <!-- Entry Form -->
-            <form>
-              <div class="form-group">
-                <label for="employee-name-input">Employee Name</label>
-                <input class="form-control" id="employee-name-input" placeholder="Jane Doe" type="text">
-              </div>
-              <div class="form-group">
-                <label for="role-input">Role</label>
-                <input class="form-control" id="role-input" placeholder="CEO" type="text">
-              </div>
-              <div class="form-group">
-                <label for="start-input">Start Date (MM/DD/YYYY)</label>
-                <input class="form-control" id="start-input" placeholder="01/08/1989" type="text">
-              </div>
-              <div class="form-group">
-                <label for="rate-input">Monthly Rate</label>
-                <input class="form-control" id="rate-input" placeholder="200000" type="text">
-              </div>
-              <button class="btn btn-primary float-right" id="add-employee-btn">Submit</button>
-            </form>
-
-          </div>
-        </div>
-      </div>
-    </div>
-
-  </div>
-
-  <!-- JavaScript -->
-<script src="../script/employee.js"></script>
-
-</body>
+		<!-- JavaScript -->
+		<script src="./js/employee.js"></script>
+	</body>
 </html>
