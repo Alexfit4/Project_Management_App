@@ -6,13 +6,26 @@ const db = require('../models');
 
 // Routes
 module.exports = (app) => {
-  // GET route for getting all of the todos
+  // * GET route for getting all of the managers
   app.get('/api/managers', (req, res) => {
     // findAll returns all entries for a table when used with no options
-    db.Manager.findAll({}).then((Manager) => res.json(Manager));
+    db.Manager.findAll({include:[db.Project]}).then((Manager) => res.json(Manager));
   });
 
-  // POST route for saving a new todo
+  // * Finding one Manager and project associated with that manager
+  app.get('/api/managers/:id', (req, res) => {
+    // Here we add an "include" property to our options in our findOne query
+    // We set the value to an array of the models we want to include in a left outer join
+    // In this case, just db.Post
+    db.Manager.findOne({
+      where: {
+        id: req.params.id,
+      },
+      include: [db.Project],
+    }).then((dbAuthor) => res.json(dbAuthor));
+  });
+
+  // * POST route for saving a new manager
   app.post('/api/managers', (req, res) => {
     db.Manager.create({
       first_name: req.body.first_name,
@@ -24,7 +37,7 @@ module.exports = (app) => {
     }).then((dbManager) => res.json(dbManager));
   });
 
-  // DELETE route for deleting todos using the ID (req.params.id)
+  // * DELETE route for deleting todos using the ID (req.params.id)
   app.delete('/api/managers:id', (req, res) => {
     // We just have to specify which todo we want to destroy with "where"
     db.Manager.destroy({
@@ -34,7 +47,7 @@ module.exports = (app) => {
     }).then((dbManager) => res.json(dbManager));
   });
 
-  // PUT route for updating todos. We can get the updated todo data from req.body
+  // * PUT route for updating managers. We can get the updated manager data from req.body
   app.put('/api/managers', (req, res) => {
     db.Manager.update(
       {
@@ -51,6 +64,9 @@ module.exports = (app) => {
       }
     ).then((dbManager) => res.json(dbManager));
   });
+
+
+
 };
 
 // Testing my link to the repo
