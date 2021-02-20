@@ -42,10 +42,10 @@
 
   ## Developers
 
-  Lu Hao: Javascript, CSS
-  Mengyue Zhang: Javascript, CSS
-  Amir Ashtiany: MySQL, CRUD, Validation
-  Johnnie Simpson: MySQL, CRUD, Handlebars, Linter
+  1. Lu Hao: Javascript, CSS
+  2. Mengyue Zhang: Javascript, CSS
+  3. Amir Ashtiany: MySQL, CRUD, Validation
+  4. Johnnie Simpson: MySQL, CRUD, Handlebars, Linter
 
   ## Installation
 
@@ -54,31 +54,33 @@
   ```
   ## Usage
 
+  Coming soon!
+
   ## Contributing
 
   This project is free and open source software (FOSS). Please contact the developers for more information.
 
   ## Technologies
 
-  Node.js
-  Javascript
-  MySQL
-  Sequelize
-  Handlebars
-  Express
-  HTML
-  CSS
-  Dotenv
-  Inquirer
+  - Node.js
+  - Javascript
+  - MySQL
+  - Sequelize
+  - Handlebars
+  - Express
+  - HTML
+  - CSS
+  - Dotenv
+  - Inquirer
 
 
   ## Questions
 
   Developer Github profiles:
-  Amir Ashtiany: https://github.com/Alexfit4 
-  Johnnie Simpson: http://www.github.com/balokdecoy.
-  Lu Hao: https://github.com/lhaodev 
-  Mengyue Zhang: https://github.com/mengyue-z 
+  1. Amir Ashtiany: https://github.com/Alexfit4 
+  2. Johnnie Simpson: http://www.github.com/balokdecoy.
+  3. Lu Hao: https://github.com/lhaodev 
+  4. Mengyue Zhang: https://github.com/mengyue-z 
 
   ## Acknowledgments
 
