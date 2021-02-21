@@ -16,6 +16,7 @@ app.use(express.json());
 app.use(express.static('public'));
 
 // Routes
+require('./routes/html-routes')(app);
 require('./routes/api-routes.js')(app);
 require('./routes/project-routes.js')(app);
 require('./routes/employee-routes.js')(app);
