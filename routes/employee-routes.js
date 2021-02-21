@@ -8,7 +8,7 @@ module.exports = (app) => {
   // GET route for getting all of the todos
   app.get('/api/employees', (req, res) => {
     // findAll returns all entries for a table when used with no options
-    db.Employee.findAll({}).then((Employee) => res.json(Employee));
+    db.Employee.findAll({include:[db.Manager]}).then((Employee) => res.json(Employee));
   });
 
   // POST route for saving a new todo
@@ -16,8 +16,9 @@ module.exports = (app) => {
     db.Employee.create({
       first_name: req.body.first_name,
       last_name: req.body.last_name,
-      title:req.body.title,
-      salary: req.body.salary,
+      role_id:req.body.role_id,
+      project_id: req.body.project_id,
+      manager_id: req.body.manager_id,
       email: req.body.email,
       password: req.body.password,
     
