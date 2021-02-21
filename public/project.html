@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Add a Project</title>
+    <!-- Latest compiled and minified CSS & JS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootswatch/4.0.0/flatly/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css" media="screen" title="no title">
+</head>
+
+<body>
+    <div class="container hidden">
+        <div class="row top-30">
+            <div class="col-md-2 col-sm-2">
+                <a class="btn btn-light" href="/dashboard">Go to Dashboard</a>
+            </div>
+            <div class="col-md-2 col-sm-2">
+                <a class="btn btn-light" href="/employee">Manage Employees</a>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <form id="create-form">
+                    <div class="form-group">
+                        <label for="project">Project Name:</label>
+                        <input placeholder="Project Name" type="text" class="form-control" id="name">
+                        <br />
+                        <label for="body">Details</label>
+                        <textarea placeholder="Project Details" class="form-control" rows="10" id="body"></textarea>
+
+                        <div class="form-group">
+                            <label for="category">Select Managers:</label>
+                            <select class="custom-select" id="manager">
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="category">Select Employees:</label>
+                            <select class="custom-select" id="employee">
+                            </select>
+                        </div>
+                        <br />
+                        <button type="submit" class="btn btn-success submit">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+    <!-- link jquery-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- Custom Script -->
+    <script src="./js/project.js" type="text/javascript"></script>
+
+</body>
+
+</html>

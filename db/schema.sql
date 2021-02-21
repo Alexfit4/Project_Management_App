@@ -6,6 +6,7 @@ USE projectManagement_db;
 CREATE TABLE project (
   id INT NOT NULL AUTO_INCREMENT,
   project VARCHAR(30) NULL,
+  details VARCHAR(300) NULL,
   PRIMARY KEY (id)
 );
 
