@@ -8,14 +8,7 @@ module.exports = (sequelize, DataTypes) => {
 		 * The `models/index` file will call this method automatically.
 		 */
 		static associate({ Manager }) {
-			// define association here
-			// Project.belongsTo(models.Manager, {
-			// 	foreignKey: "project_id",
-			// 	constraints: false,
-			// });
-			// Project.belongsTo(models.Employee, {
-			// 	// through: 'id',
-			// });
+
 			this.hasMany(Manager, { foreignKey: "project_id" });
 		}
 	}
