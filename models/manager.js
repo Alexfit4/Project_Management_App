@@ -13,7 +13,20 @@ module.exports = (sequelize, DataTypes) => {
 
 			this.hasMany(Employee, { foreignKey: "manager_id" });
 
-			this.belongsTo(Role, {foreignKey: 'role_id'})
+			this.belongsTo(Role, { foreignKey: "role_id" });
+		}
+
+		// * Decides which fields are returned
+		toJSON() {
+			return {
+				...this.get(),
+				id: undefined,
+				createdAt: undefined,
+				updatedAt: undefined,
+				role_id: undefined,
+				project_id: undefined,
+				password: undefined
+			};
 		}
 	}
 	Manager.init(
@@ -29,7 +42,7 @@ module.exports = (sequelize, DataTypes) => {
 			},
 			role_id: {
 				type: DataTypes.INTEGER,
-				allowNull: false
+				allowNull: false,
 			},
 			project_id: {
 				type: DataTypes.INTEGER,
