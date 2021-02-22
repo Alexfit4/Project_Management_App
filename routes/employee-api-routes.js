@@ -10,10 +10,6 @@ module.exports = (app) => {
     // findAll returns all entries for a table when used with no options
     db.Employee.findAll({include:[
       {
-        model: db.Manager,
-        required: true
-      },
-      {
         model: db.Project,
         
       },

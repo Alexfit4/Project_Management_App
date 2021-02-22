@@ -26,7 +26,9 @@ module.exports = (sequelize, DataTypes) => {
 				role_id: undefined,
 				manager_id: undefined,
 				project_id: undefined,
-				password: undefined
+				password: undefined,
+				createdAt: undefined,
+				updatedAt: undefined
 			};
 		}
 	}
