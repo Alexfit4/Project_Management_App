@@ -12,6 +12,8 @@ module.exports = (app) => {
     db.Manager.findAll({include:[db.Project]}).then((Manager) => res.json(Manager));
   });
 
+ // * Finding all Employee associated with that manager
+
   app.get('/api/managers_employees', (req, res) => {
     // findAll returns all entries for a table when used with no options
     db.Manager.findAll({include:[db.Employee]}).then((Manager) => res.json(Manager));
