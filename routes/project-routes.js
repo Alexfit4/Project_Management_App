@@ -2,6 +2,25 @@ const db = require("../models");
 
 // Routes
 module.exports = (app) => {
+<<<<<<< HEAD
+	app.get("/api/project", async (req, res) => {
+		db.Project.findAll({
+			include: [db.Manager],
+		}).then((dbPost) => res.json(dbPost));
+	});
+
+	app.get("/api/project/:id", (req, res) => {
+		// Here we add an "include" property to our options in our findOne query
+		// We set the value to an array of the models we want to include in a left outer join
+		// In this case, just db.Post
+		db.Project.findOne({
+			where: {
+				id: req.params.id,
+			},
+			include: [db.Post],
+		}).then((dbProject) => res.json(dbProject));
+	});
+=======
   app.get("/api/project", async (req, res) => {
 
     db.Project.findAll({})
@@ -21,6 +40,7 @@ module.exports = (app) => {
       include: [db.Manager],
     }).then((result) => res.json(dbAuthor));
   });
+>>>>>>> 227ce2a90ecb6093259c50eadbf21832e746056a
 
   // POST route for saving a new post
   app.post("/api/project", (req, res) => {
@@ -29,6 +49,8 @@ module.exports = (app) => {
     );
   });
 };
+<<<<<<< HEAD
+=======
 
 
 
@@ -82,3 +104,4 @@ module.exports = (app) => {
     }).then((result) => res.json(result));
   });
 };
+>>>>>>> 227ce2a90ecb6093259c50eadbf21832e746056a
