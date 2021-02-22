@@ -30,10 +30,6 @@ module.exports = (app) => {
 				id: req.params.id,
 			},
 			include: [
-        {
-          model: db.Manager,
-          required: true
-        },
 				{
 					model: db.Project,
 				},
