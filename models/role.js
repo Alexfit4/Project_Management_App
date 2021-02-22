@@ -21,7 +21,6 @@ module.exports = (sequelize, DataTypes) => {
 			return {
 				...this.get(),
 				id: undefined,
-				employee_id: undefined,
 			};
 		}
 	}
@@ -32,10 +31,6 @@ module.exports = (sequelize, DataTypes) => {
 				allowNull: false,
 			},
 			salary: {
-				type: DataTypes.INTEGER,
-				allowNull: false,
-			},
-			employee_id: {
 				type: DataTypes.INTEGER,
 				allowNull: false,
 			},
