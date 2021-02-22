@@ -10,6 +10,28 @@ module.exports = (app) => {
       });
 
 
+      // * Find One
+      app.get("/api/roles/:id", (req, res) => {
+        // Here we add an "include" property to our options in our findOne query
+        // We set the value to an array of the models we want to include in a left outer join
+        // In this case, just db.Post
+        db.Role.findOne({
+          where: {
+            id: req.params.id,
+          },
+          include: [
+            {
+              model: db.Employee,
+              required: true,
+            },
+            {
+              model: db.Manager,
+            },
+          ],
+        }).then((dbProject) => res.json(dbProject));
+      });
+
+
 
       app.post('/api/roles', (req, res) => {
         db.Role.create({
