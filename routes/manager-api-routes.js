@@ -12,10 +12,6 @@ module.exports = (app) => {
 		db.Manager.findAll({
 			include: [
 				{
-					model: db.Employee,
-					required: true,
-				},
-				{
 					model: db.Project,
 				},
 				{
