@@ -17,6 +17,10 @@ module.exports = (app) => {
         model: db.Project,
         
       },
+      {
+        model: db.Role,
+        
+      },
     ]}).then((Employee) => res.json(Employee));
   });
 
@@ -44,21 +48,3 @@ module.exports = (app) => {
     }).then((dbEmployee) => res.json(dbEmployee));
   });
 };
-// PUT route for updating todos. We can get the updated todo data from req.body
-//   app.put('/api/employees', (req, res) => {
-//     db.Manager.update(
-//       {
-//         first_name: req.body.first_name,
-//         last_name: req.body.last_name,
-//         project_id: req.body.project_id,
-//         email: req.body.email,
-//         password: req.body.password,
-//       },
-//       {
-//         where: {
-//           id: req.body.id,
-//         },
-//       }
-//     ).then((dbManager) => res.json(dbManager));
-//   });
-// };

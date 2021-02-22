@@ -18,6 +18,10 @@ module.exports = (app) => {
         model: db.Project,
         
       },
+      {
+        model: db.Role,
+        
+      },
     ]}).then((Manager) => res.json(Manager));
   });
 
@@ -46,6 +50,7 @@ module.exports = (app) => {
     db.Manager.create({
       first_name: req.body.first_name,
       last_name: req.body.last_name,
+      role_id:req.body.role_id,
       project_id: req.body.project_id,
       email: req.body.email,
       password: req.body.password,
