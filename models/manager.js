@@ -7,38 +7,40 @@ module.exports = (sequelize, DataTypes) => {
 		 * This method is not a part of Sequelize lifecycle.
 		 * The `models/index` file will call this method automatically.
 		 */
-		static associate({ Project }) {
+		static associate({ Project, Manager }) {
 			// define association here
-			this.belongsTo(Project, { foreignKey: 'project_id'})
+			this.belongsTo(Project, { foreignKey: "project_id" });
+
+			this.belongsTo(Manager, { foreignKey: "manager_id" });
 		}
 	}
 	Manager.init(
 		{
 			first_name: {
 				type: DataTypes.STRING,
-				allowNull: false
+				allowNull: false,
 			},
-			
+
 			last_name: {
 				type: DataTypes.STRING,
-				allowNull: false
+				allowNull: false,
 			},
 			project_id: {
 				type: DataTypes.INTEGER,
-				allowNull: false
+				allowNull: false,
 			},
 			email: {
 				type: DataTypes.STRING,
-				allowNull: false
+				allowNull: false,
 			},
 			password: {
 				type: DataTypes.STRING,
-				allowNull: false
+				allowNull: false,
 			},
 		},
 		{
 			sequelize,
-			tableName: 'managers',
+			tableName: "managers",
 			modelName: "Manager",
 		}
 	);

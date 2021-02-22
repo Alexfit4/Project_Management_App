@@ -15,11 +15,21 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   Role.init({
-    title: DataTypes.STRING,
-    salary: DataTypes.INTEGER,
-    employee_id: DataTypes.INTEGER
+    title: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    salary: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
+    employee_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
   }, {
     sequelize,
+    tableName: 'roles',
     modelName: 'Role',
   });
   return Role;
