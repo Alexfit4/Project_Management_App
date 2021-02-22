@@ -24,6 +24,30 @@ module.exports = (app) => {
     ]}).then((Employee) => res.json(Employee));
   });
 
+  // * Find One 
+  app.get("/api/employees/:id", (req, res) => {
+		// Here we add an "include" property to our options in our findOne query
+		// We set the value to an array of the models we want to include in a left outer join
+		// In this case, just db.Post
+		db.Employee.findOne({
+			where: {
+				id: req.params.id,
+			},
+			include: [
+        {
+          model: db.Manager,
+          required: true
+        },
+				{
+					model: db.Project,
+				},
+				{
+					model: db.Role,
+				},
+			],
+		}).then((dbAuthor) => res.json(dbAuthor));
+	});
+
   // POST route for saving a new todo
   app.post('/api/employees', (req, res) => {
     db.Employee.create({
