@@ -20,6 +20,7 @@ require('./routes/html-routes')(app);
 require('./routes/api-routes.js')(app);
 require('./routes/project-routes.js')(app);
 require('./routes/employee-routes.js')(app);
+require('./routes/roles-api.js')(app);
 
 // Syncing our sequelize models and then starting our Express app
 db.sequelize.sync({force: true}).then(() => {
