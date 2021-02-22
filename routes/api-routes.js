@@ -9,7 +9,16 @@ module.exports = (app) => {
   // * GET route for getting all of the managers
   app.get('/api/managers', (req, res) => {
     // findAll returns all entries for a table when used with no options
-    db.Manager.findAll({include:[db.Project]}).then((Manager) => res.json(Manager));
+    db.Manager.findAll({include:[
+      {
+        model: db.Employee,
+        required: true
+      },
+      {
+        model: db.Project,
+        
+      },
+    ]}).then((Manager) => res.json(Manager));
   });
 
  // * Finding all Employee associated with that manager

@@ -4,7 +4,16 @@ const db = require("../models");
 module.exports = (app) => {
   app.get('/api/project', (req, res) => {
     // findAll returns all entries for a table when used with no options
-    db.Project.findAll({include:[db.Manager]}).then((Manager) => res.json(Manager));
+    db.Project.findAll({include:[
+      {
+        model: db.Employee,
+        required: true
+      },
+      {
+        model: db.Manager,
+        
+      },
+    ]}).then((Manager) => res.json(Manager));
   });
 
 	app.get("/api/project/:id", (req, res) => {

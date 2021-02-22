@@ -8,7 +8,16 @@ module.exports = (app) => {
   // GET route for getting all of the todos
   app.get('/api/employees', (req, res) => {
     // findAll returns all entries for a table when used with no options
-    db.Employee.findAll({include:[db.Manager]}).then((Employee) => res.json(Employee));
+    db.Employee.findAll({include:[
+      {
+        model: db.Manager,
+        required: true
+      },
+      {
+        model: db.Project,
+        
+      },
+    ]}).then((Employee) => res.json(Employee));
   });
 
   // POST route for saving a new todo
