@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
 			// define association here
 			this.belongsTo(Project, { foreignKey: "project_id" });
 
-			this.hasMany(Employee, { foreignKey: "manager_id" });
+			// this.hasMany(Employee, { foreignKey: "manager_id" });
 
 			this.belongsTo(Role, { foreignKey: "role_id" });
 		}

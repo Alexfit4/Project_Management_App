@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
 			// define association here
 			this.belongsTo(Project, { foreignKey: "project_id" });
 
-			this.belongsTo(Manager, { foreignKey: "manager_id" });
+			// this.belongsTo(Manager, { foreignKey: "manager_id" });
 
 			// this.hasMany(Employee, { foreignKey: "manager_id" });
 
@@ -49,10 +49,10 @@ module.exports = (sequelize, DataTypes) => {
 				type: DataTypes.INTEGER,
 				allowNull: false,
 			},
-			manager_id: {
-				type: DataTypes.INTEGER,
-				allowNull: false,
-			},
+			// manager_id: {
+			// 	type: DataTypes.INTEGER,
+			// 	allowNull: false,
+			// },
 			email: {
 				type: DataTypes.STRING,
 				allowNull: false,

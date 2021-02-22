@@ -14,9 +14,6 @@ module.exports = {
       salary: {
         type: Sequelize.INTEGER
       },
-      employee_id: {
-        type: Sequelize.INTEGER
-      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
