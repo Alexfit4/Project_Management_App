@@ -21,8 +21,6 @@ module.exports = (sequelize, DataTypes) => {
 			return {
 				...this.get(),
 				id: undefined,
-				createdAt: undefined,
-				updatedAt: undefined,
 				employee_id: undefined,
 			};
 		}
