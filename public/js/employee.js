@@ -1,6 +1,5 @@
-$(document).on(click, 'DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', (e) => {
   console.log('DOM loaded! 🚀');
-
   //Get Employee
   const getEmployees = () => {
     fetch('/api/employees', {
@@ -15,8 +14,8 @@ $(document).on(click, 'DOMContentLoaded', () => {
           console.log('Success in getting post:', data);
 
           // Populate the form
-          empFirstName.value = data.first_name;
-          empLastName.value = data.last_name;
+          empFirstName = data[0].first_name;
+          empLastName = data[0].last_name;
           empTitle = data.title;
           empSalary = data.salary;
           empEmail = data.email;
@@ -42,8 +41,8 @@ $(document).on(click, 'DOMContentLoaded', () => {
   getEmployees()
 
   //Add Employee
-  const addEmployee = (e) => {
-    e.preventDefault();
+  const addEmployee = () => {
+    
     const newEmployee = {
       first_name: $("#employee-first-name").val().trim(),
       last_name: $("#employee-last-name").val().trim(),

@@ -20,9 +20,6 @@ module.exports = {
       project_id: {
         type: Sequelize.INTEGER
       },
-      manager_id: {
-        type: Sequelize.INTEGER
-      },
       email: {
         type: Sequelize.STRING
       },
