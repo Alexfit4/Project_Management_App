@@ -19,7 +19,7 @@ app.use(express.static('public'));
 
 app.engine('handlebars', expbs({
   defaultLayout: 'main',
-  layoutsDir: path.join(__dirname, 'views/mainLayout' )
+  layoutsDir: path.join(__dirname, 'views/layouts' )
 }))
 
 // Routes
