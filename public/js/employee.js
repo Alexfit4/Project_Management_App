@@ -1,4 +1,4 @@
-$(document).on(click, 'DOMContentLoaded', () => {
+$(document).on("click", 'DOMContentLoaded', () => {
   console.log('DOM loaded! 🚀');
 
   //Get Employee
