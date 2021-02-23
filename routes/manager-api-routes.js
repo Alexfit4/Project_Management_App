@@ -18,7 +18,7 @@ module.exports = (app) => {
 					model: db.Role,
 				},
 			],
-		}).then((Manager) => res.json(Manager));
+		}).then((Manager) => res.json(Manager))
 	});
 
 	// * Finding one Manager and project associated with that manager
