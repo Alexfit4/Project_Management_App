@@ -22,8 +22,6 @@ app.engine('handlebars', expbs({
   layoutsDir: path.join(__dirname, 'views/mainLayout' )
 }))
 
-
-
 // Routes
 require('./routes/html-routes')(app);
 require('./routes/manager-api-routes.js')(app);
