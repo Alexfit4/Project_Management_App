@@ -15,8 +15,19 @@ app.use(express.json());
 // Static directory
 app.use(express.static('public'));
 
+// Import handlebars
+const exphbs = require('express-handlebars');
+
+app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
+app.set('view engine', 'handlebars');
+
+// Set the route
+const routes = require('./controllers/controller')
+
+app.use(routes);
+
 // Routes
-require('./routes/html-routes')(app);
+require('./routes/html-routes.js')(app);
 require('./routes/api-routes.js')(app);
 require('./routes/project-routes.js')(app);
 require('./routes/employee-routes.js')(app);
