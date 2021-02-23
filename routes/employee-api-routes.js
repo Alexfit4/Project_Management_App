@@ -37,7 +37,7 @@ module.exports = (app) => {
 					model: db.Role,
 				},
 			],
-		}).then((dbAuthor) => res.json(dbAuthor));
+		}).then((dbEmployee) => res.json(dbEmployee));
 	});
 
   //* POST route for saving a new employee
@@ -84,3 +84,5 @@ module.exports = (app) => {
 		).then((dbEmployee) => res.json(dbEmployee));
 	});
 };
+
+
