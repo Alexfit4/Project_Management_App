@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/Alexfit4/Project_Management_App#readme",
   "dependencies": {
+    "@popperjs/core": "^2.8.3",
     "console.table": "^0.10.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
