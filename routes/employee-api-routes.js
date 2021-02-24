@@ -20,6 +20,19 @@ module.exports = (app) => {
     ]}).then((Employee) => res.json(Employee));
   });
 
+  app.get('/api/managers', (req, res) => {
+    // findAll returns all entries for a table when used with no options
+    db.Manager.findAll({include:[
+      {
+        model: db.Project,
+        
+      },
+      {
+        model: db.Role,
+        
+      },
+    ]}).then((Manager) => res.json(Manager));
+  });
   // * Find One 
   app.get("/api/employees/:id", (req, res) => {
 		// Here we add an "include" property to our options in our findOne query
