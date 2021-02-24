@@ -1,4 +1,4 @@
-# Project Management App
+# Sprinter - A Project Management App
 
   [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
@@ -28,7 +28,7 @@
 
   ## Description
 
-  An application for tracking and managing collaborative projects, tracking employee time and progress, and generating invoices. 
+  Sprinter is an application for tracking and managing developer sprints. 
 
   ## Links
 
@@ -65,6 +65,7 @@
   - Node.js
   - Javascript
   - MySQL
+  - MySQL2
   - Sequelize
   - Handlebars
   - Express
