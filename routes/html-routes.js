@@ -12,15 +12,15 @@ module.exports = (app) => {
 
     // project route loads project.html
     app.get('/project', (req, res) =>
-        res.sendFile(path.join(__dirname, '../public/project.html'))
+        res.sendFile(path.join(__dirname, '../views/project.html'))
     );
 
     app.get('/employee', (req, res) =>
-        res.sendFile(path.join(__dirname, '../public/employeeTracker.html'))
+        res.sendFile(path.join(__dirname, '../views/employeeTracker.html'))
     );
 
     app.get('/dashboard', (req, res) =>
-        res.sendFile(path.join(__dirname, '../public/dashboard.html'))
+        res.sendFile(path.join(__dirname, '../views/dashboard.html'))
     );
 
 };

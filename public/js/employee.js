@@ -1,6 +1,6 @@
-
-document.addEventListener('DOMContentLoaded', (e) => {
+$(document).ready(() => {
   console.log('DOM loaded! 🚀');
+
   //Get Employee
   const getEmployees = () => {
     fetch('/api/employees', {
@@ -11,15 +11,16 @@ document.addEventListener('DOMContentLoaded', (e) => {
     })
       .then((response) => response.json())
       .then((data) => {
-        if (data) {
+        if (data.length > 0) {
           console.log('Success in getting post:', data);
-
+          $("#employee-table > tbody").empty();
           // Populate the form
-          empFirstName = data[0].first_name;
-          empLastName = data[0].last_name;
-          empTitle = data.title;
-          empSalary = data.salary;
-          empEmail = data.email;
+          for (i=0; i< data.length; i++){
+          empFirstName = data[i].first_name;
+          empLastName = data[i].last_name;
+          empTitle = data[i].title;
+          empSalary = data[i].salary;
+          empEmail = data[i].email;
 
           var newRow = $("<tr>").append(
             $("<td>").text(empFirstName),
@@ -35,6 +36,7 @@ document.addEventListener('DOMContentLoaded', (e) => {
           $("#employee-table > tbody").append(newRow)
 
         }
+      }
       })
       .catch((err) => console.error(err));
 
@@ -42,8 +44,8 @@ document.addEventListener('DOMContentLoaded', (e) => {
   getEmployees()
 
   //Add Employee
-  const addEmployee = () => {
-    
+  const addEmployee = (e) => {
+    e.preventDefault();
     const newEmployee = {
       first_name: $("#employee-first-name").val().trim(),
       last_name: $("#employee-last-name").val().trim(),
@@ -64,7 +66,7 @@ document.addEventListener('DOMContentLoaded', (e) => {
         .then(() => getEmployees());
     }
   };
-  $("#add-employee-btn").on("click", addEmployee())
+  $("#add-employee-btn").on("click", addEmployee)
 
   //Delete Employee
   const deleteEmployees = (e) => {
