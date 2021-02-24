@@ -7,6 +7,10 @@
     <!-- Latest compiled and minified CSS & JS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootswatch/4.0.0/flatly/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/styles.css" media="screen" title="no title">
+
+    <link rel="stylesheet" href="css/project.css" media="screen" title="no title">
+
+
 </head>
 
 <body>
@@ -36,11 +40,30 @@
                             <select class="custom-select" id="manager">
                             </select>
                         </div>
+
+
+                        <div class="multipleSelection">
+                            <div class="selectBox" onclick="showCheckboxes()">
+                                <select id="employee">
+                                    <option>Select Employees:</option>
+                                </select>
+                                <div class="overSelect"></div>
+                            </div>
+                        </div>
+
+
+                        <!-- <div class="form-group">
+                            <label for="category">Select Employees:</label>
+                            <select class="custom-select" id="employee">
+                            </select>
+                        </div> -->
+
                         <div class="form-group">
                             <label for="category">Select Employees:</label>
                             <select class="custom-select" id="employee">
                             </select>
                         </div>
+
                         <br />
                         <button type="submit" class="btn btn-success submit">Submit</button>
                     </div>
