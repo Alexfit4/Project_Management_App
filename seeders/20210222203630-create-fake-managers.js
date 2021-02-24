@@ -13,7 +13,7 @@ module.exports = {
     */
 
     await queryInterface.bulkInsert('managers', [{
-      first_name: "Lue",
+      first_name: "Lu",
       last_name: "Hao",
       role_id: 1,
       project_id: 1,
