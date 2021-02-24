@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', (e) => {
 
   // Helper function to grab todos
   const getTodos = () => {
-    fetch('/api/todos', {
+    fetch('/api/managers', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -41,6 +41,7 @@ document.addEventListener('DOMContentLoaded', (e) => {
       .then((data) => {
         console.log('Success in getting todos:', data);
         todos = data;
+        console.log(todos);
         initializeRows();
       });
   };
@@ -52,7 +53,7 @@ document.addEventListener('DOMContentLoaded', (e) => {
     e.stopPropagation();
     const { id } = e.target.dataset;
 
-    fetch(`/api/todos/${id}`, {
+    fetch(`/api/managers/${id}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
@@ -98,7 +99,7 @@ document.addEventListener('DOMContentLoaded', (e) => {
   // Update a todo (PUT)
   const updateTodo = (todo) => {
     console.log('attempting to update with', todo);
-    fetch('/api/todos', {
+    fetch('/api/managers', {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -210,7 +211,7 @@ document.addEventListener('DOMContentLoaded', (e) => {
       complete: false,
     };
     if (todo.text) {
-      fetch('/api/todos', {
+      fetch('/api/managers', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

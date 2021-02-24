@@ -7,7 +7,7 @@ module.exports = (app) => {
 
     // index route loads view.html
     app.get('/', (req, res) =>
-        res.sendFile(path.join(__dirname, '../public/index.html'))
+        res.sendFile(path.join(__dirname, '../public/project.html'))
     );
 
     // project route loads project.html
