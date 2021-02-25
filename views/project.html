@@ -42,14 +42,27 @@
                         </div>
 
 
-                        <div class="multipleSelection">
+                        <!-- <label>Manager Name: </label>
+                        <select>
+                            <% for(var i=0; i < dropdownVals.length; i++) { %>
+                                <option value="<%= dropdownVals[i].ID %>">
+                                    <%= dropdownVals[i].first_name %>
+                                </option>
+                                <% } %>
+                        </select> -->
+
+
+
+                        <!-- <div class="multipleSelection">
                             <div class="selectBox" onclick="showCheckboxes()">
                                 <select id="employee">
                                     <option>Select Employees:</option>
                                 </select>
                                 <div class="overSelect"></div>
                             </div>
-                        </div>
+                        </div> -->
+
+
 
 
                         <!-- <div class="form-group">
@@ -63,6 +76,18 @@
                             <select class="custom-select" id="employee">
                             </select>
                         </div>
+
+
+
+
+                        <!-- <div class="multipleSelection">
+                            <div class="selectBox" onclick="showCheckboxes()">
+                                <select id="manager">
+                                    <option>Select Managers:</option>
+                                </select>
+                                <div class="overSelect"></div>
+                            </div>
+                        </div> -->
 
                         <br />
                         <button type="submit" class="btn btn-success submit">Submit</button>
