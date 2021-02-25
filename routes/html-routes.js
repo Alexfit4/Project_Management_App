@@ -5,6 +5,7 @@ const path = require('path');
 module.exports = (app) => {
     // Each of the below routes just handles the HTML page that the user gets sent to.
 
+
     // index route loads view.html
     app.get('/', (req, res) =>
         res.sendFile(path.join(__dirname, '../views/login.html'))
@@ -22,6 +23,12 @@ module.exports = (app) => {
     app.get('/dashboard', (req, res) =>
         res.sendFile(path.join(__dirname, '../views/dashboard.html'))
     );
+
+
+    //* Amir
+    app.get('/login', (req, res) =>
+    res.sendFile(path.join(__dirname, '../views/login.html'))
+);
 
     app.get('/about', (req, res) => {
         const dev = {
@@ -45,5 +52,6 @@ module.exports = (app) => {
     );
 
     // insert app.get() hbsObject function contributors: data, avatar loop, 
+
 
 };

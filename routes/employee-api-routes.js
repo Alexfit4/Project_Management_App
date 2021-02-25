@@ -1,5 +1,6 @@
 
 // Grabbing our models
+const { body, validationResult } = require('express-validator');
 
 const db = require('../models');
 
@@ -20,19 +21,19 @@ module.exports = (app) => {
     ]}).then((Employee) => res.json(Employee));
   });
 
-  app.get('/api/managers', (req, res) => {
-    // findAll returns all entries for a table when used with no options
-    db.Manager.findAll({include:[
-      {
-        model: db.Project,
+  // app.get('/api/employees', (req, res) => {
+  //   // findAll returns all entries for a table when used with no options
+  //   db.Employee.findAll({include:[
+  //     {
+  //       model: db.Project,
         
-      },
-      {
-        model: db.Role,
+  //     },
+  //     {
+  //       model: db.Role,
         
-      },
-    ]}).then((Manager) => res.json(Manager));
-  });
+  //     },
+  //   ]}).then((Manager) => res.json(Manager));
+  // });
   // * Find One 
   app.get("/api/employees/:id", (req, res) => {
 		// Here we add an "include" property to our options in our findOne query
@@ -40,7 +41,7 @@ module.exports = (app) => {
 		// In this case, just db.Post
 		db.Employee.findOne({
 			where: {
-				id: req.params.id,
+				email: req.body.email,
 			},
 			include: [
 				{
