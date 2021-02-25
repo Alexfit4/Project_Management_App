@@ -7,13 +7,13 @@ document.addEventListener('DOMContentLoaded', () => {
     // Variable to hold our projects
     let projects;
 
-    const getProjects = (employee) => {
-        employeeId = employee || '';
-        if (employeeId) {
-            employeeId = `/?employee_id=${employeeId}`;
-        }
+    const getProjects = (id) => {
+        // employeeId = employee || '';
+        // if (employeeId) {
+        //     employeeId = `/?employee_id=${employeeId}`;
+        // }
 
-        fetch(`/api/projects${employeeId}`, {
+        fetch('/api/project', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -21,30 +21,44 @@ document.addEventListener('DOMContentLoaded', () => {
         })
             .then((response) => response.json())
             .then((data) => {
-                projects = data;
-                console.log('Success in getting projects:', data);
-                if (!data || !data.length) {
-                    displayEmpty(employee);
-                } else {
-                    initializeRows();
+                if (data.length > 0) {
+                    console.log('Success in getting post:', data);
+                    console.log(data)
+                    $("#projectTable > tbody").empty();
+                    // Populate the form
+                    for (i = 0; i < data.length; i++) {
+                        projId = data[i].id;
+                        projName = data[i].name;
+                        projDescript = data[i].description;
+                        // projMngFirst = data[i].Manager.first_name;
+                        // projMngLast = data[i].Manager.last_name;
+
+                        var newRow = $("<tr>").append(
+                            $("<td>").text(projId),
+                            $("<td>").text(projName),
+                            $("<td>").text(projDescript)
+
+                            // $("<td>").text(empSalary),
+                            // $("<td>").text(empEmail),
+                            // $("<button>").text("Edit").addClass("edit-emp-btn"),
+                            // $("<button>").text("Delete").addClass("delete-emp-btn"),
+                        );
+
+                        // // Append the new row to the table
+                        $("#projectTable > tbody").append(newRow)
+
+                    }
                 }
+
             })
-            .catch((error) => console.error('Error:', error));
+        // .catch((error) => console.error('Error:', error));
     };
 
-    // Get a blog post from a specific author
-    const url = window.location.search;
-    let employeeId;
-    if (url.indexOf('?employee_id=') !== -1) {
-        employeeId = url.split('=')[1];
-        getProjects(employeeId);
-    } else {
-        getProjects();
-    }
+    getProjects();
 
     // Front end call to DELETE a post
     const deleteProject = (id) => {
-        fetch(`/api/projects/${id}`, {
+        fetch(`/api/project/${id}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
@@ -52,25 +66,18 @@ document.addEventListener('DOMContentLoaded', () => {
         }).then(getProjects());
     };
 
-    // Create HTML rows for the blog container
-    const initializeRows = () => {
-        projectContainer.innerHTML = '';
-        const projectsToAdd = [];
 
-        projects.forEach((project) => projectsToAdd.push(createNewRow(project)));
-        projectsToAdd.forEach((project) => projectContainer.append(project));
-    };
 
     const createNewRow = (project) => {
-        console.log('createNewRow -> project', project);
+        // console.log('createNewRow -> project', project);
 
-        const formattedDate = new Date(project.createdAt).toLocaleDateString();
+        // const formattedDate = new Date(project.createdAt).toLocaleDateString();
 
-        const newProjectCard = document.createElement('div');
-        newProjectCard.classList.add('card');
+        // const newProjectCard = document.createElement('div');
+        // newProjectCard.classList.add('card');
 
-        const newProjectCardHeading = document.createElement('div');
-        newProjectCardHeading.classList.add('card-header');
+        // const newProjectCardHeading = document.createElement('div');
+        // newProjectCardHeading.classList.add('card-header');
 
         // Delete button
         const deleteBtn = document.createElement('button');
@@ -88,17 +95,17 @@ document.addEventListener('DOMContentLoaded', () => {
         const newProjectDate = document.createElement('small');
         const newProjectEmployee = document.createElement('h5');
 
-        newProjectEmployee.textContent = `Written by: ${post.Author.name}`;
-        newProjectEmployee.style.float = 'right';
-        newProjectEmployee.style.color = 'blue';
-        newProjectEmployee.style.marginTop = '-10px';
+        // newProjectEmployee.textContent = `Written by: ${project.name}`;
+        // newProjectEmployee.style.float = 'right';
+        // newProjectEmployee.style.color = 'blue';
+        // newProjectEmployee.style.marginTop = '-10px';
 
         const newProjectCardBody = document.createElement('div');
         newProjectCardBody.classList.add('card-body');
 
         const newProjectBody = document.createElement('p');
-        newProjectTitle.textContent = `${project.title} `;
-        newProjectBody.textContent = project.body;
+        newProjectTitle.textContent = `${project.name} `;
+        newProjectBody.textContent = project.description;
         newProjectDate.textContent = ` (${formattedDate})`;
         newProjectTitle.append(newProjectDate);
         newProjectCardHeading.append(deleteBtn);
@@ -114,21 +121,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return newProjectCard;
     };
 
-    // Helper function to display something when there are no projects
-    const displayEmpty = (id) => {
-        const query = window.location.search;
-        let partial = '';
-        if (id) {
-            partial = ` for Employee #${id}`;
-        }
 
-        projectContainer.innerHTML = '';
-        const messageH2 = document.createElement('h2');
-        messageH2.style.textAlign = 'center';
-        messageH2.style.marginTop = '50px';
-        messageH2.innerHTML = `No projects yet${partial}, navigate <a href='/project${query}'>here</a> in order to get started.`;
-        projectContainer.append(messageH2);
-    };
 
     // Handle when we click the delete post button
     const handleProjectDelete = (e) => {
@@ -148,3 +141,4 @@ document.addEventListener('DOMContentLoaded', () => {
         window.location.href = `/project?project_id=${currentProject.id}`;
     };
 });
+

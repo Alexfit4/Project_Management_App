@@ -115,8 +115,8 @@ $(document).ready(() => {
   //Delete Employee
   const deleteEmployees = (e) => {
     e.stopPropagation();
-    const { id } = e.target.dataset;
-
+    const { id } = e.target.parentElement.parentElement;
+    console.log(id);
     fetch(`/api/employees/${id}`, {
       method: 'DELETE',
       headers: {
