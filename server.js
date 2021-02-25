@@ -21,6 +21,7 @@ app.engine('handlebars', expbs({
   defaultLayout: 'main',
   layoutsDir: path.join(__dirname, 'views/layouts' )
 }))
+app.set('view engine', 'handlebars');
 
 // Routes
 require('./routes/html-routes')(app);
