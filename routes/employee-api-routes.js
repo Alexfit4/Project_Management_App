@@ -1,6 +1,6 @@
 
 // Grabbing our models
-const { body, validationResult } = require('express-validator');
+// const { body, validationResult } = require('express-validator');
 
 const db = require('../models');
 
