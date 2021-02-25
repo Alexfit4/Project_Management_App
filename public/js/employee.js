@@ -128,4 +128,47 @@ $(document).ready(() => {
   $(".delete-emp-btn").on("click", deleteEmployees);
 
   // Edit Employee
+
+  // Render a list of employee titles
+  const titleSelect = $(".title-select")
+  const renderTitleList = (data) => {
+    console.log('renderTitleList -> data', data);
+
+    const rowsToAdd = [];
+
+    data.forEach((title) => rowsToAdd.push(createTitleRow(title)));
+    
+    console.log('renderTitleList -> rowsToAdd', rowsToAdd);
+    console.log('titleSelect', titleSelect);
+
+    rowsToAdd.forEach((row) => titleSelect.append(row));
+    titleSelect.value = titleId;
+  };
+
+    // Build title dropdown
+    const createTitleRow = ({ id, title }) => {
+      const listOption = $('<option>');
+      listOption.val(id);
+      listOption.text(title)
+      return listOption;
+    };
+
+    const getTitles = () => {
+      fetch('api/roles', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+        .then((response) => response.json())
+        .then((data) => {
+        console.log(data)
+        //????????titleId
+        titleId = data.id;
+        console.log(titleId)
+        renderTitleList(data)})
+        .catch((err) => console.error(err));
+    };
+
+    getTitles()
 });
