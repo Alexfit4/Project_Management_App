@@ -5,13 +5,15 @@
      <div class="col-6">
       <h2>Meet the Devs</h2>
 
-    <ul>
+    <div class="row">
       {{#each contributors}}
-        <li>{{name}}</li>
-        <li>{{github}}</li>
-        <li>{{email}}</li>
-        <li>{{avatar}}</li>
+        <div class="col-6">
+            <li>{{name}}</li>
+            <li>{{github}}</li>
+            <li>{{email}}</li>
+            <li>{{avatar}}</li>
+        </div>
       {{/each}}
-    </ul>
+    </div>
   </div>
   </div>
