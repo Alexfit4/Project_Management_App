@@ -1,5 +1,6 @@
 // Dependencies
 const path = require('path');
+// const { HasOne } = require('sequelize/types');
 
 // Routes
 module.exports = (app) => {
@@ -35,15 +36,27 @@ module.exports = (app) => {
             contributors : [
                 {
                     name: "Johnnie Simpson",
-                    github: "balokdecoy",
-                    email: "johnniesimpson88@gmail.com",
+                    github: "Github: https://github.com/balokdecoy",
+                    email: "Email: johnniesimpson88@gmail.com",
                     avatar: "insert file path",
                 },
                 {
                     name: "Amir Ashtiany",
-                    github: "Alexfit4",
-                    email: "amir@gmail.com",
+                    github: "Github: https://github.com/Alexfit4",
+                    email: "Email: amir@gmail.com",
                     avatar: "insert file path",
+                },
+                {
+                    name: "Lu Hao",
+                    github: "Github: https://github.com/lhaodev",
+                    email: "Email: lu@gmail.com",
+                    avatar: "insert file path",
+                },
+                {
+                    name: "Mengyue Zhang",
+                    github: "Github: https://github.com/mengyue-z",
+                    email: "Email: mengyue@gmail.com",
+                    avatar: "insert file path here"
                 }
             ],
         }
