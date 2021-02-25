@@ -14,17 +14,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const employeeSelect = document.getElementById('employee');
     const managerSelect = document.getElementById('manager');
     // Get query parameter
-    const url = window.location.search;
-    let postId;
+    // const url = window.location.search;
+    let projectId;
     let employeeId;
     let updating = false;
 
     // Get post data for editing/adding
-    // const getPostData = (id, type) => {
-    //     const queryUrl =
-    //         type === 'post' ? `/api/projects/${id}` : `/api/employee/${id}`;
-
-    //     fetch(queryUrl, {
+    // const getProjectData = () => {
+    //     fetch('/api/project', {
     //         method: 'GET',
     //         headers: {
     //             'Content-Type': 'application/json',
@@ -36,8 +33,8 @@ document.addEventListener('DOMContentLoaded', () => {
     //                 console.log('Success in getting project:', data);
 
     //                 // Populate the form for editing
-    //                 titleInput.value = data.project;
-    //                 bodyInput.value = data.details;
+    //                 titleInput.value = data.name;
+    //                 bodyInput.value = data.description;
     //                 // employeeId = data.EmployeeId || data.id;
 
     //                 // We are updating
@@ -47,7 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
     //         .catch((err) => console.error(err));
     // };
 
-
+    // getProjectData();
 
     // Event handler for when the project for is submitted
     const handleFormSubmit = (e) => {
@@ -65,18 +62,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Object that will be sent to the db
         const newProject = {
-            project: titleInput.value.trim(),
-            details: bodyInput.value.trim(),
+            name: titleInput.value.trim(),
+            description: bodyInput.value.trim(),
             //  Employeeid: employeeSelect.value,
         };
         console.log(newProject);
 
         // Update a post if flag is true, otherwise submit a new one
         if (updating) {
-            newProject.id = postId;
+            newProject.id = projectId;
             updateProject(newProject);
         } else {
-            submitProject(newPost);
+            submitProject(newProject);
         }
     };
 
@@ -84,18 +81,18 @@ document.addEventListener('DOMContentLoaded', () => {
     createBtn.addEventListener('submit', handleFormSubmit);
 
     // Submits new project then redirects
-    const submitProject = (post) => {
-        fetch('/api/posts', {
+    const submitProject = (project) => {
+        fetch('/api/project', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify(post),
+            body: JSON.stringify(project),
         })
             .then(() => {
                 window.location.href = '/dashboard';
             })
-            .catch((err) => console.error(err));
+        // .catch((err) => console.error(err));
     };
 
     // Render a list of employees or redirect if no employees
@@ -121,12 +118,19 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     // Build employee dropdown
+
     const createEmployeeRow = ({ id, name }) => {
         const listOption = document.createElement('option');
         listOption.value = id;
         listOption.textContent = name;
         return listOption;
     };
+
+
+
+
+
+
 
     // A function to get employees and then call the render function
     const getEmployees = () => {
@@ -138,7 +142,7 @@ document.addEventListener('DOMContentLoaded', () => {
         })
             .then((response) => response.json())
             .then((data) => renderEmployeeList(data))
-            .catch((err) => console.error(err));
+        // .catch((err) => console.error(err));
     };
 
     // Get the employees, and their projects
@@ -146,7 +150,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Update a post then redirect to blog
     const updateProject = (project) => {
-        fetch('/api/posts', {
+        fetch('/api/project', {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -156,7 +160,7 @@ document.addEventListener('DOMContentLoaded', () => {
             .then(() => {
                 window.location.href = '/dashboard';
             })
-            .catch((err) => console.error(err));
+        // .catch((err) => console.error(err));
     };
 });
 
