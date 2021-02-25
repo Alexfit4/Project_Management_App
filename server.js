@@ -1,6 +1,9 @@
 require('dotenv').config()
 const express = require('express');
 const path = require('path');
+var session = require("express-session");
+// Requiring passport as we've configured it
+var passport = require("./config/passport");
 
 // Sets up the Express App
 const app = express();
@@ -23,12 +26,19 @@ app.engine('handlebars', expbs({
 }))
 app.set('view engine', 'handlebars');
 
+
+// Passport
+app.use(session({ secret: "keyboard cat", resave: true, saveUninitialized: true }));
+app.use(passport.initialize());
+app.use(passport.session());
+
 // Routes
 require('./routes/html-routes')(app);
 require('./routes/manager-api-routes.js')(app);
 require('./routes/project-api-routes.js')(app);
 require('./routes/employee-api-routes.js')(app);
 require('./routes/roles-api-routes.js')(app);
+require("./routes/api-routes.js")(app);
 
 // Syncing our sequelize models and then starting our Express app
 db.sequelize.sync().then(() => {
