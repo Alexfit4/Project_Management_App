@@ -23,4 +23,27 @@ module.exports = (app) => {
         res.sendFile(path.join(__dirname, '../views/dashboard.html'))
     );
 
+    app.get('/about', (req, res) => {
+        const dev = {
+            contributors : [
+                {
+                    name: "Johnnie Simpson",
+                    github: "balokdecoy",
+                    email: "johnniesimpson88@gmail.com",
+                    avatar: "insert file path",
+                },
+                {
+                    name: "Amir Ashtiany",
+                    github: "Alexfit4",
+                    email: "amir@gmail.com",
+                    avatar: "insert file path",
+                }
+            ],
+        }
+        res.render('about', dev)
+    }
+    );
+
+    // insert app.get() hbsObject function contributors: data, avatar loop, 
+
 };
