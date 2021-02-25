@@ -1,52 +1,39 @@
-console.log('DOM loaded! 🚀');
-let button = document.querySelector('.btn')
-  //Get Employee
-//   const getEmployees = () => {
-//     fetch('/api/employees', {
-//       method: 'GET',
-//       headers: {
-//         'Content-Type': 'application/json',
-//       },
-//     })
-//       .then((response) => response.json())
-//       .then((data) => {
-//         console.log(data); 
-//         let emailData;
-//         for (let i = 0; i < data.length; i++) {
-//             console.log(data[i].email)
-//             emailData = data[i].email
-            
-//         }
+$(document).ready(function() {
+  // Getting references to our form and inputs
+  var loginForm = $("form.login");
+  var emailInput = $("input#email-input");
+  var passwordInput = $("input#password-input");
 
-//         console.log(emailData);
-//         if (emailData === button) {
-//             console.log('yes');
-//         } else {
-//             console.log('no');
-//         }
-      
-//       })
-      
+  // When the form is submitted, we validate there's an email and password entered
+  loginForm.on("submit", function(event) {
+    event.preventDefault();
+    var userData = {
+      email: emailInput.val().trim(),
+      password: passwordInput.val().trim()
+    };
 
-//   };
+    if (!userData.email || !userData.password) {
+      return;
+    }
 
- 
-  button.addEventListener('click',(e) => {
-    const email = e.target.querySelector('#inputEmail')
+    // If we have an email and password we run the loginUser function and clear the form
+    loginUser(userData.email, userData.password);
+    emailInput.val("");
+    passwordInput.val("");
+  });
 
-    fetch(`/api/employees/${email}`, {
-        method: 'GET',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-        },
-
-        // make sure to serialize the JSON body
-        
+  // loginUser does a post to our "api/login" route and if successful, redirects us the the members page
+  function loginUser(email, password) {
+    $.post("/api/login", {
+      email: email,
+      password: password
+    })
+      .then(function() {
+        window.location.replace("/dashboard");
+        // If there's an error, log the error
       })
-      .then((response) => response.json()).then((data) => {
-        console.log(data);
-
-      })
-
-  })
+      .catch(function(err) {
+        console.log(err);
+      });
+  }
+});

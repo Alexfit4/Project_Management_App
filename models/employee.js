@@ -1,4 +1,5 @@
 "use strict";
+var bcrypt = require("bcryptjs");
 const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
 	class Employee extends Model {
@@ -28,7 +29,7 @@ module.exports = (sequelize, DataTypes) => {
 				project_id: undefined,
 				password: undefined,
 				createdAt: undefined,
-				updatedAt: undefined
+				updatedAt: undefined,
 			};
 		}
 	}
@@ -58,6 +59,10 @@ module.exports = (sequelize, DataTypes) => {
 			email: {
 				type: DataTypes.STRING,
 				allowNull: false,
+				unique: true,
+				validate: {
+					isEmail: true,
+				},
 			},
 			password: {
 				type: DataTypes.STRING,
@@ -70,5 +75,19 @@ module.exports = (sequelize, DataTypes) => {
 			modelName: "Employee",
 		}
 	);
+
+	// Creating a custom method for our User model. This will check if an unhashed password entered by the user can be compared to the hashed password stored in our database
+	Employee.prototype.validPassword = function (password) {
+		return bcrypt.compareSync(password, this.password);
+	};
+	// Hooks are automatic methods that run during various phases of the User Model lifecycle
+	// In this case, before a User is created, we will automatically hash their password
+	Employee.addHook("beforeCreate", function (employee) {
+		employee.password = bcrypt.hashSync(
+			employee.password,
+			bcrypt.genSaltSync(10),
+			null
+		);
+	});
 	return Employee;
 };
