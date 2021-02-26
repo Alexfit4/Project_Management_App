@@ -23,7 +23,7 @@ module.exports = (sequelize, DataTypes) => {
 		toJSON() {
 			return {
 				...this.get(),
-				id: undefined,
+				//id: undefined,
 				role_id: undefined,
 				manager_id: undefined,
 				project_id: undefined,
@@ -48,10 +48,10 @@ module.exports = (sequelize, DataTypes) => {
 				type: DataTypes.INTEGER,
 				allowNull: false,
 			},
-			project_id: {
-				type: DataTypes.INTEGER,
-				allowNull: false,
-			},
+			// project_id: {
+			// 	type: DataTypes.INTEGER,
+			// 	defaultValue: 0,
+			// },
 			// manager_id: {
 			// 	type: DataTypes.INTEGER,
 			// 	allowNull: false,
