@@ -1,5 +1,5 @@
 const db = require("../models");
-
+const { Op } = require("sequelize");
 // Routes
 module.exports = (app) => {
 	// * GET route for getting all of the projects
@@ -18,9 +18,16 @@ module.exports = (app) => {
 				{
 					model: db.Manager,
 				},
+
+			]
+		}).then((Project) => {
+			res.json(Project);
+		});
+
 			],
 		}).then((Project) => res.json(Project));
 		console.log(db.Project)
+
 	});
 
 	// * Finding one project
@@ -38,7 +45,7 @@ module.exports = (app) => {
 					required: true,
 				},
 				{
-					model: db.Manager
+					model: db.Manager,
 				},
 			],
 		}).then((dbProject) => res.json(dbProject));
@@ -49,9 +56,7 @@ module.exports = (app) => {
 		db.Project.create({
 			name: req.body.name,
 			description: req.body.description,
-		}).then((dbPost) =>
-			res.json(dbPost)
-		);
+		}).then((dbPost) => res.json(dbPost));
 	});
 
 	// * DELETE route for deleting Project using the ID (req.params.id)
@@ -69,7 +74,7 @@ module.exports = (app) => {
 		db.Project.update(
 			{
 				name: req.body.name,
-				description: req.body.description
+				description: req.body.description,
 			},
 			{
 				where: {
