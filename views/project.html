@@ -32,21 +32,24 @@
                         <label for="body">Details</label>
                         <textarea placeholder="Project Details" class="form-control" rows="10" id="body"></textarea>
 
-                        <div class="form-group">
+                        <!-- <div class="form-group">
                             <label for="category">Select Managers:</label>
-                            <select class="custom-select" id="manager">
+
+                            <select class="custom-select" id="manager-form">
                             </select>
+
+                        </div> -->
+
+                        <div class="form-check" id="manager">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                            <label class="form-check-label" for="flexCheckDefault">
+                                Default checkbox
+                            </label>
                         </div>
 
 
-                        <!-- <label>Manager Name: </label>
-                        <select>
-                            <% for(var i=0; i < dropdownVals.length; i++) { %>
-                                <option value="<%= dropdownVals[i].ID %>">
-                                    <%= dropdownVals[i].first_name %>
-                                </option>
-                                <% } %>
-                        </select> -->
+
+
 
 
 

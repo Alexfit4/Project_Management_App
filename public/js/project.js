@@ -29,6 +29,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const createBtn = document.getElementById('create-form');
     const employeeSelect = document.getElementById('employee');
     const managerSelect = document.getElementById('manager');
+
+    console.log(managerSelect)
     // Get query parameter
     // const url = window.location.search;
     let projectId;
@@ -106,7 +108,7 @@ document.addEventListener('DOMContentLoaded', () => {
             body: JSON.stringify(project),
         })
             .then(() => {
-                window.location.href = '/dashboard';
+                // window.location.href = '/dashboard';
             })
         // .catch((err) => console.error(err));
     };
@@ -136,23 +138,33 @@ document.addEventListener('DOMContentLoaded', () => {
     // Build employee dropdown
 
     const createManagerRow = ({ id, first_name, last_name }) => {
-        const listOption = document.createElement('label')
+        const listOption = document.createElement('input')
         // .appendChild("input");
 
-
         //  const addInput = document.createElement('input');
-        //   const listOption = addLable.append($("input"))
+        // const listOption = addLable.append($("input"))
         console.log(listOption)
         listOption.setAttribute("type", "checkbox")
         listOption.value = id;
         listOption.textContent = `${first_name} ${last_name}`;
-
+        console.log(listOption.textContent)
         return listOption;
 
     };
 
 
+    // const createManagerRow = ({ id, first_name, last_name }) => {
+    //     const addLable = document.createElement('label');
 
+    //     const listOption = document.createElement('input');
+    //     addLable.append(listOption)
+    //     listOption.setAttribute("type", "checkbox")
+    //     listOption.value = id;
+    //     listOption.textContent = `${first_name} ${last_name}`;
+
+    //     return listOption;
+
+    // };
 
 
 
@@ -184,10 +196,6 @@ document.addEventListener('DOMContentLoaded', () => {
     //         console.log(err)
     //     })
     // };
-
-
-
-
 
 
 
