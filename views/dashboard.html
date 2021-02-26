@@ -22,7 +22,6 @@
     </ul>
   </nav>
 
-
   <div class="container-fluid">
     <div class="row">
       <nav class="col-md-2 d-none d-md-block bg-dark sidebar">
@@ -35,37 +34,37 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">
+              <a class="nav-link" href="project">
                 <span data-feather="file"></span>
                 View Sprints
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">
+              <a class="nav-link" href="/employee">
                 <span data-feather="shopping-cart"></span>
                 View Employees
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">
+              <a class="nav-link" href="/employee">
                 <span data-feather="users"></span>
                 View Managers
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">
+              <a class="nav-link" href="/employee">
                 <span data-feather="bar-chart-2"></span>
                 Add Employees
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">
+              <a class="nav-link" href="/employee">
                 <span data-feather="layers"></span>
                 Add Managers
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">
+              <a class="nav-link" href="/project">
                 <span data-feather="layers"></span>
                 Add Sprints
               </a>
@@ -112,10 +111,10 @@
 
         <div class="my-4" id="myChart" width="900" height="380">
           <div class="col-12">
-            <div class="card">
+            <div class="card" id="projectDetail">
               <div class="card-body">
                 <p class="card-text">
-                  Project Name
+                  
                 </p>
               </div>
             </div>
@@ -152,7 +151,9 @@
               </thead>
               <tbody>
                 <tr>
-                  <td id="prId"></td>
+                  <td id="prId">
+                      <button id="button">Button</button>
+                  </td>
                   <td id="prName"></td>
                   <td id="prDetails"></td>
                   <td id="prMgFirstName"></td>
