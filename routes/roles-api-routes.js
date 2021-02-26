@@ -1,6 +1,7 @@
 // Grabbing our models
 
 const db = require("../models");
+const { Op } = require("sequelize");
 
 // Routes
 module.exports = (app) => {
@@ -13,8 +14,26 @@ module.exports = (app) => {
 				},
 				{
 					model: db.Manager,
+				},			]			
+		}).then((dbRoles) => res.json(dbRoles));
+	});
+
+	app.get("/api/roles_manager", (req, res) => {
+		// * GET route for getting all of the roles for managers
+		db.Role.findAll({
+			include: [
+				{
+					model: db.Employee,
+				},
+				{
+					model: db.Manager,
 				},
 			],
+			where: {
+				title: {
+					[Op.like]: "%Lead%",
+				},
+			},
 		}).then((dbRoles) => res.json(dbRoles));
 	});
 
