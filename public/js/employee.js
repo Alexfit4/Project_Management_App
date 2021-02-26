@@ -1,6 +1,7 @@
 $(document).ready(() => {
   console.log('DOM loaded! 🚀');
 
+  let titleId;
   //Get Employee
   const getEmployees = () => {
     fetch('/api/employees', {
@@ -22,15 +23,16 @@ $(document).ready(() => {
           empTitle = data[i].Role.title;
           empSalary = data[i].Role.salary;
           empEmail = data[i].email;
-
+          empId = data[i].id;
+          
           var newRow = $("<tr>").append(
             $("<td>").text(empFirstName),
             $("<td>").text(empLastName),
             $("<td>").text(empTitle).addClass("title-row"),
             $("<td>").text(empSalary),
             $("<td>").text(empEmail),
-            $("<button>").text("Edit").addClass("edit-emp-btn"),
-            $("<button>").text("Delete").addClass("delete-emp-btn"),
+            $("<button>").text("Edit").addClass("edit-emp-btn").val(empId),
+            $("<button>").text("Delete").addClass("delete-emp-btn").val(empId),
           );
 
           // Append the new row to the table
@@ -65,17 +67,16 @@ $(document).ready(() => {
           managerTitle = data[i].Role.title;
           managerSalary = data[i].Role.salary;
           managerEmail = data[i].email;
-
+          managerId = data[i].id;
           var newRow = $("<tr>").append(
             $("<td>").text(managerFirstName),
             $("<td>").text(managerLastName),
             $("<td>").text(managerTitle).addClass("title-row"),
             $("<td>").text(managerSalary),
             $("<td>").text(managerEmail),
-            $("<button>").text("Edit").addClass("edit-emp-btn"),
-            $("<button>").text("Delete").addClass("delete-emp-btn"),
+            $("<button>").text("Edit").addClass("edit-emp-btn").val(managerId),
+            $("<button>").text("Delete").addClass("delete-emp-btn").val(managerId),
           );
-
           // Append the new row to the table
           $("#manager-table > tbody").append(newRow)
 
@@ -83,7 +84,6 @@ $(document).ready(() => {
       }
       })
       .catch((err) => console.error(err));
-
   };
   getManager()
 
@@ -93,11 +93,11 @@ $(document).ready(() => {
     const newEmployee = {
       first_name: $("#employee-first-name").val().trim(),
       last_name: $("#employee-last-name").val().trim(),
-      title: $("#employee-title").val().trim(),
-      salary: $("#employee-salary").val().trim(),
+      role_id: titleSelect.val(),
       email: $("#employee-email").val().trim(),
       password: $("#employee-password").val().trim(),
     };
+    //console.log(newEmployee.role_id)
     if (newEmployee) {
       fetch('/api/employees', {
         method: 'POST',
@@ -107,15 +107,40 @@ $(document).ready(() => {
         body: JSON.stringify(newEmployee),
       })
         .then((response) => response.json())
-        .then(() => getEmployees());
+        .then(() => getEmployees()).catch((err) => console.error(err));;
     }
   };
   $("#add-employee-btn").on("click", addEmployee)
 
+  //Add Employee
+  const addManager = (e) => {
+    e.preventDefault();
+    const newManager = {
+      first_name: $("#manager-first-name").val().trim(),
+      last_name: $("#manager-last-name").val().trim(),
+      role_id: titleSelect.val(),
+      email: $("#manager-email").val().trim(),
+      password: $("#manager-password").val().trim(),
+    };
+    //console.log(newEmployee.role_id)
+    if (newManager) {
+      fetch('/api/managers', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(newManager),
+      })
+        .then((response) => response.json())
+        .then(() => getManager()).catch((err) => console.error(err));;
+    }
+  };
+  $("#add-manager-btn").on("click", addManager)
+
   //Delete Employee
   const deleteEmployees = (e) => {
     e.stopPropagation();
-    const { id } = e.target.parentElement.parentElement;
+    var {id} = $(this).val();
     console.log(id);
     fetch(`/api/employees/${id}`, {
       method: 'DELETE',
@@ -162,10 +187,7 @@ $(document).ready(() => {
       })
         .then((response) => response.json())
         .then((data) => {
-        console.log(data)
-        //????????titleId
-        titleId = data.id;
-        console.log(titleId)
+          titleId = data.id;
         renderTitleList(data)})
         .catch((err) => console.error(err));
     };
