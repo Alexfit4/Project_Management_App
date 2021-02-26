@@ -43,12 +43,14 @@ document.addEventListener('DOMContentLoaded', () => {
                         projDescript = data[i].description;
                         // projMngFirst = data[i].Manager.first_name;
                         // projMngLast = data[i].Manager.last_name;
-
+                        // projMngName = `${projMngFirst} ${projMngLast}`
+                        console.log(projDescript)
                         var newRow = $("<tr>").append(
                             $("<td>").text(projId),
                             $("<td>").text(projName),
-                            $("<td>").text(projDescript)
-
+                            $("<td>").text(projDescript),
+                            // $("<td>").text(projMng),
+                            console.log(projDescript)
                             // $("<td>").text(empSalary),
                             // $("<td>").text(empEmail),
                             // $("<button>").text("Edit").addClass("edit-emp-btn"),

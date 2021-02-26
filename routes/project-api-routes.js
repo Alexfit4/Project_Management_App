@@ -11,15 +11,16 @@ module.exports = (app) => {
 		// findAll returns all entries for a table when used with no options
 		db.Project.findAll({
 			include: [
-				{
-					model: db.Employee,
-					required: true,
-				},
+				// {
+				// 	model: db.Employee,
+				// 	required: true,
+				// },
 				{
 					model: db.Manager,
 				},
 			],
 		}).then((Project) => res.json(Project));
+		console.log(db.Project)
 	});
 
 	// * Finding one project
@@ -54,7 +55,7 @@ module.exports = (app) => {
 	});
 
 	// * DELETE route for deleting Project using the ID (req.params.id)
-	app.delete("/api/project:id", (req, res) => {
+	app.delete("/api/project/:id", (req, res) => {
 		// We just have to specify which project we want to destroy with "where"
 		db.Project.destroy({
 			where: {
