@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         // projMngName = `${projMngFirst} ${projMngLast}`
                         console.log(projDescript)
                         var newRow = $("<tr>").append(
-                            $("<button class='button'>").text(projId),
+                            $("<button type='button' class='btn btn-primary button'>").text(projId),
                             $("<td>").text(projName),
                             $("<td>").text(projDescript),
                             // $("<td>").text(projMng),
