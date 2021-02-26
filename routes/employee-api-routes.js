@@ -66,8 +66,6 @@ module.exports = (app) => {
       first_name: req.body.first_name,
       last_name: req.body.last_name,
       role_id:req.body.role_id,
-      project_id: req.body.project_id,
-      manager_id: req.body.manager_id,
       email: req.body.email,
       password: req.body.password,
     
