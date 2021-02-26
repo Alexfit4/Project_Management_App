@@ -1,8 +1,11 @@
+// const { BIGINT } = require("sequelize");
+
 // Wait for the DOM to completely load before we run our JS
 document.addEventListener('DOMContentLoaded', () => {
     console.log('DOM loaded! 🚀');
 
     const projectContainer = document.querySelector('.project-container');
+    const button = document.querySelector('.button');
 
     // Variable to hold our projects
     let projects;
@@ -21,6 +24,14 @@ document.addEventListener('DOMContentLoaded', () => {
         })
             .then((response) => response.json())
             .then((data) => {
+                // button.onclick = function() {
+                //     console.log('hello world');
+                //     console.log(data);
+                //     var projectDetail = $("<div>").append(
+                //         $("<div>").text(projName)
+                //     )
+                //     $("#projectDetail").append(projectDetail);
+                // }
                 if (data.length > 0) {
                     console.log('Success in getting post:', data);
                     console.log(data)
@@ -46,8 +57,12 @@ document.addEventListener('DOMContentLoaded', () => {
                             // $("<button>").text("Delete").addClass("delete-emp-btn"),
                         );
 
+            
+                        
+
                         // // Append the new row to the table
-                        $("#projectTable > tbody").append(newRow)
+                        $("#projectTable > tbody").append(newRow);
+                        
 
                     }
                 }
