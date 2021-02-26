@@ -35,9 +35,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (data.length > 0) {
                     console.log('Success in getting post:', data);
                     console.log(data)
+                   
                     $("#projectTable > tbody").empty();
                     // Populate the form
                     for (i = 0; i < data.length; i++) {
+                        console.log(data[i].id)
                         projId = data[i].id;
                         projName = data[i].name;
                         projDescript = data[i].description;
@@ -46,7 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         // projMngName = `${projMngFirst} ${projMngLast}`
                         console.log(projDescript)
                         var newRow = $("<tr>").append(
-                            $("<td>").text(projId),
+                            $("<button class='button'>").text(projId),
                             $("<td>").text(projName),
                             $("<td>").text(projDescript),
                             // $("<td>").text(projMng),
