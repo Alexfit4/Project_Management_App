@@ -3,6 +3,7 @@
 // Wait for the DOM to completely load before we run our JS
 document.addEventListener('DOMContentLoaded', () => {
     console.log('DOM loaded! 🚀');
+    feather.replace()
 
     const projectContainer = document.querySelector('.project-container');
     const button = document.querySelector('.button');
