@@ -40,17 +40,18 @@ document.addEventListener('DOMContentLoaded', () => {
                     $("#projectTable > tbody").empty();
                     // Populate the form
                     for (i = 0; i < data.length; i++) {
-                        console.log(data[i].id)
+                        console.log(data[i])
                         projId = data[i].id;
                         projName = data[i].name;
                         projDescript = data[i].description;
                         projMngFirst = data[i].Manager.first_name;
                         projMngLast = data[i].Manager.last_name;
                         projMngName = `${projMngFirst} ${projMngLast}`
+                       
 
-                        // projEmpFirst = data[i].Employees[0].first_name;
-                        // projEmpLast = data[i].Employees[0].last_name;
-                        // projEmpName = `${projEmpFirst} ${projEmpLast}`
+                        projEmpFirst = data[i].Employees[0].first_name;
+                        projEmpLast = data[i].Employees[0].last_name;
+                        projEmpName = `${projEmpFirst} ${projEmpLast}`
 
                         console.log(projDescript)
                         var newRow = $("<tr>").append(
@@ -60,6 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             $("<td>").text(projName),
                             $("<td>").text(projDescript),
                             $("<td>").text(projMngName),
+                            $("<td>").text(projEmpName),
 
                             console.log(projDescript)
                             // $("<td>").text(empSalary),
@@ -102,7 +104,8 @@ document.addEventListener('DOMContentLoaded', () => {
                         console.log(data);
                     projectDet.textContent = data.name;
                     projectContent.textContent = data.description + `${'\n'}` + data.Manager.first_name + " " + data.Manager.last_name;
-                    }) 
+                    
+                }) 
                           
         }
     });
