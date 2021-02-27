@@ -9,11 +9,14 @@ module.exports = (sequelize, DataTypes) => {
 		 */
 		static associate({ Project, Manager, Employee, Role }) {
 			// define association here
-			this.belongsTo(Project, { foreignKey: "project_id" });
+			this.hasMany(Project, { foreignKey: "manager_id" });
 
 			// this.hasMany(Employee, { foreignKey: "manager_id" });
 
 			this.belongsTo(Role, { foreignKey: "role_id" });
+			this.hasMany(Manager, { foreignKey: "manager_id" });
+
+			this.belongsTo(Manager, { foreignKey: "manager_id" });
 		}
 
 		// * Decides which fields are returned
@@ -44,7 +47,7 @@ module.exports = (sequelize, DataTypes) => {
 				type: DataTypes.INTEGER,
 				allowNull: false,
 			},
-			project_id: {
+			projects_id: {
 				type: DataTypes.INTEGER,
 				allowNull: false,
 			},

@@ -51,10 +51,10 @@ module.exports = (sequelize, DataTypes) => {
 				type: DataTypes.INTEGER,
 				defaultValue: 0,
 			 },
-			// manager_id: {
-			// 	type: DataTypes.INTEGER,
-			// 	allowNull: false,
-			// },
+			manager_id: {
+				type: DataTypes.INTEGER,
+				allowNull: false,
+			},
 			email: {
 				type: DataTypes.STRING,
 				allowNull: false,
