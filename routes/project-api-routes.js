@@ -13,7 +13,7 @@ module.exports = (app) => {
 			include: [
 				{
 					model: db.Employee,
-					
+
 				},
 				{
 					model: db.Manager,
@@ -56,12 +56,13 @@ module.exports = (app) => {
 		db.Project.create({
 			name: req.body.name,
 			description: req.body.description,
-			manager_id: req.body.manager_id
+			manager_id: req.body.manager_id,
+			employee_id: req.body.employee_id
 		}).then((dbPost) => res.json(dbPost));
 	});
 
 	// * DELETE route for deleting Project using the ID (req.params.id)
-	app.delete("/api/project:id", (req, res) => {
+	app.delete("/api/project/:id", (req, res) => {
 		// We just have to specify which project we want to destroy with "where"
 		db.Project.destroy({
 			where: {
@@ -71,11 +72,13 @@ module.exports = (app) => {
 	});
 
 	// * PUT route for updating Projects. We can get the updated Project data from req.body
-	app.put("/api/project", (req, res) => {
+	app.put("/api/project/:id", (req, res) => {
 		db.Project.update(
 			{
 				name: req.body.name,
 				description: req.body.description,
+				manager_id: req.body.manager_id,
+				employee_id: req.body.employee_id
 			},
 			{
 				where: {

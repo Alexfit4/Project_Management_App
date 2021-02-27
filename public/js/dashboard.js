@@ -11,9 +11,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const projectDet = document.getElementById('projectDetail');
     const projectContent = document.getElementById('projectContent');
     let button = document.querySelector('.btn');
+
     let projectID = document.getElementById('projectTable');
     console.log(projectID);
     
+
     // Variable to hold our projects
     let projects;
 
@@ -34,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (data.length > 0) {
                     console.log('Success in getting post:', data);
                     console.log(data)
-                   
+
                     $("#projectTable > tbody").empty();
                     // Populate the form
                     for (i = 0; i < data.length; i++) {
@@ -45,19 +47,27 @@ document.addEventListener('DOMContentLoaded', () => {
                         projMngFirst = data[i].Manager.first_name;
                         projMngLast = data[i].Manager.last_name;
                         projMngName = `${projMngFirst} ${projMngLast}`
+
+                        // projEmpFirst = data[i].Employees[0].first_name;
+                        // projEmpLast = data[i].Employees[0].last_name;
+                        // projEmpName = `${projEmpFirst} ${projEmpLast}`
+
                         console.log(projDescript)
                         var newRow = $("<tr>").append(
+
                             $(`<button type='button' id=${data[i].id} data-attr=${data[i].id} class='button${data[i].id} btn btn-primary'>`).text(projId),
+                            $("<button>").text("Edit").addClass("edit-proj-btn").val(projId),
                             $("<td>").text(projName),
                             $("<td>").text(projDescript),
                             // $("<td>").text(projMngName),
+
                             console.log(projDescript)
                             // $("<td>").text(empSalary),
                             // $("<td>").text(empEmail),
                             // $("<button>").text("Edit").addClass("edit-emp-btn"),
                             // $("<button>").text("Delete").addClass("delete-emp-btn"),
                         );
-     
+
                         // // Append the new row to the table
                         $("#projectTable > tbody").append(newRow);
 
@@ -65,13 +75,14 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
 
                 }
-                
+
 
             })
         // .catch((error) => console.error('Error:', error));
     };
 
     getProjects();
+
 
     projectID.addEventListener('click', function(e) {
         e.preventDefault();
@@ -127,7 +138,14 @@ document.addEventListener('DOMContentLoaded', () => {
            
     // })};
 
-    
+
+                console.log(data);
+
+
+            })
+    };
+
+
     // const buttonClick = (id) => {
     //     fetch('/api/project', {
     //         method: 'GET',
@@ -137,12 +155,12 @@ document.addEventListener('DOMContentLoaded', () => {
     //     })
     //         .then((response) => response.json())
     //         .then((data) => {
-               
+
     //         const test = "hello world"
     //         button.onclick = console.log(test);
-               
-                
-                
+
+
+
 
     //         //     
     //         //     button.onclick = function() {
@@ -154,10 +172,49 @@ document.addEventListener('DOMContentLoaded', () => {
     //         // }
 
     // })}
-    
-    //buttonClick();
 
-    
+
+
+
+
+
+
+
+    const editProject = (e) => {
+        id = e.target.value;
+        console.log("hello")
+        fetch(`/api/project/${id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(e),
+        })
+            .then(() => {
+                console.log("hello")
+                // window.location.href = '/project';
+            })
+            .catch((err) => console.error(err));
+    };
+
+    //  $(".edit-proj-btn").on("click", editProject);
+
+
+    $(document).on("click", '.edit-proj-btn', editProject);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     // Front end call to DELETE a post
     const deleteProject = (id) => {
@@ -170,58 +227,6 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
 
-    const createNewRow = (project) => {
-        // console.log('createNewRow -> project', project);
-
-        // const formattedDate = new Date(project.createdAt).toLocaleDateString();
-
-        // const newProjectCard = document.createElement('div');
-        // newProjectCard.classList.add('card');
-
-        // const newProjectCardHeading = document.createElement('div');
-        // newProjectCardHeading.classList.add('card-header');
-
-        // Delete button
-        const deleteBtn = document.createElement('button');
-        deleteBtn.textContent = 'x';
-        deleteBtn.classList.add('delete', 'btn', 'btn-danger');
-        deleteBtn.addEventListener('click', handleProjectDelete);
-
-        // Edit button
-        const editButton = document.createElement('button');
-        editButton.textContent = 'EDIT';
-        editButton.classList.add('edit', 'btn', 'btn-info');
-        editButton.addEventListener('click', handleProjectEdit);
-
-        const newProjectTitle = document.createElement('h2');
-        const newProjectDate = document.createElement('small');
-        const newProjectEmployee = document.createElement('h5');
-
-        // newProjectEmployee.textContent = `Written by: ${project.name}`;
-        // newProjectEmployee.style.float = 'right';
-        // newProjectEmployee.style.color = 'blue';
-        // newProjectEmployee.style.marginTop = '-10px';
-
-        const newProjectCardBody = document.createElement('div');
-        newProjectCardBody.classList.add('card-body');
-
-        const newProjectBody = document.createElement('p');
-        newProjectTitle.textContent = `${project.name} `;
-        newProjectBody.textContent = project.description;
-        newProjectDate.textContent = ` (${formattedDate})`;
-        newProjectTitle.append(newProjectDate);
-        newProjectCardHeading.append(deleteBtn);
-        newProjectCardHeading.append(editButton);
-        newProjectCardHeading.append(newProjectitle);
-        newProjectCardHeading.append(newProjectEmployee);
-        newProjectCardBody.append(newProjectBody);
-        newProjectCard.append(newProjectCardHeading);
-        newProjectCard.append(newProjectCardBody);
-        newProjectCard.setAttribute('data-post', JSON.stringify(project));
-
-        console.log('createNewRow -> newProjectCard', newProjectCard);
-        return newProjectCard;
-    };
 
 
 
