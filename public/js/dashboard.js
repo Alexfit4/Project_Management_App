@@ -6,7 +6,9 @@ document.addEventListener('DOMContentLoaded', () => {
     feather.replace()
 
     const projectContainer = document.querySelector('.project-container');
-    const button = document.querySelector('.button');
+    const projectDet = document.querySelector('#projectDetail');
+    let button = document.querySelector('.btn');
+    
 
     // Variable to hold our projects
     let projects;
@@ -25,14 +27,6 @@ document.addEventListener('DOMContentLoaded', () => {
         })
             .then((response) => response.json())
             .then((data) => {
-                // button.onclick = function() {
-                //     console.log('hello world');
-                //     console.log(data);
-                //     var projectDetail = $("<div>").append(
-                //         $("<div>").text(projName)
-                //     )
-                //     $("#projectDetail").append(projectDetail);
-                // }
                 if (data.length > 0) {
                     console.log('Success in getting post:', data);
                     console.log(data)
@@ -49,7 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         // projMngName = `${projMngFirst} ${projMngLast}`
                         console.log(projDescript)
                         var newRow = $("<tr>").append(
-                            $("<button type='button' class='btn btn-primary button'>").text(projId),
+                            $(`<button type='button' id=${data[i].id} class='button${data[i].id} btn btn-primary'>`).text(projId),
                             $("<td>").text(projName),
                             $("<td>").text(projDescript),
                             // $("<td>").text(projMng),
@@ -59,22 +53,69 @@ document.addEventListener('DOMContentLoaded', () => {
                             // $("<button>").text("Edit").addClass("edit-emp-btn"),
                             // $("<button>").text("Delete").addClass("delete-emp-btn"),
                         );
-
+                        
             
                         
 
                         // // Append the new row to the table
                         $("#projectTable > tbody").append(newRow);
-                        
-
-                    }
+                                          
+                }                
+               
                 }
+                
 
             })
         // .catch((error) => console.error('Error:', error));
     };
 
     getProjects();
+
+    const buttonClick = (e) => {
+        e.preventDefault();
+        fetch('/api/project', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+            .then((response) => response.json())
+            .then((data) => {
+               
+            const test = "hello world"
+            button.onclick = console.log(test);
+    })};
+
+    // const buttonClick = (id) => {
+    //     fetch('/api/project', {
+    //         method: 'GET',
+    //         headers: {
+    //             'Content-Type': 'application/json',
+    //         },
+    //     })
+    //         .then((response) => response.json())
+    //         .then((data) => {
+               
+    //         const test = "hello world"
+    //         button.onclick = console.log(test);
+               
+                
+                
+
+    //         //     
+    //         //     button.onclick = function() {
+    //         //         console.log('button');
+    //         //     }
+
+    //         // if (data.id = button) {
+    //         //     console.log('hello world');
+    //         // }
+
+    // })}
+
+    buttonClick();
+
+    
 
     // Front end call to DELETE a post
     const deleteProject = (id) => {
@@ -85,7 +126,6 @@ document.addEventListener('DOMContentLoaded', () => {
             },
         }).then(getProjects());
     };
-
 
 
     const createNewRow = (project) => {
