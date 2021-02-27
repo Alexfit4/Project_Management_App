@@ -10,11 +10,13 @@ module.exports = (sequelize, DataTypes) => {
 		 */
 		static associate({ Project, Manager, Role }) {
 			// define association here
-			this.belongsTo(Project, { foreignKey: "project_id" });
+			// this.belongsTo(Project, { foreignKey: "project_id" });
 
 			// this.belongsTo(Manager, { foreignKey: "manager_id" });
 
-			// this.hasMany(Employee, { foreignKey: "manager_id" });
+			this.hasMany(Project, { foreignKey: "employee_id" });
+
+			
 
 			this.belongsTo(Role, { foreignKey: "role_id" });
 		}
@@ -52,7 +54,6 @@ module.exports = (sequelize, DataTypes) => {
 
 				allowNull: true,
 			 },
-
 			manager_id: {
 				type: DataTypes.INTEGER,
 				allowNull: true,
