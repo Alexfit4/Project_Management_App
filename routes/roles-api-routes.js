@@ -37,6 +37,25 @@ module.exports = (app) => {
 		}).then((dbRoles) => res.json(dbRoles));
 	});
 
+	app.get("/api/roles_emp", (req, res) => {
+		// * GET route for getting all of the roles for employees
+		db.Role.findAll({
+			include: [
+				{
+					model: db.Employee,
+				},
+				{
+					model: db.Manager,
+				},
+			],
+			where: {
+				title: {
+					[Op.notLike]: "%Lead%",
+				},
+			},
+		}).then((dbRoles) => res.json(dbRoles));
+	});
+
 	// * Find One
 	app.get("/api/roles/:id", (req, res) => {
 		// Here we add an "include" property to our options in our findOne query

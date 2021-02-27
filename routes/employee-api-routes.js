@@ -74,7 +74,7 @@ module.exports = (app) => {
   });
 
   //* DELETE route for deleting todos using the ID (req.params.id)
-  app.delete('/api/employees:id', (req, res) => {
+  app.delete('/api/employees/:id', (req, res) => {
     //* We just have to specify which todo we want to destroy with "where"
     db.Employee.destroy({
       where: {
@@ -90,7 +90,6 @@ module.exports = (app) => {
         first_name: req.body.first_name,
         last_name: req.body.last_name,
         role_id:req.body.role_id,
-        project_id: req.body.project_id,
         manager_id: req.body.manager_id,
         email: req.body.email,
         password: req.body.password,
@@ -103,5 +102,7 @@ module.exports = (app) => {
 		).then((dbEmployee) => res.json(dbEmployee));
 	});
 };
+
+
 
 
