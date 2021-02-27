@@ -43,8 +43,8 @@ document.addEventListener('DOMContentLoaded', () => {
                         projId = data[i].id;
                         projName = data[i].name;
                         projDescript = data[i].description;
-                        projMngFirst = data[i].Managers[0].first_name;
-                        projMngLast = data[i].Managers[0].last_name;
+                        projMngFirst = data[i].Manager.first_name;
+                        projMngLast = data[i].Manager.last_name;
                         projMngName = `${projMngFirst} ${projMngLast}`
                         console.log(projDescript)
                         var newRow = $("<tr>").append(

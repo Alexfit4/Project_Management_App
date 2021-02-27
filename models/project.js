@@ -8,9 +8,13 @@ module.exports = (sequelize, DataTypes) => {
 		 * The `models/index` file will call this method automatically.
 		 */
 		static associate({ Manager, Employee }) {
-			this.hasMany(Manager, { foreignKey: "project_id" });
+			this.belongsTo(Manager, { foreignKey: "manager_id" });
 
 			this.hasMany(Employee, { foreignKey: "project_id" });
+
+			
+
+			this.hasMany(Manager, { foreignKey: "manager_id" });
 		}
 
 		// * Decides which fields are returned
@@ -33,6 +37,9 @@ module.exports = (sequelize, DataTypes) => {
 				type: DataTypes.TEXT,
 				allowNull: false,
 			},
+			manager_id: {
+				type: DataTypes.INTEGER
+			}
 		},
 		{
 			sequelize,
