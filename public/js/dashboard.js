@@ -139,13 +139,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // })};
 
 
-<<<<<<< HEAD
 
 
 
-=======
-         
->>>>>>> 1968cf1c52d5b0ebdeaf39b3ac049c21bc199ca9
 
 
     // const buttonClick = (id) => {
@@ -184,17 +180,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const editProject = (e) => {
         id = e.target.value;
-        console.log("hello")
+        const updatedProject = {
+            name: document.getElementById('name').value.trim(),
+            description: document.getElementById('body').value.trim(),
+        };
+
+        console.log(id)
         fetch(`/api/project/${id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify(e),
+            body: JSON.stringify(updatedProject),
         })
             .then(() => {
                 console.log("hello")
-                // window.location.href = '/project';
+                window.location.href = '/project';
             })
             .catch((err) => console.error(err));
     };
@@ -207,46 +208,4 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-    // Front end call to DELETE a post
-    const deleteProject = (id) => {
-        fetch(`/api/project/${id}`, {
-            method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        }).then(getProjects());
-    };
-
-
-
-
-
-    // Handle when we click the delete post button
-    const handleProjectDelete = (e) => {
-        const currentProject = JSON.parse(
-            e.target.parentElement.parentElement.dataset.project
-        );
-
-        deleteProject(currentProject.id);
-    };
-
-    // Handle when we click the edit post button
-    const handleProjectEdit = (e) => {
-        const currentProject = JSON.parse(
-            e.target.parentElement.parentElement.dataset.project
-        );
-
-        window.location.href = `/project?project_id=${currentProject.id}`;
-    };
 });
