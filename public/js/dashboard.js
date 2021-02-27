@@ -41,15 +41,15 @@ document.addEventListener('DOMContentLoaded', () => {
                         projId = data[i].id;
                         projName = data[i].name;
                         projDescript = data[i].description;
-                        // projMngFirst = data[i].Manager.first_name;
-                        // projMngLast = data[i].Manager.last_name;
-                        // projMngName = `${projMngFirst} ${projMngLast}`
+                        projMngFirst = data[i].Managers[0].first_name;
+                        projMngLast = data[i].Managers[0].last_name;
+                        projMngName = `${projMngFirst} ${projMngLast}`
                         console.log(projDescript)
                         var newRow = $("<tr>").append(
                             $("<td>").text(projId),
                             $("<td>").text(projName),
                             $("<td>").text(projDescript),
-                            // $("<td>").text(projMng),
+                            $("<td>").text(projMngName),
                             console.log(projDescript)
                             // $("<td>").text(empSalary),
                             // $("<td>").text(empEmail),
@@ -57,12 +57,12 @@ document.addEventListener('DOMContentLoaded', () => {
                             // $("<button>").text("Delete").addClass("delete-emp-btn"),
                         );
 
-            
-                        
+
+
 
                         // // Append the new row to the table
                         $("#projectTable > tbody").append(newRow);
-                        
+
 
                     }
                 }

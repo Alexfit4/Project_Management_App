@@ -23,11 +23,6 @@ module.exports = (app) => {
 		}).then((Project) => {
 			res.json(Project);
 		});
-
-			],
-		}).then((Project) => res.json(Project));
-		console.log(db.Project)
-
 	});
 
 	// * Finding one project
