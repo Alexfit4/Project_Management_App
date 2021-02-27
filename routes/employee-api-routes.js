@@ -10,10 +10,10 @@ module.exports = (app) => {
   app.get('/api/employees', (req, res) => {
     // findAll returns all entries for a table when used with no options
     db.Employee.findAll({include:[
-      {
-        model: db.Project,
+      // {
+      //   model: db.Project,
         
-      },
+      // },
       {
         model: db.Role,
         

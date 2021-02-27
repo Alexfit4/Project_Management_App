@@ -31,13 +31,11 @@ $(document).ready(() => {
             $("<td>").text(empTitle).addClass("title-row"),
             $("<td>").text(empSalary),
             $("<td>").text(empEmail),
-            $("<button>").text("Edit").addClass("edit-emp-btn").val(empId),
             $("<button>").text("Delete").addClass("delete-emp-btn").val(empId),
           );
 
           // Append the new row to the table
           $("#employee-table > tbody").append(newRow)
-
         }
       }
       })
@@ -74,7 +72,6 @@ $(document).ready(() => {
             $("<td>").text(managerTitle).addClass("title-row"),
             $("<td>").text(managerSalary),
             $("<td>").text(managerEmail),
-            $("<button>").text("Edit").addClass("edit-manager-btn").val(managerId),
             $("<button>").text("Delete").addClass("delete-manager-btn").val(managerId),
           );
           // Append the new row to the table
@@ -164,24 +161,6 @@ $(document).ready(() => {
   };
 
   $(document).on("click", '.delete-manager-btn', deleteManagers);
-
-  // Update/Edit Employee
-
-  const editEmployee = (employee) => {
-    fetch('/api/employees', {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(employee),
-    })
-      .then(() => {
-        window.location.href = '#employee-form';
-      })
-      .catch((err) => console.error(err));
-  };
-
-  $(document).on("click", ".edit-emp-btn", editEmployee);
 
   // Render a list of employee titles
   const EmployeeTitleSelect = $("#employee-title")
