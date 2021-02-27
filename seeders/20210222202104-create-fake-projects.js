@@ -1,3 +1,5 @@
+
+
 "use strict";
 
 module.exports = {
@@ -19,6 +21,7 @@ module.exports = {
 					name: "TinCat",
 					description: "Dating for cats!",
 					manager_id: 1,
+					employee_id: 1,
 					createdAt: "2021-02-22 16:31:26",
 					updatedAt: "2021-02-22 16:31:26",
 				},
@@ -26,6 +29,7 @@ module.exports = {
 					name: "Winery",
 					description: "New Winery in town, needs a website",
 					manager_id: 2,
+					employee_id: 1,
 					createdAt: "2021-02-22 16:31:47",
 					updatedAt: "2021-02-22 16:31:47",
 				},
@@ -33,6 +37,7 @@ module.exports = {
 					name: "Brewery",
 					description: "Brewery websites need revamping",
 					manager_id: 1,
+					employee_id: 1,
 					createdAt: "2021-02-22 16:32:23",
 					updatedAt: "2021-02-22 16:32:23",
 				},
@@ -40,6 +45,7 @@ module.exports = {
 					name: "Amazon",
 					description: "Buy and sell items",
 					manager_id: 3,
+					employee_id: 1,
 					createdAt: "2021-02-22 16:32:40",
 					updatedAt: "2021-02-22 16:32:40",
 				},

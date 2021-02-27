@@ -50,7 +50,8 @@ module.exports = (app) => {
 		db.Project.create({
 			name: req.body.name,
 			description: req.body.description,
-			manager_id: req.body.manager_id
+			manager_id: req.body.manager_id,
+			employee_id: req.body.employee_id
 		}).then((dbPost) => res.json(dbPost));
 	});
 

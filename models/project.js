@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
 
 			this.hasMany(Employee, { foreignKey: "project_id" });
 
-			
+
 
 			this.hasMany(Manager, { foreignKey: "manager_id" });
 		}
@@ -38,6 +38,9 @@ module.exports = (sequelize, DataTypes) => {
 				allowNull: false,
 			},
 			manager_id: {
+				type: DataTypes.INTEGER
+			},
+			employee_id: {
 				type: DataTypes.INTEGER
 			}
 		},

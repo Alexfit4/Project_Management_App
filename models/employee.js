@@ -47,13 +47,15 @@ module.exports = (sequelize, DataTypes) => {
 				type: DataTypes.INTEGER,
 				allowNull: false,
 			},
-			 project_id: {
+			project_id: {
 				type: DataTypes.INTEGER,
-				defaultValue: 0,
+
+				allowNull: true,
 			 },
+
 			manager_id: {
 				type: DataTypes.INTEGER,
-				allowNull: false,
+				allowNull: true,
 			},
 			email: {
 				type: DataTypes.STRING,
