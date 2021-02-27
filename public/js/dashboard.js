@@ -1,5 +1,7 @@
 // const { BIGINT } = require("sequelize");
 
+// const { DatabaseError } = require("sequelize");
+
 // const e = require("express");
 
 // Wait for the DOM to completely load before we run our JS
@@ -82,7 +84,6 @@ document.addEventListener('DOMContentLoaded', () => {
             })
         // .catch((error) => console.error('Error:', error));
     };
-
     getProjects();
 
 
@@ -101,10 +102,26 @@ document.addEventListener('DOMContentLoaded', () => {
                         },
                     }).then((response) => response.json())
                     .then((data) => {
-                        console.log(data);
+                    console.log(data);
                     projectDet.textContent = data.name;
-                    projectContent.textContent = data.description + `${'\n'}` + data.Manager.first_name + " " + data.Manager.last_name;
-                    
+                    employees = [];
+                    var desc = "Sprint description: " + data.description;
+                    var manager = "Manager: " + data.Manager.first_name + " " + data.Manager.last_name;
+                    var managerEmail = "Manager contact: " + data.Manager.email;
+                    for (i=0; i< data.Employees.length; i++) {
+                        employees.push(data.Employees[i].first_name + " " + data.Employees[i].last_name);
+                    }
+                    console.log(employees);
+                    "Employee: " + data.Employees.first_name + " " + data.Employees.last_name;
+                    var showSprint = $("<div>").append(
+                        $("<div>").text(desc),
+                        $("<div>").text(manager),
+                        $("<div>").text(managerEmail),
+                        // $("<div>").text(employee),
+                    )
+                    // $(projectContent).text(`Project description:  ${desc}` +
+                    // `Manager: ${manager}`)
+                    $(projectContent).append(showSprint);
                 }) 
                           
         }
