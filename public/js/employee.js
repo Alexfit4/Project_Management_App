@@ -74,8 +74,8 @@ $(document).ready(() => {
             $("<td>").text(managerTitle).addClass("title-row"),
             $("<td>").text(managerSalary),
             $("<td>").text(managerEmail),
-            $("<button>").text("Edit").addClass("edit-emp-btn").val(managerId),
-            $("<button>").text("Delete").addClass("delete-emp-btn").val(managerId),
+            $("<button>").text("Edit").addClass("edit-manager-btn").val(managerId),
+            $("<button>").text("Delete").addClass("delete-manager-btn").val(managerId),
           );
           // Append the new row to the table
           $("#manager-table > tbody").append(newRow)
@@ -138,8 +138,9 @@ $(document).ready(() => {
   $("#add-manager-btn").on("click", addManager)
 
   //Delete Employee
-  const deleteEmployees = (id) => {
-    console.log("deleting")
+  const deleteEmployees = (e) => {
+    id = e.target.value;
+    console.log(e.target.value);
     fetch(`/api/employees/${id}`, {
       method: 'DELETE',
       headers: {
@@ -148,7 +149,21 @@ $(document).ready(() => {
     }).then(getEmployees());
   };
 
-  $(".delete-emp-btn").on("click", deleteEmployees);
+  $(document).on("click", '.delete-emp-btn', deleteEmployees);
+
+   //Delete Manager
+   const deleteManagers = (e) => {
+    id = e.target.value;
+    console.log(e.target.value);
+    fetch(`/api/managers/${id}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }).then(getManager());
+  };
+
+  $(document).on("click", '.delete-manager-btn', deleteManagers);
 
   // Update/Edit Employee
 
@@ -166,7 +181,7 @@ $(document).ready(() => {
       .catch((err) => console.error(err));
   };
 
-  $(".edit-emp-btn").on("click", editEmployee);
+  $(document).on("click", ".edit-emp-btn", editEmployee);
 
   // Render a list of employee titles
   const EmployeeTitleSelect = $("#employee-title")
