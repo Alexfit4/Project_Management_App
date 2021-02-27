@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let projectID = document.getElementById('projectTable');
     console.log(projectID);
-    
+
 
     // Variable to hold our projects
     let projects;
@@ -84,7 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
     getProjects();
 
 
-    projectID.addEventListener('click', function(e) {
+    projectID.addEventListener('click', function (e) {
         e.preventDefault();
         console.log(e.target);
         let element = e.target;
@@ -92,18 +92,18 @@ document.addEventListener('DOMContentLoaded', () => {
         if (element.matches('button')) {
             console.log("i'm a button");
             let attr = element.getAttribute('data-attr');
-            fetch('/api/project/'+attr, {
-                        method: 'GET',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                    }).then((response) => response.json())
-                    .then((data) => {
+            fetch('/api/project/' + attr, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            }).then((response) => response.json())
+                .then((data) => {
                     projectDet.textContent = data.name;
                     projectContent.textContent = data.description;
-                    })
-                    
-                          
+                })
+
+
         }
     });
 
@@ -116,34 +116,32 @@ document.addEventListener('DOMContentLoaded', () => {
     //     })
     //         .then((response) => response.json())
     //         .then((data) => {
-               
+
     //         const test = (e) => {
     //             e.preventDefault();
     //             //console.log(data);
     //             console.log(e.target.textContent);
-                
+
     //             if (data.id === e.target.textContent) {
     //                 console.log('hi');
     //             }
     //             for (var i=0; i < data.length; i++) {
     //                if (e.target.textContent === data.id){
     //                    console.log('hi')
-                   
+
     //             }}
     //         };
 
 
     //         $('.btn').on('click', test);
-           
-           
+
+
     // })};
 
 
-                console.log(data);
 
 
-            })
-    };
+
 
 
     // const buttonClick = (id) => {
