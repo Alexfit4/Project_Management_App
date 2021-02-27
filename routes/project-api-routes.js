@@ -10,15 +10,15 @@ module.exports = (app) => {
 		// }
 		// findAll returns all entries for a table when used with no options
 		db.Project.findAll({
-			// include: [
-			// 	{
-			// 		model: db.Employee,
-			// 		required: true,
-			// 	},
-			// 	{
-			// 		model: db.Manager,
-			// 	},
-			// ]
+			include: [
+				{
+					model: db.Employee,
+					required: true,
+				},
+				{
+					model: db.Manager,
+				},
+			]
 		}).then((Project) => {
 			res.json(Project);
 		});
