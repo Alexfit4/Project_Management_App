@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             $(`<button type='button' id=${data[i].id} data-attr=${data[i].id} class='button${data[i].id} btn btn-primary'>`).text(projId),
                             $("<td>").text(projName),
                             $("<td>").text(projDescript),
-                            // $("<td>").text(projMngName),
+                            $("<td>").text(projMngName),
                             console.log(projDescript)
                             // $("<td>").text(empSalary),
                             // $("<td>").text(empEmail),
