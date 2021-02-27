@@ -99,10 +99,10 @@ document.addEventListener('DOMContentLoaded', () => {
                         },
                     }).then((response) => response.json())
                     .then((data) => {
+                        console.log(data);
                     projectDet.textContent = data.name;
-                    projectContent.textContent = data.description;
-                    })
-                    
+                    projectContent.textContent = data.description + `${'\n'}` + data.Manager.first_name + " " + data.Manager.last_name;
+                    }) 
                           
         }
     });
