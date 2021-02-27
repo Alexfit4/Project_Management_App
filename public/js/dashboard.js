@@ -1,19 +1,20 @@
 // const { BIGINT } = require("sequelize");
 
+// const e = require("express");
+
 // Wait for the DOM to completely load before we run our JS
 document.addEventListener('DOMContentLoaded', () => {
     console.log('DOM loaded! 🚀');
     feather.replace()
 
     const projectContainer = document.querySelector('.project-container');
-    // const projectDet = document.querySelector('#projectDetail');
+    const projectDet = document.getElementById('projectDetail');
+    const projectContent = document.getElementById('projectContent');
     let button = document.querySelector('.btn');
 
-    // document.getElementsByClassName(".btn").addEventListener("click", myFunction);
-
-    // function myFunction() {
-    // projectDet.innerHTML = "YOU CLICKED ME!";
-    // }
+    let projectID = document.getElementById('projectTable');
+    console.log(projectID);
+    
 
     // Variable to hold our projects
     let projects;
@@ -53,12 +54,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
                         console.log(projDescript)
                         var newRow = $("<tr>").append(
-                            $(`<button type='button' id=${data[i].id} class='button${data[i].id} btn btn-primary'>`).text(projId),
+
+                            $(`<button type='button' id=${data[i].id} data-attr=${data[i].id} class='button${data[i].id} btn btn-primary'>`).text(projId),
                             $("<button>").text("Edit").addClass("edit-proj-btn").val(projId),
                             $("<td>").text(projName),
                             $("<td>").text(projDescript),
-                            $("<td>").text(projMngName),
-                            // $("<td>").text(projEmpName),
+                            // $("<td>").text(projMngName),
+
                             console.log(projDescript)
                             // $("<td>").text(empSalary),
                             // $("<td>").text(empEmail),
@@ -82,17 +84,60 @@ document.addEventListener('DOMContentLoaded', () => {
     getProjects();
 
 
+    projectID.addEventListener('click', function(e) {
+        e.preventDefault();
+        console.log(e.target);
+        let element = e.target;
 
-    const buttonClick = (e) => {
-        //e.preventDefault();
-        fetch('/api/project', {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        })
-            .then((response) => response.json())
-            .then((data) => {
+        if (element.matches('button')) {
+            console.log("i'm a button");
+            let attr = element.getAttribute('data-attr');
+            fetch('/api/project/'+attr, {
+                        method: 'GET',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                    }).then((response) => response.json())
+                    .then((data) => {
+                    projectDet.textContent = data.name;
+                    projectContent.textContent = data.description;
+                    })
+                    
+                          
+        }
+    });
+
+    // const buttonClick = (e) => {
+    //     fetch('/api/project', {
+    //         method: 'GET',
+    //         headers: {
+    //             'Content-Type': 'application/json',
+    //         },
+    //     })
+    //         .then((response) => response.json())
+    //         .then((data) => {
+               
+    //         const test = (e) => {
+    //             e.preventDefault();
+    //             //console.log(data);
+    //             console.log(e.target.textContent);
+                
+    //             if (data.id === e.target.textContent) {
+    //                 console.log('hi');
+    //             }
+    //             for (var i=0; i < data.length; i++) {
+    //                if (e.target.textContent === data.id){
+    //                    console.log('hi')
+                   
+    //             }}
+    //         };
+
+
+    //         $('.btn').on('click', test);
+           
+           
+    // })};
+
 
                 console.log(data);
 
@@ -128,7 +173,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // })}
 
-    buttonClick();
 
 
 

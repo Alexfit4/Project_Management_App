@@ -31,13 +31,11 @@ $(document).ready(() => {
             $("<td>").text(empTitle).addClass("title-row"),
             $("<td>").text(empSalary),
             $("<td>").text(empEmail),
-            $("<button>").text("Edit").addClass("edit-emp-btn").val(empId),
             $("<button>").text("Delete").addClass("delete-emp-btn").val(empId),
           );
 
           // Append the new row to the table
           $("#employee-table > tbody").append(newRow)
-
         }
       }
       })
@@ -74,8 +72,7 @@ $(document).ready(() => {
             $("<td>").text(managerTitle).addClass("title-row"),
             $("<td>").text(managerSalary),
             $("<td>").text(managerEmail),
-            $("<button>").text("Edit").addClass("edit-emp-btn").val(managerId),
-            $("<button>").text("Delete").addClass("delete-emp-btn").val(managerId),
+            $("<button>").text("Delete").addClass("delete-manager-btn").val(managerId),
           );
           // Append the new row to the table
           $("#manager-table > tbody").append(newRow)
@@ -138,8 +135,9 @@ $(document).ready(() => {
   $("#add-manager-btn").on("click", addManager)
 
   //Delete Employee
-  const deleteEmployees = (id) => {
-    console.log("deleting")
+  const deleteEmployees = (e) => {
+    id = e.target.value;
+    console.log(e.target.value);
     fetch(`/api/employees/${id}`, {
       method: 'DELETE',
       headers: {
@@ -148,25 +146,21 @@ $(document).ready(() => {
     }).then(getEmployees());
   };
 
-  $(".delete-emp-btn").on("click", deleteEmployees);
+  $(document).on("click", '.delete-emp-btn', deleteEmployees);
 
-  // Update/Edit Employee
-
-  const editEmployee = (employee) => {
-    fetch('/api/employees', {
-      method: 'PUT',
+   //Delete Manager
+   const deleteManagers = (e) => {
+    id = e.target.value;
+    console.log(e.target.value);
+    fetch(`/api/managers/${id}`, {
+      method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(employee),
-    })
-      .then(() => {
-        window.location.href = '#employee-form';
-      })
-      .catch((err) => console.error(err));
+    }).then(getManager());
   };
 
-  $(".edit-emp-btn").on("click", editEmployee);
+  $(document).on("click", '.delete-manager-btn', deleteManagers);
 
   // Render a list of employee titles
   const EmployeeTitleSelect = $("#employee-title")

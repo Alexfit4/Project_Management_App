@@ -10,10 +10,10 @@ module.exports = (app) => {
   app.get('/api/employees', (req, res) => {
     // findAll returns all entries for a table when used with no options
     db.Employee.findAll({include:[
-      {
-        model: db.Project,
+      // {
+      //   model: db.Project,
         
-      },
+      // },
       {
         model: db.Role,
         
@@ -81,6 +81,15 @@ module.exports = (app) => {
         id: req.params.id,
       },
     }).then((dbEmployee) => res.json(dbEmployee));
+  });
+
+  app.delete('/api/managers/:id', (req, res) => {
+    //* We just have to specify which todo we want to destroy with "where"
+    db.Manager.destroy({
+      where: {
+        id: req.params.id,
+      },
+    }).then((dbManager) => res.json(dbManager));
   });
 
   	// * PUT route for updating Employees. We can get the updated Employee data from req.body
