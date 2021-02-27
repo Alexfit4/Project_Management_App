@@ -1,3 +1,7 @@
+
+
+
+
 'use strict';
 
 module.exports = {
@@ -16,7 +20,7 @@ module.exports = {
       first_name: "Lu",
       last_name: "Hao",
       role_id: 1,
-      project_id: 1,
+      projects_id: 1,
       email: "luH@gmail.com",
       password: "1234?",
       updatedAt: "2021-02-22 16:32:49",
@@ -25,7 +29,7 @@ module.exports = {
       first_name: "Johnnie",
       last_name: "Simpson",
       role_id: 2,
-      project_id: 2,
+      projects_id: 2,
       email: "johnnieS@gmail.com",
       password: "1234?!",
       createdAt: '2021-02-22 16:32:56',
@@ -35,7 +39,7 @@ module.exports = {
       first_name: "Mengyue",
       last_name: "Zhang",
       role_id: 3,
-      project_id: 3,
+      projects_id: 3,
       email: "mengyueZ@gmail.com",
       password: "1234?!Wow",
       createdAt: '2021-02-22 16:33:05',
@@ -45,7 +49,7 @@ module.exports = {
       first_name: "Amir",
       last_name: "Ashtiany",
       role_id: 4,
-      project_id: 4,
+      projects_id: 4,
       email: "AmirA@gmail.com",
       password: "1234?!WowThisIsSecret",
       createdAt: '2021-02-22 16:33:07',

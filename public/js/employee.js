@@ -74,8 +74,8 @@ $(document).ready(() => {
             $("<td>").text(managerTitle).addClass("title-row"),
             $("<td>").text(managerSalary),
             $("<td>").text(managerEmail),
-            $("<button>").text("Edit").addClass("edit-emp-btn").val(managerId),
-            $("<button>").text("Delete").addClass("delete-emp-btn").val(managerId),
+            $("<button>").text("Edit").addClass("edit-manager-btn").val(managerId),
+            $("<button>").text("Delete").addClass("delete-manager-btn").val(managerId),
           );
           // Append the new row to the table
           $("#manager-table > tbody").append(newRow)
@@ -93,7 +93,7 @@ $(document).ready(() => {
     const newEmployee = {
       first_name: $("#employee-first-name").val().trim(),
       last_name: $("#employee-last-name").val().trim(),
-      role_id: titleSelect.val(),
+      role_id: EmployeeTitleSelect.val(),
       email: $("#employee-email").val().trim(),
       password: $("#employee-password").val().trim(),
     };
@@ -118,7 +118,7 @@ $(document).ready(() => {
     const newManager = {
       first_name: $("#manager-first-name").val().trim(),
       last_name: $("#manager-last-name").val().trim(),
-      role_id: titleSelect.val(),
+      role_id: ManagerTitleSelect.val(),
       email: $("#manager-email").val().trim(),
       password: $("#manager-password").val().trim(),
     };
@@ -139,55 +139,76 @@ $(document).ready(() => {
 
   //Delete Employee
   const deleteEmployees = (e) => {
-    e.stopPropagation();
-    var {id} = $(this).val();
-    console.log(id);
+    id = e.target.value;
+    console.log(e.target.value);
     fetch(`/api/employees/${id}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
       },
-    }).then(getEmployees);
+    }).then(getEmployees());
   };
 
-  $(".delete-emp-btn").on("click", deleteEmployees);
+  $(document).on("click", '.delete-emp-btn', deleteEmployees);
 
-  // Edit Employee
+   //Delete Manager
+   const deleteManagers = (e) => {
+    id = e.target.value;
+    console.log(e.target.value);
+    fetch(`/api/managers/${id}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }).then(getManager());
+  };
+
+  $(document).on("click", '.delete-manager-btn', deleteManagers);
+
+  // Update/Edit Employee
+
+  const editEmployee = (employee) => {
+    fetch('/api/employees', {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(employee),
+    })
+      .then(() => {
+        window.location.href = '#employee-form';
+      })
+      .catch((err) => console.error(err));
+  };
+
+  $(document).on("click", ".edit-emp-btn", editEmployee);
 
   // Render a list of employee titles
   const EmployeeTitleSelect = $("#employee-title")
   const renderEmpTitleList = (data) => {
-    console.log('renderTitleList -> data', data);
+    console.log('renderEmployeeTitleList -> data', data);
 
     const rowsToAdd = [];
 
     data.forEach((title) => rowsToAdd.push(createEmpTitleRow(title)));
     
-    console.log('renderTitleList -> rowsToAdd', rowsToAdd);
+    console.log('renderEmployeeTitleList -> rowsToAdd', rowsToAdd);
     console.log('EmployeeTitleSelect', EmployeeTitleSelect);
 
     rowsToAdd.forEach((row) => EmployeeTitleSelect.append(row));
     EmployeeTitleSelect.value = titleId;
   };
 
-    // Build title dropdown
-    const createTitleRow = ({ id, title }) => {
-      const listOption = $('<option>');
-      listOption.val(id);
-      listOption.text(title)
-      return listOption;
-    };
-
       // Render a list of manager titles
   const ManagerTitleSelect = $("#manager-title")
   const renderManagerTitleList = (data) => {
-    console.log('renderTitleList -> data', data);
+    console.log('renderManagerTitleList -> data', data);
 
     const rowsToAdd = [];
 
     data.forEach((title) => rowsToAdd.push(createManagerRow(title)));
     
-    console.log('renderTitleList -> rowsToAdd', rowsToAdd);
+    console.log('renderManagerTitleList -> rowsToAdd', rowsToAdd);
     console.log('ManagerTitleSelect', ManagerTitleSelect);
 
     rowsToAdd.forEach((row) => ManagerTitleSelect.append(row));
@@ -211,7 +232,7 @@ $(document).ready(() => {
     };
 
     const getEmpTitles = () => {
-      fetch('api/roles', {
+      fetch('api/roles_emp', {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -227,7 +248,7 @@ $(document).ready(() => {
     getEmpTitles()
 
     const getManagerTitles = () => {
-      fetch('api/roles', {
+      fetch('api/roles_manager', {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
