@@ -40,3 +40,7 @@ body {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
+
+.btn {
+  background-color: #6f42c1;
+}
