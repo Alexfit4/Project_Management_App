@@ -84,7 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
             name: titleInput.value.trim(),
             description: bodyInput.value.trim(),
             manager_id: managerSelect.value,
-            // EmployeeId: employeeSelect.value
+            employee_id: employeeSelect.value
         };
         console.log(newProject);
 

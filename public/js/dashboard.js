@@ -48,9 +48,9 @@ document.addEventListener('DOMContentLoaded', () => {
                         projMngLast = data[i].Manager.last_name;
                         projMngName = `${projMngFirst} ${projMngLast}`
 
-                        // projEmpFirst = data[i].Employees[0].first_name;
-                        // projEmpLast = data[i].Employees[0].last_name;
-                        // projEmpName = `${projEmpFirst} ${projEmpLast}`
+                        projEmpFirst = data[i].Employee.first_name;
+                        projEmpLast = data[i].Employee.last_name;
+                        projEmpName = `${projEmpFirst} ${projEmpLast}`
 
                         console.log(projDescript)
                         var newRow = $("<tr>").append(
@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             $("<td>").text(projName),
                             $("<td>").text(projDescript),
                             $("<td>").text(projMngName),
-
+                            $("<td>").text(projEmpName),
                             console.log(projDescript)
                             // $("<td>").text(empSalary),
                             // $("<td>").text(empEmail),
