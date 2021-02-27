@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let projectID = document.getElementById('projectTable');
     console.log(projectID);
-    
+
 
     // Variable to hold our projects
     let projects;
@@ -48,9 +48,9 @@ document.addEventListener('DOMContentLoaded', () => {
                         projMngLast = data[i].Manager.last_name;
                         projMngName = `${projMngFirst} ${projMngLast}`
 
-                        // projEmpFirst = data[i].Employees[0].first_name;
-                        // projEmpLast = data[i].Employees[0].last_name;
-                        // projEmpName = `${projEmpFirst} ${projEmpLast}`
+                        projEmpFirst = data[i].Employee.first_name;
+                        projEmpLast = data[i].Employee.last_name;
+                        projEmpName = `${projEmpFirst} ${projEmpLast}`
 
                         console.log(projDescript)
                         var newRow = $("<tr>").append(
@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             $("<td>").text(projName),
                             $("<td>").text(projDescript),
                             $("<td>").text(projMngName),
-
+                            $("<td>").text(projEmpName),
                             console.log(projDescript)
                             // $("<td>").text(empSalary),
                             // $("<td>").text(empEmail),
@@ -84,7 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
     getProjects();
 
 
-    projectID.addEventListener('click', function(e) {
+    projectID.addEventListener('click', function (e) {
         e.preventDefault();
         console.log(e.target);
         let element = e.target;
@@ -92,18 +92,18 @@ document.addEventListener('DOMContentLoaded', () => {
         if (element.matches('button')) {
             console.log("i'm a button");
             let attr = element.getAttribute('data-attr');
-            fetch('/api/project/'+attr, {
-                        method: 'GET',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                    }).then((response) => response.json())
-                    .then((data) => {
+            fetch('/api/project/' + attr, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            }).then((response) => response.json())
+                .then((data) => {
                     projectDet.textContent = data.name;
                     projectContent.textContent = data.description;
-                    })
-                    
-                          
+                })
+
+
         }
     });
 
@@ -116,30 +116,32 @@ document.addEventListener('DOMContentLoaded', () => {
     //     })
     //         .then((response) => response.json())
     //         .then((data) => {
-               
+
     //         const test = (e) => {
     //             e.preventDefault();
     //             //console.log(data);
     //             console.log(e.target.textContent);
-                
+
     //             if (data.id === e.target.textContent) {
     //                 console.log('hi');
     //             }
     //             for (var i=0; i < data.length; i++) {
     //                if (e.target.textContent === data.id){
     //                    console.log('hi')
-                   
+
     //             }}
     //         };
 
 
     //         $('.btn').on('click', test);
-           
-           
+
+
     // })};
 
 
-         
+
+
+
 
 
     // const buttonClick = (id) => {
@@ -178,17 +180,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const editProject = (e) => {
         id = e.target.value;
-        console.log("hello")
+        const updatedProject = {
+            name: document.getElementById('name').value.trim(),
+            description: document.getElementById('body').value.trim(),
+        };
+
+        console.log(id)
         fetch(`/api/project/${id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify(e),
+            body: JSON.stringify(updatedProject),
         })
             .then(() => {
                 console.log("hello")
-                // window.location.href = '/project';
+                window.location.href = '/project';
             })
             .catch((err) => console.error(err));
     };
@@ -201,46 +208,4 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-    // Front end call to DELETE a post
-    const deleteProject = (id) => {
-        fetch(`/api/project/${id}`, {
-            method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        }).then(getProjects());
-    };
-
-
-
-
-
-    // Handle when we click the delete post button
-    const handleProjectDelete = (e) => {
-        const currentProject = JSON.parse(
-            e.target.parentElement.parentElement.dataset.project
-        );
-
-        deleteProject(currentProject.id);
-    };
-
-    // Handle when we click the edit post button
-    const handleProjectEdit = (e) => {
-        const currentProject = JSON.parse(
-            e.target.parentElement.parentElement.dataset.project
-        );
-
-        window.location.href = `/project?project_id=${currentProject.id}`;
-    };
 });
