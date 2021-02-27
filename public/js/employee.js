@@ -155,19 +155,19 @@ $(document).ready(() => {
   // Edit Employee
 
   // Render a list of employee titles
-  const titleSelect = $(".title-select")
-  const renderTitleList = (data) => {
+  const EmployeeTitleSelect = $("#employee-title")
+  const renderEmpTitleList = (data) => {
     console.log('renderTitleList -> data', data);
 
     const rowsToAdd = [];
 
-    data.forEach((title) => rowsToAdd.push(createTitleRow(title)));
+    data.forEach((title) => rowsToAdd.push(createEmpTitleRow(title)));
     
     console.log('renderTitleList -> rowsToAdd', rowsToAdd);
-    console.log('titleSelect', titleSelect);
+    console.log('EmployeeTitleSelect', EmployeeTitleSelect);
 
-    rowsToAdd.forEach((row) => titleSelect.append(row));
-    titleSelect.value = titleId;
+    rowsToAdd.forEach((row) => EmployeeTitleSelect.append(row));
+    EmployeeTitleSelect.value = titleId;
   };
 
     // Build title dropdown
@@ -178,7 +178,39 @@ $(document).ready(() => {
       return listOption;
     };
 
-    const getTitles = () => {
+      // Render a list of manager titles
+  const ManagerTitleSelect = $("#manager-title")
+  const renderManagerTitleList = (data) => {
+    console.log('renderTitleList -> data', data);
+
+    const rowsToAdd = [];
+
+    data.forEach((title) => rowsToAdd.push(createManagerRow(title)));
+    
+    console.log('renderTitleList -> rowsToAdd', rowsToAdd);
+    console.log('ManagerTitleSelect', ManagerTitleSelect);
+
+    rowsToAdd.forEach((row) => ManagerTitleSelect.append(row));
+    ManagerTitleSelect.value = titleId;
+  };
+
+    // Build title dropdown
+    const createEmpTitleRow = ({ id, title }) => {
+      const listOption = $('<option>');
+      listOption.val(id);
+      listOption.text(title)
+      return listOption;
+    };
+
+     // Build title dropdown
+     const createManagerRow = ({ id, title }) => {
+      const listOption = $('<option>');
+      listOption.val(id);
+      listOption.text(title)
+      return listOption;
+    };
+
+    const getEmpTitles = () => {
       fetch('api/roles', {
         method: 'GET',
         headers: {
@@ -188,9 +220,25 @@ $(document).ready(() => {
         .then((response) => response.json())
         .then((data) => {
           titleId = data.id;
-        renderTitleList(data)})
+        renderEmpTitleList(data)})
         .catch((err) => console.error(err));
     };
 
-    getTitles()
+    getEmpTitles()
+
+    const getManagerTitles = () => {
+      fetch('api/roles', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          titleId = data.id;
+        renderManagerTitleList(data)})
+        .catch((err) => console.error(err));
+    };
+
+    getManagerTitles()
 });
