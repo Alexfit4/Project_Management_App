@@ -35,15 +35,15 @@ module.exports = (app) => {
 			where: {
 				id: req.params.id,
 			},
-			// include: [
-			// 	{
-			// 		model: db.Employee,
-			// 		required: true,
-			// 	},
-			// 	{
-			// 		model: db.Manager,
-			// 	},
-			// ],
+			include: [
+				{
+					model: db.Employee,
+					required: true,
+				},
+				{
+					model: db.Manager,
+				},
+			],
 		}).then((dbProject) => {
 			console.log("hdkfjdjk");
 			//console.log(dbProject);

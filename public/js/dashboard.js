@@ -1,5 +1,7 @@
 // const { BIGINT } = require("sequelize");
 
+// const { DatabaseError } = require("sequelize");
+
 // const e = require("express");
 
 // Wait for the DOM to completely load before we run our JS
@@ -40,13 +42,14 @@ document.addEventListener('DOMContentLoaded', () => {
                     $("#projectTable > tbody").empty();
                     // Populate the form
                     for (i = 0; i < data.length; i++) {
-                        console.log(data[i].id)
+                        console.log(data[i])
                         projId = data[i].id;
                         projName = data[i].name;
                         projDescript = data[i].description;
                         projMngFirst = data[i].Manager.first_name;
                         projMngLast = data[i].Manager.last_name;
                         projMngName = `${projMngFirst} ${projMngLast}`
+                       
 
                         projEmpFirst = data[i].Employee.first_name;
                         projEmpLast = data[i].Employee.last_name;
@@ -80,7 +83,6 @@ document.addEventListener('DOMContentLoaded', () => {
             })
         // .catch((error) => console.error('Error:', error));
     };
-
     getProjects();
 
 
@@ -92,18 +94,37 @@ document.addEventListener('DOMContentLoaded', () => {
         if (element.matches('button')) {
             console.log("i'm a button");
             let attr = element.getAttribute('data-attr');
-            fetch('/api/project/' + attr, {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            }).then((response) => response.json())
-                .then((data) => {
+            fetch('/api/project/'+attr, {
+                        method: 'GET',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                    }).then((response) => response.json())
+                    .then((data) => {
+                    console.log(data);
                     projectDet.textContent = data.name;
-                    projectContent.textContent = data.description;
-                })
-
-
+                    employees = [];
+                    var desc = "Sprint description: " + data.description;
+                    var manager = "Manager: " + data.Manager.first_name + " " + data.Manager.last_name;
+                    var managerEmail = "Manager contact: " + data.Manager.email;
+                    var employee = "Employee: " + data.Employee.first_name + " " + data.Employee.last_name;
+                    var employeeEmail = "Employee contact: " + data.Employee.email;
+                    // for (i=0; i< data.Employee.length; i++) {
+                    //     console.log('hi there');
+                    //     employees.push(data.Employee.first_name + " " + data.Employee.last_name);
+                    // }
+                    // console.log(employees);
+                    //"Employee: " + data.Employee[i].first_name + " " + data.Employee[i].last_name;
+                    var showSprint = $("<div>").append(
+                        $("<div>").text(desc),
+                        $("<div>").text(manager),
+                        $("<div>").text(managerEmail),
+                        $("<div>").text(employee),
+                        $("<div>").text(employeeEmail),
+                    )
+                    $(projectContent).append(showSprint);
+                }) 
+                          
         }
     });
 
