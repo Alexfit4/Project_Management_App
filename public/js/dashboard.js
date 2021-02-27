@@ -6,10 +6,15 @@ document.addEventListener('DOMContentLoaded', () => {
     feather.replace()
 
     const projectContainer = document.querySelector('.project-container');
-    const projectDet = document.querySelector('#projectDetail');
+    // const projectDet = document.querySelector('#projectDetail');
     let button = document.querySelector('.btn');
-    
 
+    // document.getElementsByClassName(".btn").addEventListener("click", myFunction);
+
+    // function myFunction() {
+    // projectDet.innerHTML = "YOU CLICKED ME!";
+    // }
+    
     // Variable to hold our projects
     let projects;
 
@@ -71,8 +76,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     getProjects();
 
+   
+
     const buttonClick = (e) => {
-        e.preventDefault();
+        //e.preventDefault();
         fetch('/api/project', {
             method: 'GET',
             headers: {
@@ -82,10 +89,12 @@ document.addEventListener('DOMContentLoaded', () => {
             .then((response) => response.json())
             .then((data) => {
                
-            const test = "hello world"
-            button.onclick = console.log(test);
+            console.log(data);
+           
+           
     })};
 
+    
     // const buttonClick = (id) => {
     //     fetch('/api/project', {
     //         method: 'GET',
@@ -112,7 +121,7 @@ document.addEventListener('DOMContentLoaded', () => {
     //         // }
 
     // })}
-
+    
     buttonClick();
 
     
