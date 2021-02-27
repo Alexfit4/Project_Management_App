@@ -29,20 +29,26 @@ module.exports = (app) => {
 		// Here we add an "include" property to our options in our findOne query
 		// We set the value to an array of the models we want to include in a left outer join
 		// In this case, just db.Post
+		console.log(req.params.id)
+		console.log("hfdkjfdkj")
 		db.Project.findOne({
 			where: {
 				id: req.params.id,
 			},
-			include: [
-				{
-					model: db.Employee,
-					required: true,
-				},
-				{
-					model: db.Manager,
-				},
-			],
-		}).then((dbProject) => res.json(dbProject));
+			// include: [
+			// 	{
+			// 		model: db.Employee,
+			// 		required: true,
+			// 	},
+			// 	{
+			// 		model: db.Manager,
+			// 	},
+			// ],
+		}).then((dbProject) => {
+			console.log("hdkfjdjk");
+			console.log(dbProject.dataValues);
+			res.json(dbProject)
+		});
 	});
 
 	//* POST route for saving a new project
