@@ -83,6 +83,15 @@ module.exports = (app) => {
     }).then((dbEmployee) => res.json(dbEmployee));
   });
 
+  app.delete('/api/managers/:id', (req, res) => {
+    //* We just have to specify which todo we want to destroy with "where"
+    db.Manager.destroy({
+      where: {
+        id: req.params.id,
+      },
+    }).then((dbManager) => res.json(dbManager));
+  });
+
   	// * PUT route for updating Employees. We can get the updated Employee data from req.body
 	app.put("/api/employees", (req, res) => {
 		db.Employee.update(
