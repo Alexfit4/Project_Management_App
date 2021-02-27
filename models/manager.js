@@ -44,10 +44,10 @@ module.exports = (sequelize, DataTypes) => {
 				type: DataTypes.INTEGER,
 				allowNull: false,
 			},
-			// project_id: {
-			// 	type: DataTypes.INTEGER,
-			// 	allowNull: false,
-			// },
+			project_id: {
+				type: DataTypes.INTEGER,
+				allowNull: false,
+			},
 			email: {
 				type: DataTypes.STRING,
 				allowNull: false,

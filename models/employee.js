@@ -47,10 +47,10 @@ module.exports = (sequelize, DataTypes) => {
 				type: DataTypes.INTEGER,
 				allowNull: false,
 			},
-			// project_id: {
-			// 	type: DataTypes.INTEGER,
-			// 	defaultValue: 0,
-			// },
+			 project_id: {
+				type: DataTypes.INTEGER,
+				defaultValue: 0,
+			 },
 			// manager_id: {
 			// 	type: DataTypes.INTEGER,
 			// 	allowNull: false,
