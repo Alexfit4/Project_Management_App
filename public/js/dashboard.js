@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let projectID = document.getElementById('projectTable');
     console.log(projectID);
-    
+
 
     // Variable to hold our projects
     let projects;
@@ -51,8 +51,8 @@ document.addEventListener('DOMContentLoaded', () => {
                         projMngName = `${projMngFirst} ${projMngLast}`
                        
 
-                        projEmpFirst = data[i].Employees[0].first_name;
-                        projEmpLast = data[i].Employees[0].last_name;
+                        projEmpFirst = data[i].Employee.first_name;
+                        projEmpLast = data[i].Employee.last_name;
                         projEmpName = `${projEmpFirst} ${projEmpLast}`
 
                         console.log(projDescript)
@@ -64,7 +64,6 @@ document.addEventListener('DOMContentLoaded', () => {
                             $("<td>").text(projDescript),
                             $("<td>").text(projMngName),
                             $("<td>").text(projEmpName),
-
                             console.log(projDescript)
                             // $("<td>").text(empSalary),
                             // $("<td>").text(empEmail),
@@ -87,7 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
     getProjects();
 
 
-    projectID.addEventListener('click', function(e) {
+    projectID.addEventListener('click', function (e) {
         e.preventDefault();
         console.log(e.target);
         let element = e.target;
@@ -108,19 +107,21 @@ document.addEventListener('DOMContentLoaded', () => {
                     var desc = "Sprint description: " + data.description;
                     var manager = "Manager: " + data.Manager.first_name + " " + data.Manager.last_name;
                     var managerEmail = "Manager contact: " + data.Manager.email;
-                    for (i=0; i< data.Employees.length; i++) {
-                        employees.push(data.Employees[i].first_name + " " + data.Employees[i].last_name);
-                    }
-                    console.log(employees);
-                    "Employee: " + data.Employees.first_name + " " + data.Employees.last_name;
+                    var employee = "Employee: " + data.Employee.first_name + " " + data.Employee.last_name;
+                    var employeeEmail = "Employee contact: " + data.Employee.email;
+                    // for (i=0; i< data.Employee.length; i++) {
+                    //     console.log('hi there');
+                    //     employees.push(data.Employee.first_name + " " + data.Employee.last_name);
+                    // }
+                    // console.log(employees);
+                    //"Employee: " + data.Employee[i].first_name + " " + data.Employee[i].last_name;
                     var showSprint = $("<div>").append(
                         $("<div>").text(desc),
                         $("<div>").text(manager),
                         $("<div>").text(managerEmail),
-                        // $("<div>").text(employee),
+                        $("<div>").text(employee),
+                        $("<div>").text(employeeEmail),
                     )
-                    // $(projectContent).text(`Project description:  ${desc}` +
-                    // `Manager: ${manager}`)
                     $(projectContent).append(showSprint);
                 }) 
                           
@@ -136,30 +137,32 @@ document.addEventListener('DOMContentLoaded', () => {
     //     })
     //         .then((response) => response.json())
     //         .then((data) => {
-               
+
     //         const test = (e) => {
     //             e.preventDefault();
     //             //console.log(data);
     //             console.log(e.target.textContent);
-                
+
     //             if (data.id === e.target.textContent) {
     //                 console.log('hi');
     //             }
     //             for (var i=0; i < data.length; i++) {
     //                if (e.target.textContent === data.id){
     //                    console.log('hi')
-                   
+
     //             }}
     //         };
 
 
     //         $('.btn').on('click', test);
-           
-           
+
+
     // })};
 
 
-         
+
+
+
 
 
     // const buttonClick = (id) => {
@@ -198,17 +201,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const editProject = (e) => {
         id = e.target.value;
-        console.log("hello")
+        const updatedProject = {
+            name: document.getElementById('name').value.trim(),
+            description: document.getElementById('body').value.trim(),
+        };
+
+        console.log(id)
         fetch(`/api/project/${id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify(e),
+            body: JSON.stringify(updatedProject),
         })
             .then(() => {
                 console.log("hello")
-                // window.location.href = '/project';
+                window.location.href = '/project';
             })
             .catch((err) => console.error(err));
     };
@@ -221,46 +229,4 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-    // Front end call to DELETE a post
-    const deleteProject = (id) => {
-        fetch(`/api/project/${id}`, {
-            method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        }).then(getProjects());
-    };
-
-
-
-
-
-    // Handle when we click the delete post button
-    const handleProjectDelete = (e) => {
-        const currentProject = JSON.parse(
-            e.target.parentElement.parentElement.dataset.project
-        );
-
-        deleteProject(currentProject.id);
-    };
-
-    // Handle when we click the edit post button
-    const handleProjectEdit = (e) => {
-        const currentProject = JSON.parse(
-            e.target.parentElement.parentElement.dataset.project
-        );
-
-        window.location.href = `/project?project_id=${currentProject.id}`;
-    };
 });
