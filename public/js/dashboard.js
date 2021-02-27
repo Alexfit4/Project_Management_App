@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             $("<button>").text("Edit").addClass("edit-proj-btn").val(projId),
                             $("<td>").text(projName),
                             $("<td>").text(projDescript),
-                            // $("<td>").text(projMngName),
+                            $("<td>").text(projMngName),
 
                             console.log(projDescript)
                             // $("<td>").text(empSalary),
@@ -139,11 +139,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // })};
 
 
-                console.log(data);
-
-
-            })
-    };
+         
 
 
     // const buttonClick = (id) => {
@@ -248,4 +244,3 @@ document.addEventListener('DOMContentLoaded', () => {
         window.location.href = `/project?project_id=${currentProject.id}`;
     };
 });
-
