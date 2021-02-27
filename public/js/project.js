@@ -35,6 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // const url = window.location.search;
     let projectId;
     let managerId;
+    let employeeId;
     let updating = false;
 
     // Get post data for editing/adding
@@ -83,6 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
             name: titleInput.value.trim(),
             description: bodyInput.value.trim(),
             ManagerId: managerSelect.value,
+            EmployeeId: employeeSelect.value
         };
         console.log(newProject);
 
@@ -108,21 +110,13 @@ document.addEventListener('DOMContentLoaded', () => {
             body: JSON.stringify(project),
         })
             .then(() => {
-                // window.location.href = '/dashboard';
+                window.location.href = '/dashboard';
             })
         // .catch((err) => console.error(err));
     };
 
     // Render a list of employees or redirect if no employees
     const renderManagerList = (data) => {
-        // console.log('renderManagerList -> data', data);
-        // if (!data.length) {
-        //     window.location.href = '/employee';
-        // }
-        // if (document.querySelector('.hidden')) {
-        //     show(document.querySelector('.hidden'));
-        // }
-
         const rowsToAdd = [];
 
         data.forEach((manager) => rowsToAdd.push(createManagerRow(manager)));
@@ -138,7 +132,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Build employee dropdown
 
     const createManagerRow = ({ id, first_name, last_name }) => {
-        const listOption = document.createElement('input')
+        const listOption = document.createElement('option')
         // .appendChild("input");
 
         //  const addInput = document.createElement('input');
@@ -151,23 +145,6 @@ document.addEventListener('DOMContentLoaded', () => {
         return listOption;
 
     };
-
-
-    // const createManagerRow = ({ id, first_name, last_name }) => {
-    //     const addLable = document.createElement('label');
-
-    //     const listOption = document.createElement('input');
-    //     addLable.append(listOption)
-    //     listOption.setAttribute("type", "checkbox")
-    //     listOption.value = id;
-    //     listOption.textContent = `${first_name} ${last_name}`;
-
-    //     return listOption;
-
-    // };
-
-
-
 
     // A function to get employees and then call the render function
     const getManagers = (req, res) => {
@@ -182,25 +159,107 @@ document.addEventListener('DOMContentLoaded', () => {
         // .catch((err) => console.error(err));
     };
 
-
-    // const getManagers = (req, res) => {
-    //     fetch('api/managers', {
-    //         method: 'GET',
-    //         headers: {
-    //             'Content-Type': 'application/json',
-    //         },
-    //     }).then(result => {
-    //         // Pass the DB result to the template
-    //         res.render('project', { dropdownVals: result })
-    //     }).catch(err => {
-    //         console.log(err)
-    //     })
-    // };
-
-
-
     // Get the employees, and their projects
     getManagers();
+
+
+
+
+
+    //Employe dropdowns
+
+    // Render a list of employees or redirect if no employees
+    const renderEmployeeList = (data) => {
+        const rowsToAdd = [];
+
+        data.forEach((employee) => rowsToAdd.push(createEmployeeRow(employee)));
+
+        employeeSelect.innerHTML = '';
+        console.log('renderEmployeeList -> rowsToAdd', rowsToAdd);
+        console.log('employeeSelect', employeeSelect);
+
+        rowsToAdd.forEach((row) => employeeSelect.append(row));
+        employeeSelect.value = employeeId;
+    };
+
+    // Build employee dropdown
+    const createEmployeeRow = ({ id, first_name, last_name }) => {
+
+        var x = document.createElement("INPUT");
+        x.setAttribute("type", "checkbox");
+
+
+        // ($('<label></label>').text(`${first_name} ${last_name}`)).insertAfter(x);
+
+        // x = $("label").text(`${first_name} ${last_name}`).after(x);
+
+        // $("<p>`${first_name} ${last_name}`</p>").insertAfter(x);
+
+
+        // x.value = id;
+        // x.textContent = `${first_name} ${last_name}`;
+        // console.log(x.textContent)
+
+
+
+
+        const listOption = document.createElement('option')
+        // .appendChild("input");
+
+        //  const addInput = document.createElement('input');
+        // const listOption = addLable.append($("input"))
+        console.log(listOption)
+        listOption.setAttribute("type", "checkbox")
+        listOption.value = id;
+        listOption.textContent = `${first_name} ${last_name}`;
+        console.log(listOption.textContent)
+        return listOption;
+
+
+    };
+
+
+    // A function to get employees and then call the render function
+    const getEmployees = (req, res) => {
+        fetch('api/employees', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+            .then((response) => response.json())
+            .then((data) => renderEmployeeList(data))
+        // .catch((err) => console.error(err));
+    };
+
+    // Get the employees, and their projects
+    getEmployees();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     // Update a post then redirect to blog
     const updateProject = (project) => {
