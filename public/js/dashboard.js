@@ -18,7 +18,6 @@ document.addEventListener('DOMContentLoaded', () => {
     let button = document.querySelector('.btn');
 
     let projectID = document.getElementById('projectTable');
-    console.log(projectID);
 
 
     // Variable to hold our projects
@@ -91,15 +90,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     projectID.addEventListener('click', function (e) {
         e.preventDefault();
-        projectDescriptor.textContent = " ";
-        managerDetail.textContent = " ";
-        employeeDetail.textContent = " ";
-        timeline.textContent = " ";
-
         console.log(e.target);
         let element = e.target;
 
         if (element.matches('button')) {
+            projectDescriptor.textContent = " ";
+            managerDetail.textContent = " ";
+            employeeDetail.textContent = " ";
+            timeline.textContent = " ";
             console.log("i'm a button");
             let attr = element.getAttribute('data-attr');
             fetch('/api/project/' + attr, {
@@ -111,6 +109,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 .then((data) => {
                     console.log(data);
                     projectTitle.textContent = data.name;
+                    console.log(data.Employee.length);
                     $(projectTitle).attr('style', 'font-style: italic; font-weight: bold');
                     employees = [];
                     var desc = data.description;
