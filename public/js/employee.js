@@ -1,6 +1,6 @@
 $(document).ready(() => {
   console.log('DOM loaded! 🚀');
-
+  feather.replace()
   let titleId;
   //Get Employee
   const getEmployees = () => {
@@ -31,7 +31,7 @@ $(document).ready(() => {
             $("<td>").text(empTitle).addClass("title-row"),
             $("<td>").text(empSalary),
             $("<td>").text(empEmail),
-            $("<button>").text("Delete").addClass("delete-emp-btn").val(empId),
+            $("<button>").text("Delete").addClass("delete-emp-btn btn-outline-dark btn").val(empId),
           );
 
           // Append the new row to the table
@@ -72,7 +72,7 @@ $(document).ready(() => {
             $("<td>").text(managerTitle).addClass("title-row"),
             $("<td>").text(managerSalary),
             $("<td>").text(managerEmail),
-            $("<button>").text("Delete").addClass("delete-manager-btn").val(managerId),
+            $("<button>").text("Delete").addClass("delete-manager-btn btn-outline-dark btn").val(managerId),
           );
           // Append the new row to the table
           $("#manager-table > tbody").append(newRow)
