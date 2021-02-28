@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         projMngFirst = data[i].Manager.first_name;
                         projMngLast = data[i].Manager.last_name;
                         projMngName = `${projMngFirst} ${projMngLast}`
-                       
+
 
                         projEmpFirst = data[i].Employee.first_name;
                         projEmpLast = data[i].Employee.last_name;
@@ -94,13 +94,13 @@ document.addEventListener('DOMContentLoaded', () => {
         if (element.matches('button')) {
             console.log("i'm a button");
             let attr = element.getAttribute('data-attr');
-            fetch('/api/project/'+attr, {
-                        method: 'GET',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                    }).then((response) => response.json())
-                    .then((data) => {
+            fetch('/api/project/' + attr, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            }).then((response) => response.json())
+                .then((data) => {
                     console.log(data);
                     projectDet.textContent = data.name;
                     employees = [];
@@ -123,8 +123,8 @@ document.addEventListener('DOMContentLoaded', () => {
                         $("<div>").text(employeeEmail),
                     )
                     $(projectContent).append(showSprint);
-                }) 
-                          
+                })
+
         }
     });
 
@@ -201,24 +201,26 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const editProject = (e) => {
         id = e.target.value;
-        const updatedProject = {
-            name: document.getElementById('name').value.trim(),
-            description: document.getElementById('body').value.trim(),
-        };
+        // const updatedProject = {
+        //     name: document.getElementById('name').value.trim(),
+        //     description: document.getElementById('body').value.trim(),
+        // };
 
         console.log(id)
-        fetch(`/api/project/${id}`, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(updatedProject),
-        })
-            .then(() => {
-                console.log("hello")
-                window.location.href = '/project';
-            })
-            .catch((err) => console.error(err));
+        // console.log(updatedProject)
+        window.location.href = `/project?id=${id}`
+        // fetch(`/api/project/${id}`, {
+        //     method: 'PUT',
+        //     headers: {
+        //         'Content-Type': 'application/json',
+        //     },
+        //     body: JSON.stringify(updatedProject),
+        // })
+        //     .then(() => {
+        //         console.log("hello")
+        //         window.location.href = '/project';
+        //     })
+        //     .catch((err) => console.error(err));
     };
 
     //  $(".edit-proj-btn").on("click", editProject);

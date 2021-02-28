@@ -102,8 +102,8 @@ module.exports = (app) => {
 			{
 				name: req.body.name,
 				description: req.body.description,
-				// manager_id: req.body.manager_id,
-				// employee_id: req.body.employee_id
+				manager_id: req.body.manager_id,
+				employee_id: req.body.employee_id
 			},
 			{
 				where: {

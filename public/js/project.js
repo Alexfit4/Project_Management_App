@@ -32,38 +32,50 @@ document.addEventListener('DOMContentLoaded', () => {
 
     console.log(managerSelect)
     // Get query parameter
-    // const url = window.location.search;
-    let projectId;
+    const url = window.location.search;
+    console.log(url)
+
+
+    let projectId = url.split('=')[1];
+    console.log(projectId)
     let managerId;
     let employeeId;
     let updating = false;
 
+
+
     // Get post data for editing/adding
-    // const getProjectData = () => {
-    //     fetch('/api/project', {
-    //         method: 'GET',
-    //         headers: {
-    //             'Content-Type': 'application/json',
-    //         },
-    //     })
-    //         .then((response) => response.json())
-    //         .then((data) => {
-    //             if (data) {
-    //                 console.log('Success in getting project:', data);
+    const getProjectData = () => {
+        fetch(`/api/project/${projectId}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                if (data) {
+                    console.log('Success in getting project:', data);
 
-    //                 // Populate the form for editing
-    //                 titleInput.value = data.name;
-    //                 bodyInput.value = data.description;
-    //                 managerId = data.ManagerId || data.id;
+                    // Populate the form for editing
+                    titleInput.value = data.name;
+                    bodyInput.value = data.description;
+                    managerId = data.ManagerId || data.id;
+                    employeeId = data.EmployeeId || data.id;
+                    // We are updating
+                    updating = true;
+                }
+            })
+            .catch((err) => console.error(err));
+    };
 
-    //                 // We are updating
-    //                 updating = true;
-    //             }
-    //         })
-    //         .catch((err) => console.error(err));
-    // };
 
-    // getProjectData();
+
+    if (url) {
+        // updating = true;
+        getProjectData();
+    }
+
 
     // Event handler for when the project for is submitted
     const handleFormSubmit = (e) => {
@@ -87,7 +99,7 @@ document.addEventListener('DOMContentLoaded', () => {
             employee_id: employeeSelect.value
         };
         console.log(newProject);
-
+        console.log(updating)
         // Update a post if flag is true, otherwise submit a new one
         if (updating) {
             newProject.id = projectId;
@@ -185,8 +197,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // Build employee dropdown
     const createEmployeeRow = ({ id, first_name, last_name }) => {
 
-        var x = document.createElement("INPUT");
-        x.setAttribute("type", "checkbox");
+        // var x = document.createElement("INPUT");
+        // x.setAttribute("type", "checkbox");
 
 
         // ($('<label></label>').text(`${first_name} ${last_name}`)).insertAfter(x);
@@ -195,13 +207,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // $("<p>`${first_name} ${last_name}`</p>").insertAfter(x);
 
-
         // x.value = id;
         // x.textContent = `${first_name} ${last_name}`;
         // console.log(x.textContent)
-
-
-
 
         const listOption = document.createElement('option')
         // .appendChild("input");
@@ -263,7 +271,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Update a post then redirect to blog
     const updateProject = (project) => {
-        fetch('/api/project', {
+        fetch(`/api/project/${projectId}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
