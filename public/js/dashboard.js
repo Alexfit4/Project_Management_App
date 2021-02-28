@@ -88,6 +88,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     projectID.addEventListener('click', function (e) {
         e.preventDefault();
+        projectContent.textContent = " ";
         console.log(e.target);
         let element = e.target;
 
