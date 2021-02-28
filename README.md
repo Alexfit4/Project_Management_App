@@ -72,8 +72,6 @@
   - HTML
   - CSS
   - Dotenv
-  - Inquirer
-
 
   ## Questions
 

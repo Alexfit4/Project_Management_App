@@ -38,28 +38,32 @@ module.exports = (app) => {
         const dev = {
             contributors : [
                 {
+                    avatar: "",
                     name: "Johnnie Simpson",
                     github: "Github: https://github.com/balokdecoy",
                     email: "Email: johnniesimpson88@gmail.com",
-                    avatar: "insert file path",
+                    technologies: "Technologies: MySQL, CRUD, Handlebars, Linter",
                 },
                 {
+                    avatar: "file path",
                     name: "Amir Ashtiany",
                     github: "Github: https://github.com/Alexfit4",
                     email: "Email: amir@gmail.com",
-                    avatar: "insert file path",
+                    technologies: "Technologies: MySQL, CRUD, Validation",
                 },
                 {
+                    avatar: "file path",
                     name: "Lu Hao",
                     github: "Github: https://github.com/lhaodev",
                     email: "Email: lu@gmail.com",
-                    avatar: "insert file path",
+                    technologies: "Technologies: Javascript, CSS",
                 },
-                {
+                {   
+                    avatar: "file path",
                     name: "Mengyue Zhang",
                     github: "Github: https://github.com/mengyue-z",
                     email: "Email: mengyue@gmail.com",
-                    avatar: "insert file path here"
+                    technologies: "Technologies: Javascript, CSS"
                 }
             ],
         }
