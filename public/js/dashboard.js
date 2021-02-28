@@ -110,6 +110,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     var managerEmail = "Manager contact: " + data.Manager.email;
                     var employee = "Employee: " + data.Employee.first_name + " " + data.Employee.last_name;
                     var employeeEmail = "Employee contact: " + data.Employee.email;
+                    var created = data.createdAt.substring(0, 10);
+                    var createdDisplay = "Sprint start date: " + created;
+                    var update = data.updatedAt.substring(0, 10);
+                    var updateDisplay = "Last updated: " + update;
                     // for (i=0; i< data.Employee.length; i++) {
                     //     console.log('hi there');
                     //     employees.push(data.Employee.first_name + " " + data.Employee.last_name);
@@ -122,6 +126,8 @@ document.addEventListener('DOMContentLoaded', () => {
                         $("<div>").text(managerEmail),
                         $("<div>").text(employee),
                         $("<div>").text(employeeEmail),
+                        $("<div>").text(createdDisplay),
+                        $("<div>").text(updateDisplay),
                     )
                     $(projectContent).append(showSprint);
                 })

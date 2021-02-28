@@ -1,6 +1,47 @@
+  <nav class="navbar navbar-dark sticky-top flex-md-nowrap p-0">
+    <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#"><i>Sprinter</i></a>
+
+    <ul class="navbar-nav px-3">
+      <li class="nav-item text-nowrap">
+        <a class="nav-link" href="#">Sign out</a>
+      </li>
+    </ul>
+  </nav>
+
+    <div class="container-fluid">
+    <div class="row">
+      <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+        <div class="sidebar-sticky">
+          <ul class="nav flex-column">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="/dashboard">
+                <span data-feather="home"></span>
+                Dashboard <span class="sr-only">(current)</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/project">
+                <span data-feather="file"></span>
+                View Sprints
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/employee">
+                <span data-feather="shopping-cart"></span>
+                View Employees
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/about">
+                <span data-feather="users"></span>
+                Meet the Devs
+              </a>
+            </li>
+          </ul>
+      </nav>
+
 <div class="container">
-  <h1>Sprinter - About the Devs</h1>
-  <h2>Meet the Devs</h2>
+  <h1><i>Meet the Devs</i></h1>
 
     <div class="row">
       {{#each contributors}}
@@ -8,7 +49,7 @@
             <li>{{name}}</li>
             <li>{{github}}</li>
             <li>{{email}}</li>
-            <li>{{avatar}}</li>
+            <li>{{technologies}}</li>
         </div>
       {{/each}}
     </div>
