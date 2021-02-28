@@ -10,8 +10,11 @@ document.addEventListener('DOMContentLoaded', () => {
     feather.replace()
 
     const projectContainer = document.querySelector('.project-container');
-    const projectDet = document.getElementById('projectDetail');
-    const projectContent = document.getElementById('projectContent');
+    const projectTitle = document.getElementById('projectTitle');
+    const projectDescriptor = document.getElementById('projectDescriptor');
+    const managerDetail = document.getElementById('managerDetail');
+    const employeeDetail = document.getElementById('employeeDetail');
+    const timeline = document.getElementById('timeline');
     let button = document.querySelector('.btn');
 
     let projectID = document.getElementById('projectTable');
@@ -88,7 +91,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     projectID.addEventListener('click', function (e) {
         e.preventDefault();
-        projectContent.textContent = " ";
+        projectDescriptor.textContent = " ";
+        managerDetail.textContent = " ";
+        employeeDetail.textContent = " ";
+        timeline.textContent = " ";
+
         console.log(e.target);
         let element = e.target;
 
@@ -103,9 +110,10 @@ document.addEventListener('DOMContentLoaded', () => {
             }).then((response) => response.json())
                 .then((data) => {
                     console.log(data);
-                    projectDet.textContent = data.name;
+                    projectTitle.textContent = data.name;
+                    $(projectTitle).attr('style', 'font-style: italic; font-weight: bold');
                     employees = [];
-                    var desc = "Sprint description: " + data.description;
+                    var desc = data.description;
                     var manager = "Manager: " + data.Manager.first_name + " " + data.Manager.last_name;
                     var managerEmail = "Manager contact: " + data.Manager.email;
                     var employee = "Employee: " + data.Employee.first_name + " " + data.Employee.last_name;
@@ -120,16 +128,25 @@ document.addEventListener('DOMContentLoaded', () => {
                     // }
                     // console.log(employees);
                     //"Employee: " + data.Employee[i].first_name + " " + data.Employee[i].last_name;
-                    var showSprint = $("<div>").append(
+                    var showDesc = $("<div>").append(
                         $("<div>").text(desc),
+                    );
+                    var showManager = $("<div>").append(
                         $("<div>").text(manager),
-                        $("<div>").text(managerEmail),
+                        $("<div>").text(managerEmail)
+                    );
+                    var showEmployee = $("<div>").append(
                         $("<div>").text(employee),
                         $("<div>").text(employeeEmail),
+                    );
+                    var showTimeline = $("<div>").append(
                         $("<div>").text(createdDisplay),
                         $("<div>").text(updateDisplay),
-                    )
-                    $(projectContent).append(showSprint);
+                    );
+                    $(projectDescriptor).append(showDesc);
+                    $(managerDetail).append(showManager);
+                    $(employeeDetail).append(showEmployee);
+                    $(timeline).append(showTimeline);
                 })
 
         }
