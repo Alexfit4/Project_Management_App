@@ -42,5 +42,20 @@ body {
 }
 
 .btn {
-  background-color: #6f42c1;
+  
+  background-color: rgb(111,66,193);
+  margin-right: 20px;
+  margin-top: 3px ;
+  color: #fff;
+}
+
+img{
+  border-style: solid;
+  border-color: #4B0082;
+  width: 40%;
+  height: auto;
+}
+
+#email-input{
+  margin-bottom: 10px;
 }
