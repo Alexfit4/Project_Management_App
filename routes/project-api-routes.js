@@ -30,7 +30,7 @@ module.exports = (app) => {
 		// We set the value to an array of the models we want to include in a left outer join
 		// In this case, just db.Post
 		console.log(req.params.id)
-		console.log("hfdkjfdkj")
+		
 		db.Project.findOne({
 			where: {
 				id: req.params.id,
@@ -70,25 +70,6 @@ module.exports = (app) => {
 			},
 		}).then((dbProject) => res.json(dbProject));
 	});
-
-	// * PUT route for updating Projects. We can get the updated Project data from req.body
-	// app.put("/api/project/:id", (req, res) => {
-	// 	db.Project.update(
-	// 		{
-	// 			name: req.body.name,
-	// 			description: req.body.description,
-	// 			manager_id: req.body.manager_id,
-	// 			employee_id: req.body.employee_id
-	// 		},
-	// 		{
-	// 			where: {
-	// 				id: req.body.id,
-	// 			},
-	// 		}
-	// 	).then(
-	// 		//(data => res.json(data),
-	// 		console.log(req.body))
-	// });
 
 
 

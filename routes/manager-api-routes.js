@@ -11,9 +11,9 @@ module.exports = (app) => {
 		// findAll returns all entries for a table when used with no options
 		db.Manager.findAll({
 			include: [
-				// {
-				// 	model: db.Project,
-				// },
+				{
+					model: db.Project,
+				},
 				{
 					model: db.Role,
 				},

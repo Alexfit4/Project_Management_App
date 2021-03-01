@@ -16,6 +16,8 @@ module.exports = (sequelize, DataTypes) => {
 
 
 			this.hasMany(Manager, { foreignKey: "manager_id" });
+
+			
 		}
 
 		// * Decides which fields are returned

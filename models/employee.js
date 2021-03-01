@@ -19,6 +19,8 @@ module.exports = (sequelize, DataTypes) => {
 			
 
 			this.belongsTo(Role, { foreignKey: "role_id" });
+
+			
 		}
 
 		// * Decides which fields are returned
