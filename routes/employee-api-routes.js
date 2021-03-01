@@ -10,10 +10,10 @@ module.exports = (app) => {
   app.get('/api/employees', (req, res) => {
     // findAll returns all entries for a table when used with no options
     db.Employee.findAll({include:[
-      // {
-      //   model: db.Project,
+      {
+        model: db.Project,
         
-      // },
+      },
       {
         model: db.Role,
         
@@ -21,25 +21,7 @@ module.exports = (app) => {
     ]}).then((Employee) => res.json(Employee));
   });
 
-  // app.get('/api/employees', (req, res) => {
-  //   // findAll returns all entries for a table when used with no options
-  //   db.Employee.findAll({include:[
-  //     {
-  //       model: db.Project,
-        
-  //     },
-  //     {
-  //       model: db.Role,
-        
-  //     },
-  //   ]}).then((Manager) => res.json(Manager));
-  // });
-  // * Find One 
-  // app.get('/api/roles', (req, res) => {
-  //   // findAll returns all entries for a table when used with no options
-  //   db.Role.findAll(
-  //   ).then((Role) => res.json(Role));
-  // });
+
 
   app.get("/api/employees/:id", (req, res) => {
 		// Here we add an "include" property to our options in our findOne query
@@ -67,6 +49,7 @@ module.exports = (app) => {
       last_name: req.body.last_name,
       role_id:req.body.role_id,
       project_id: req.body.project_id,
+      manager_id: req.body.manager_id,
       email: req.body.email,
       password: req.body.password,
     
