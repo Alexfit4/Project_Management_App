@@ -12,12 +12,12 @@ module.exports = (sequelize, DataTypes) => {
 
 			// this.hasMany(Employee, { foreignKey: "project_id" });
 			
-			this.belongsTo(Employee, { foreignKey: "employee_id" });
+			// this.belongsTo(Employee, { foreignKey: "employee_id" });
 
 
 			this.hasMany(Manager, { foreignKey: "manager_id" });
 
-			this.belongsToMany(Employee, { through: Employee_Projects, foreignKey: "project_id" })
+			this.hasMany(Employee, { foreignKey: "project_id" })
 			
 		
 		}

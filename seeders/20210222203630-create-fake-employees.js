@@ -1,3 +1,4 @@
+
 'use strict';
 
 module.exports = {
@@ -19,7 +20,7 @@ module.exports = {
         first_name: "Gabe ",
         last_name: "Perry",
         role_id: 6,
-        project_id: 2,
+        project_id: 1,
         manager_id: 2,  
         email: "gabeP@gmail.com",
         password: "1234?!BowFlex",
@@ -57,6 +58,3 @@ module.exports = {
      
   }
 };
-
-
-
