@@ -131,7 +131,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         $("<div>").text(desc),
                     );
                     var showManager = $("<div>").append(
-                        $("<div>").text(manager),
+                        $("<div>").text(manager).attr('style', 'font-weight: bold'),
                         $("<div>").text(managerEmail)
                     );
                     var showEmployee = $("<div>").append(
