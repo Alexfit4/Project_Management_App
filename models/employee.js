@@ -1,6 +1,7 @@
 "use strict";
 var bcrypt = require("bcryptjs");
 const { Model } = require("sequelize");
+
 module.exports = (sequelize, DataTypes) => {
 	class Employee extends Model {
 		/**
@@ -8,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
 		 * This method is not a part of Sequelize lifecycle.
 		 * The `models/index` file will call this method automatically.
 		 */
-		static associate({ Project, Manager, Role }) {
+		static associate({ Project, Manager, Role,  }) {
 			// define association here
 			// this.belongsTo(Project, { foreignKey: "project_id" });
 
@@ -20,6 +21,10 @@ module.exports = (sequelize, DataTypes) => {
 
 			this.belongsTo(Role, { foreignKey: "role_id" });
 
+			this.belongsToMany(Project, { through: 'Employee_Projects', foreignKey: "project_id" })
+
+
+		
 			
 		}
 

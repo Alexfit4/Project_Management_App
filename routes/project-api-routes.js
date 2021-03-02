@@ -75,8 +75,6 @@ module.exports = (app) => {
 
 
 
-
-
 	app.put("/api/project/:id", (req, res) => {
 		console.log(req.body)
 		db.Project.update(
