@@ -17,7 +17,7 @@ module.exports = (app) => {
 				},
 				{
 					model: db.Manager,
-				},
+				}
 			]
 		}).then((Project) => {
 			res.json(Project);
@@ -43,6 +43,7 @@ module.exports = (app) => {
 				{
 					model: db.Manager,
 				},
+
 			],
 		}).then((dbProject) => {
 			console.log("hdkfjdjk");
