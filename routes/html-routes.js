@@ -38,7 +38,7 @@ module.exports = (app) => {
         const dev = {
             contributors : [
                 {
-                    avatar: "",
+                    avatar: "../images/devs/me.jpg",
                     name: "Johnnie Simpson",
                     github: "Github: https://github.com/balokdecoy",
                     email: "Email: johnniesimpson88@gmail.com",
