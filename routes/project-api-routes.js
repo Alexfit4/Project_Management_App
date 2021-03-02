@@ -30,7 +30,7 @@ module.exports = (app) => {
 		// We set the value to an array of the models we want to include in a left outer join
 		// In this case, just db.Post
 		console.log(req.params.id)
-		
+
 		db.Project.findOne({
 			where: {
 				id: req.params.id,
