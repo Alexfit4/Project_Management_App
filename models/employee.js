@@ -21,7 +21,7 @@ module.exports = (sequelize, DataTypes) => {
 
 			this.belongsTo(Role, { foreignKey: "role_id" });
 
-			this.hasMany(Project, { foreignKey: "employee_id" })
+			this.belongsTo(Project, { foreignKey: "project_id" })
 
 
 		
