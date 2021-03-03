@@ -1,8 +1,3 @@
-
-// font-family: "Roboto", Arial, Tahoma, sans-serif;
-
-
-
 'use strict';
 
 module.exports = {

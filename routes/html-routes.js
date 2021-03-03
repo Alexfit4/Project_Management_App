@@ -38,32 +38,32 @@ module.exports = (app) => {
         const dev = {
             contributors : [
                 {
-                    avatar: "",
+                    avatar: '/me.jpg',
                     name: "Johnnie Simpson",
-                    github: "Github: https://github.com/balokdecoy",
-                    email: "Email: johnniesimpson88@gmail.com",
-                    technologies: "Technologies: MySQL, CRUD, Handlebars, Linter",
+                    github: "https://github.com/balokdecoy",
+                    email: "johnniesimpson88@gmail.com",
+                    technologies: "MySQL, CRUD, Handlebars, Linter",
                 },
                 {
-                    avatar: "file path",
+                    avatar: "/amir.jpeg",
                     name: "Amir Ashtiany",
-                    github: "Github: https://github.com/Alexfit4",
-                    email: "Email: amir@gmail.com",
-                    technologies: "Technologies: MySQL, CRUD, Validation",
+                    github: "https://github.com/Alexfit4",
+                    email: "amir@gmail.com",
+                    technologies: "MySQL, CRUD, Validation",
                 },
                 {
-                    avatar: "file path",
+                    avatar: "/lu.jpeg",
                     name: "Lu Hao",
-                    github: "Github: https://github.com/lhaodev",
-                    email: "Email: lu@gmail.com",
-                    technologies: "Technologies: Javascript, CSS",
+                    github: "https://github.com/lhaodev",
+                    email: "lu@gmail.com",
+                    technologies: "Javascript, CSS",
                 },
                 {   
-                    avatar: "file path",
+                    avatar: "/mengyue.jpeg",
                     name: "Mengyue Zhang",
-                    github: "Github: https://github.com/mengyue-z",
+                    github: "https://github.com/mengyue-z",
                     email: "Email: mengyue@gmail.com",
-                    technologies: "Technologies: Javascript, CSS"
+                    technologies: "Javascript, CSS"
                 }
             ],
         }

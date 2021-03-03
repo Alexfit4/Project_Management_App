@@ -64,3 +64,4 @@ module.exports = {
 		await queryInterface.bulkDelete("projects", null, {});
 	},
 };
+

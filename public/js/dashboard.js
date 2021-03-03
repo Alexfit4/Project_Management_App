@@ -53,10 +53,9 @@ document.addEventListener('DOMContentLoaded', () => {
                         projMngLast = data[i].Manager.last_name;
                         projMngName = `${projMngFirst} ${projMngLast}`
 
-
-                        // projEmpFirst = data[i].Employees.first_name;
-                        
-                        // projEmpLast = data[i].Employees.last_name;
+                        // THIS IS IMPORTANT
+                        // projEmpFirst = data[i].Employee.first_name;
+                        // projEmpLast = data[i].Employee.last_name;
                         // projEmpName = `${projEmpFirst} ${projEmpLast}`
 
                         console.log(projDescript)
@@ -111,12 +110,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 },
             }).then((response) => response.json())
                 .then((data) => {
-
-                    console.log(data, "here");
+                    console.log(data);
+                    var result = Object.keys(data).map((key) => [String(key), data[key]]);
+                    console.log(result);
                     projectTitle.textContent = data.name;
-                    console.log(data.Employees.length);
+                    console.log(data.Employee.first_name);
                     $(projectTitle).attr('style', 'font-style: italic; font-weight: bold');
-                    employees = [];
+                    let employee;
                     var desc = data.description;
                     var manager = "Manager: " + data.Manager.first_name + " " + data.Manager.last_name;
                     var managerEmail = "Manager contact: " + data.Manager.email;
@@ -126,12 +126,18 @@ document.addEventListener('DOMContentLoaded', () => {
                     var createdDisplay = "Sprint start date: " + created;
                     var update = data.updatedAt.substring(0, 10);
                     var updateDisplay = "Last updated: " + update;
-                    // for (i=0; i< data.Employee.length; i++) {
-                    //     console.log('hi there');
-                    //     employees.push(data.Employee.first_name + " " + data.Employee.last_name);
-                    // }
-                    // console.log(employees);
-                    //"Employee: " + data.Employee[i].first_name + " " + data.Employee[i].last_name;
+                    let showEmployee;
+                    for (var i=0; i<data.Employee.length; i++) {
+                        employee = "Employee: " + data.Employee[i].first_name + " " + data.Employee[i].last_name;
+                        employeeEmail = "Employee contact: " + data.Employee[i].email;
+                        showEmployee = $("<div>").append(
+                            $("<div>").text(employee),
+                            $("<div>").text(employeeEmail),
+                        );
+                        $(employeeDetail).append(showEmployee);
+                        console.log(showEmployee);
+                    }
+                    
                     var showDesc = $("<div>").append(
                         $("<div>").text(desc),
                     );
@@ -139,17 +145,14 @@ document.addEventListener('DOMContentLoaded', () => {
                         $("<div>").text(manager).attr('style', 'font-weight: bold'),
                         $("<div>").text(managerEmail)
                     );
-                    var showEmployee = $("<div>").append(
-                        $("<div>").text(employee),
-                        $("<div>").text(employeeEmail),
-                    );
+                   
                     var showTimeline = $("<div>").append(
                         $("<div>").text(createdDisplay),
                         $("<div>").text(updateDisplay),
                     );
                     $(projectDescriptor).append(showDesc);
                     $(managerDetail).append(showManager);
-                    $(employeeDetail).append(showEmployee);
+                    
                     $(timeline).append(showTimeline);
                 })
 
