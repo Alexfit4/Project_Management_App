@@ -6,25 +6,25 @@ const db = require("../models");
 // Routes
 module.exports = (app) => {
 	// * GET route for getting all of the employees
-	app.get("/api/employees", (req, res) => {
+	app.get("/api/employee_projects", (req, res) => {
 		// findAll returns all entries for a table when used with no options
-		db.Employee.findAll({
+		db.Employee_Projects.findAll({
 			include: [
 				{
 					model: db.Project,
 				},
 				{
-					model: db.Role,
+					model: db.Employee,
 				},
-			],
+			]
 		}).then((Employee) => res.json(Employee));
 	});
 
-	app.get("/api/employees/:id", (req, res) => {
+	app.get("/api/employee_projects/:id", (req, res) => {
 		// Here we add an "include" property to our options in our findOne query
 		// We set the value to an array of the models we want to include in a left outer join
 		// In this case, just db.Post
-		db.Employee.findOne({
+		db.Employee_Projects.findOne({
 			where: {
 				email: req.params.id,
 			},
@@ -40,43 +40,31 @@ module.exports = (app) => {
 	});
 
 	//* POST route for saving a new employee
-	app.post("/api/employees", (req, res) => {
-		db.Employee.create({
-			first_name: req.body.first_name,
-			last_name: req.body.last_name,
-			role_id: req.body.role_id,
-			project_id: req.body.project_id,
-			manager_id: req.body.manager_id,
-			email: req.body.email,
-			password: req.body.password,
-		}).then((dbEmployee) => res.json(dbEmployee));
+	app.post("/api/employee_projects", (req, res) => {
+		db.Employee_Projects.create({
+			ProjectId: req.body.ProjectId,
+			EmployeeId: req.body.EmployeeId,
+		})
+			.then((dbEmployee) => res.json(dbEmployee))
+			.catch(function (err) {
+				// print the error details
+				console.log(err);
+			});
 	});
 
-	app.post("/api/employees_p", (req, res) => {
-		db.Employee.update(
-			{
-				project_id: req.body.project_id,
-			},
-			{
-				where: {
-					id: req.body.id,
-				},
-			}
-		).then((dbEmployee) => res.json(dbEmployee));
-	});
 	//* DELETE route for deleting todos using the ID (req.params.id)
-	app.delete("/api/employees/:id", (req, res) => {
+	app.delete("/api/employee_projects/:id", (req, res) => {
 		//* We just have to specify which todo we want to destroy with "where"
-		db.Employee.destroy({
+		db.Employee_Projects.destroy({
 			where: {
 				id: req.params.id,
 			},
 		}).then((dbEmployee) => res.json(dbEmployee));
 	});
 
-	app.delete("/api/employees/:id", (req, res) => {
+	app.delete("/api/employee_projects/:id", (req, res) => {
 		//* We just have to specify which todo we want to destroy with "where"
-		db.Employee.destroy({
+		db.Employee_Projects.destroy({
 			where: {
 				id: req.params.id,
 			},
@@ -84,19 +72,15 @@ module.exports = (app) => {
 	});
 
 	// * PUT route for updating Employees. We can get the updated Employee data from req.body
-	app.put("/api/employees", (req, res) => {
-		db.Employee.update(
+	app.put("/api/employee_projects", (req, res) => {
+		db.Employee_Projects.update(
 			{
-				first_name: req.body.first_name,
-				last_name: req.body.last_name,
-				role_id: req.body.role_id,
-				project_id: req.body.project_id,			
-				email: req.body.email,
-				password: req.body.password,
+				ProjectId: req.body.ProjectId,
+				EmployeeId: req.body.EmployeeId,
 			},
 			{
 				where: {
-					email: req.body.email,
+					id: req.body.id,
 				},
 			}
 		).then((dbEmployee) => res.json(dbEmployee));

@@ -105,9 +105,9 @@ document.addEventListener("DOMContentLoaded", () => {
             const singleProject = {
                 name: titleInput.value.trim(),
                 description: bodyInput.value.trim(),
-                manager_id: managerSelect.value,
-                //employee_id: employeeSelect.value,
-                employee_id: selectedIds[i],
+                manager_id: managerSelect.value,           
+                EmployeeId: selectedIds[i],
+
             }
             newProject.push(singleProject)
         }
@@ -133,16 +133,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Submits new project then redirects
     const submitProject = (project) => {
-        fetch("/api/project", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(project),
-        }).then(() => {
-            //window.location.href = "/dashboard";
-        });
-        // .catch((err) => console.error(err));
+        const urls = ["/api/project", "/api/employee_projects",  ];
+        Promise.all(
+            urls.map((url) =>
+                fetch(url, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(project),
+                })
+                    .then((response) => response.json())
+                    .catch((err) => console.error(err))
+            )
+        );
     };
 
     // Render a list of employees or redirect if no employees

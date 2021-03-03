@@ -45,6 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     // Populate the form
                     for (i = 0; i < data.length; i++) {
                         console.log(data[i])
+                        console.log(data[i].Employees)
                         projId = data[i].id;
                         projName = data[i].name;
                         projDescript = data[i].description;
@@ -75,6 +76,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
                         // // Append the new row to the table
                         $("#projectTable > tbody").append(newRow);
+
+                      
 
 
                     }
@@ -117,7 +120,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     var desc = data.description;
                     var manager = "Manager: " + data.Manager.first_name + " " + data.Manager.last_name;
                     var managerEmail = "Manager contact: " + data.Manager.email;
-                    let employeeEmail;
+                    var employee = "Employee: " + data.Employees[0].first_name + " " + data.Employees[0].last_name;
+                    var employeeEmail = "Employee contact: " + data.Employees[0].email;
                     var created = data.createdAt.substring(0, 10);
                     var createdDisplay = "Sprint start date: " + created;
                     var update = data.updatedAt.substring(0, 10);
@@ -256,6 +260,30 @@ document.addEventListener('DOMContentLoaded', () => {
     $(document).on("click", '.edit-proj-btn', editProject);
 
 
+    const getAllStuff = () => {
+        // employeeId = employee || '';
+        // if (employeeId) {
+        //     employeeId = `/?employee_id=${employeeId}`;
+        // }
 
+        fetch('/api/employee_projects', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+            .then((response) => response.json())
+            .then((data) => {
+              console.log(data[0].Project);
+              console.log(data[0].Employee);
+  
+
+                })
+
+
+            }
+        // .catch((error) => console.error('Error:', error));
+    
+        getAllStuff()
 
 });

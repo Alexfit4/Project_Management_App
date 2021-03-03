@@ -19,7 +19,6 @@ module.exports = (sequelize, DataTypes) => {
 
 			this.belongsTo(Employee, { foreignKey: "employee_id" })
 			
-		
 		}
 
 		// * Decides which fields are returned
