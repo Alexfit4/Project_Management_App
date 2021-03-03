@@ -45,6 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     // Populate the form
                     for (i = 0; i < data.length; i++) {
                         console.log(data[i])
+                        console.log(data[i].Employees)
                         projId = data[i].id;
                         projName = data[i].name;
                         projDescript = data[i].description;
@@ -53,9 +54,10 @@ document.addEventListener('DOMContentLoaded', () => {
                         projMngName = `${projMngFirst} ${projMngLast}`
 
 
-                        projEmpFirst = data[i].Employee.first_name;
-                        projEmpLast = data[i].Employee.last_name;
-                        projEmpName = `${projEmpFirst} ${projEmpLast}`
+                        // projEmpFirst = data[i].Employees.first_name;
+                        
+                        // projEmpLast = data[i].Employees.last_name;
+                        // projEmpName = `${projEmpFirst} ${projEmpLast}`
 
                         console.log(projDescript)
                         var newRow = $("<tr>").append(
@@ -65,7 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             $("<td>").text(projName),
                             $("<td>").text(projDescript),
                             $("<td>").text(projMngName),
-                            $("<td>").text(projEmpName),
+                            // $("<td>").text(projEmpName),
                             console.log(projDescript)
                             // $("<td>").text(empSalary),
                             // $("<td>").text(empEmail),
@@ -75,6 +77,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
                         // // Append the new row to the table
                         $("#projectTable > tbody").append(newRow);
+
+                      
 
 
                     }
@@ -107,16 +111,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 },
             }).then((response) => response.json())
                 .then((data) => {
-                    console.log(data);
+
+                    console.log(data, "here");
                     projectTitle.textContent = data.name;
-                    console.log(data.Employee.length);
+                    console.log(data.Employees.length);
                     $(projectTitle).attr('style', 'font-style: italic; font-weight: bold');
                     employees = [];
                     var desc = data.description;
                     var manager = "Manager: " + data.Manager.first_name + " " + data.Manager.last_name;
                     var managerEmail = "Manager contact: " + data.Manager.email;
-                    var employee = "Employee: " + data.Employee.first_name + " " + data.Employee.last_name;
-                    var employeeEmail = "Employee contact: " + data.Employee.email;
+                    var employee = "Employee: " + data.Employees[0].first_name + " " + data.Employees[0].last_name;
+                    var employeeEmail = "Employee contact: " + data.Employees[0].email;
                     var created = data.createdAt.substring(0, 10);
                     var createdDisplay = "Sprint start date: " + created;
                     var update = data.updatedAt.substring(0, 10);
@@ -252,6 +257,30 @@ document.addEventListener('DOMContentLoaded', () => {
     $(document).on("click", '.edit-proj-btn', editProject);
 
 
+    const getAllStuff = () => {
+        // employeeId = employee || '';
+        // if (employeeId) {
+        //     employeeId = `/?employee_id=${employeeId}`;
+        // }
 
+        fetch('/api/employee_projects', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+            .then((response) => response.json())
+            .then((data) => {
+              console.log(data[0].Project);
+              console.log(data[0].Employee);
+  
+
+                })
+
+
+            }
+        // .catch((error) => console.error('Error:', error));
+    
+        getAllStuff()
 
 });

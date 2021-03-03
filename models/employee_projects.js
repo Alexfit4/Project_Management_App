@@ -11,16 +11,22 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate({Employee, Project}) {
       // define association here
-      this.belongsTo(Project, { foreignKey: "project_id" })
-      this.belongsTo(Employee, { foreignKey: "employee_id" })
+      this.hasMany(Project ,{ foreignKey: "project_id" })
+      this.hasMany(Employee, { foreignKey: "employee_id" })
     }
   };
   Employee_Projects.init({
-    project_id:  {
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+      allowNull: false
+    },
+    ProjectId:  {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    employee_id: {
+    EmployeeId: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },

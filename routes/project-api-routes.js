@@ -4,6 +4,7 @@ const { Op } = require("sequelize");
 module.exports = (app) => {
 	// * GET route for getting all of the projects
 	app.get("/api/project", (req, res) => {
+		
 		// const query = {};
 		// if (req.query.employee_id) {
 		// 	query.EmployeeId = req.query.employee_id;
@@ -13,12 +14,9 @@ module.exports = (app) => {
 			include: [
 				{
 					model: db.Employee,
-
+					
 				},
-				{
-					model: db.Manager,
-				}
-			]
+			],
 		}).then((Project) => {
 			res.json(Project);
 		});
@@ -29,7 +27,7 @@ module.exports = (app) => {
 		// Here we add an "include" property to our options in our findOne query
 		// We set the value to an array of the models we want to include in a left outer join
 		// In this case, just db.Post
-		console.log(req.params.id)
+		console.log(req.params.id);
 
 		db.Project.findOne({
 			where: {
@@ -43,12 +41,11 @@ module.exports = (app) => {
 				{
 					model: db.Manager,
 				},
-
 			],
 		}).then((dbProject) => {
 			console.log("hdkfjdjk");
 			//console.log(dbProject);
-			res.json(dbProject)
+			res.json(dbProject);
 		});
 	});
 
@@ -58,7 +55,7 @@ module.exports = (app) => {
 			name: req.body.name,
 			description: req.body.description,
 			manager_id: req.body.manager_id,
-			employee_id: req.body.employee_id
+			employee_id: req.body.employee_id,
 		}).then((dbPost) => res.json(dbPost));
 	});
 
@@ -72,18 +69,14 @@ module.exports = (app) => {
 		}).then((dbProject) => res.json(dbProject));
 	});
 
-
-
-
-
 	app.put("/api/project/:id", (req, res) => {
-		console.log(req.body)
+		console.log(req.body);
 		db.Project.update(
 			{
 				name: req.body.name,
 				description: req.body.description,
 				manager_id: req.body.manager_id,
-				employee_id: req.body.employee_id
+				employee_id: req.body.employee_id,
 			},
 			{
 				where: {
@@ -92,11 +85,4 @@ module.exports = (app) => {
 			}
 		).then((data) => res.json(data));
 	});
-
-
-
-
-
 };
-
-

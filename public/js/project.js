@@ -105,9 +105,9 @@ document.addEventListener("DOMContentLoaded", () => {
             const singleProject = {
                 name: titleInput.value.trim(),
                 description: bodyInput.value.trim(),
-                manager_id: managerSelect.value,
-                //employee_id: employeeSelect.value,
-                employee_id: selectedIds[i],
+                manager_id: managerSelect.value,           
+                EmployeeId: selectedIds[i],
+
             }
             newProject.push(singleProject)
         }
@@ -133,16 +133,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Submits new project then redirects
     const submitProject = (project) => {
-        fetch("/api/project", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(project),
-        }).then(() => {
-            //window.location.href = "/dashboard";
-        });
-        // .catch((err) => console.error(err));
+        const urls = ["/api/project", "/api/employee_projects",  ];
+        Promise.all(
+            urls.map((url) =>
+                fetch(url, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(project),
+                })
+                    .then((response) => response.json())
+                    .catch((err) => console.error(err))
+            )
+        );
     };
 
     // Render a list of employees or redirect if no employees
@@ -264,4 +268,70 @@ document.addEventListener("DOMContentLoaded", () => {
         });
         // .catch((err) => console.error(err));
     };
+
+
+
+    
+// const addBoth = (e) => {
+//             // Make sure the form isn't empty
+//             if (
+//                 !titleInput.value.trim() ||
+//                 !bodyInput.value.trim()
+//                 //||
+//                 // !employeeSelect.value
+//             ) {
+//                 return;
+//             }
+    
+//             //var allEmployee = [];
+//             // Object that will be sent to the db
+//             //for (var i = 0; i < employeeSelect.length; i++) {
+//             //console.log(employeeSelect.value)
+//             var selected = Array.from(employeeSelect.options)
+//             console.log(selected)
+//             var selectedIds = [];
+    
+//             selected.forEach(selection => {
+//                 if (selection.selected) {
+//                     selectedIds.push(selection.value)
+//                 }
+    
+//             });
+ 
+//     var newProject = [];
+//     for (var i = 0; i < selectedIds.length; i++) {
+//         const singleProject = {
+//             name: $("#name").value.trim(),
+//             description: $("#body").value.trim(),
+//             manager_id: $("#manager").value,
+//             //employee_id: employeeSelect.value,
+//             employee_id: selectedIds[i],
+//             project_id: 1
+//         }
+//         newProject.push(singleProject)
+//     }
+
+// 	// store urls to fetch in an array
+// 	const urls = ["/api/project", "/api/employee_projects"];
+
+// 	// use map() to perform a fetch and handle the response for each url
+// 	Promise.all(
+// 		urls.map((url) =>
+// 			fetch(url, {
+// 				method: "POST",
+// 				headers: {
+// 					"Content-Type": "application/json",
+// 				},
+// 				body: JSON.stringify(newProject),
+// 			})
+// 				.then((response) => response.json())
+// 				.catch((err) => console.error(err))
+// 		)
+// 	);
+
+  
+  
+// };
+
+// createBtn.addEventListener("submit", addBoth);
 });

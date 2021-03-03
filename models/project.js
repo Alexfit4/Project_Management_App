@@ -19,7 +19,6 @@ module.exports = (sequelize, DataTypes) => {
 
 			this.hasMany(Employee, { foreignKey: "project_id" })
 			
-		
 		}
 
 		// * Decides which fields are returned

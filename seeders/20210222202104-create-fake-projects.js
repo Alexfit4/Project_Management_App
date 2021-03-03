@@ -1,3 +1,4 @@
+
 "use strict";
 
 module.exports = {
@@ -63,6 +64,3 @@ module.exports = {
 		await queryInterface.bulkDelete("projects", null, {});
 	},
 };
-
-
-// font-family: "Roboto", Arial, Tahoma, sans-serif;
