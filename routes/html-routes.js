@@ -41,29 +41,29 @@ module.exports = (app) => {
                     avatar: '/me.jpg',
                     name: "Johnnie Simpson",
                     github: "https://github.com/balokdecoy",
-                    email: "Email: johnniesimpson88@gmail.com",
-                    technologies: "Technologies: MySQL, CRUD, Handlebars, Linter",
+                    email: "johnniesimpson88@gmail.com",
+                    technologies: "MySQL, CRUD, Handlebars, Linter",
                 },
                 {
                     avatar: "/amir.jpeg",
                     name: "Amir Ashtiany",
                     github: "https://github.com/Alexfit4",
-                    email: "Email: amir@gmail.com",
-                    technologies: "Technologies: MySQL, CRUD, Validation",
+                    email: "amir@gmail.com",
+                    technologies: "MySQL, CRUD, Validation",
                 },
                 {
                     avatar: "/lu.jpeg",
                     name: "Lu Hao",
                     github: "https://github.com/lhaodev",
-                    email: "Email: lu@gmail.com",
-                    technologies: "Technologies: Javascript, CSS",
+                    email: "lu@gmail.com",
+                    technologies: "Javascript, CSS",
                 },
                 {   
                     avatar: "/mengyue.jpeg",
                     name: "Mengyue Zhang",
                     github: "https://github.com/mengyue-z",
                     email: "Email: mengyue@gmail.com",
-                    technologies: "Technologies: Javascript, CSS"
+                    technologies: "Javascript, CSS"
                 }
             ],
         }

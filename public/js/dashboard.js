@@ -108,8 +108,10 @@ document.addEventListener('DOMContentLoaded', () => {
             }).then((response) => response.json())
                 .then((data) => {
                     console.log(data);
+                    var result = Object.keys(data).map((key) => [String(key), data[key]]);
+                    console.log(result);
                     projectTitle.textContent = data.name;
-                    console.log(data.Employees.length);
+                    console.log(data.Employee.first_name);
                     $(projectTitle).attr('style', 'font-style: italic; font-weight: bold');
                     let employee;
                     var desc = data.description;
@@ -121,15 +123,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     var update = data.updatedAt.substring(0, 10);
                     var updateDisplay = "Last updated: " + update;
                     let showEmployee;
-                    // for (i=0; i< data.Employee.length; i++) {
-                    //     console.log('hi there');
-                    //     employees.push(data.Employee.first_name + " " + data.Employee.last_name);
-                    // }
-                    // console.log(employees);
-                    //"Employee: " + data.Employee[i].first_name + " " + data.Employee[i].last_name;
-                    for (var i=0; i<data.Employees.length; i++) {
-                        employee = "Employee: " + data.Employees[i].first_name + " " + data.Employees[i].last_name;
-                        employeeEmail = "Employee contact: " + data.Employees[i].email;
+                    for (var i=0; i<data.Employee.length; i++) {
+                        employee = "Employee: " + data.Employee[i].first_name + " " + data.Employee[i].last_name;
+                        employeeEmail = "Employee contact: " + data.Employee[i].email;
                         showEmployee = $("<div>").append(
                             $("<div>").text(employee),
                             $("<div>").text(employeeEmail),

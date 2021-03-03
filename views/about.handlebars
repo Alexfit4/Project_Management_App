@@ -42,17 +42,16 @@
 
 <div class="container">
   <h1><i>Meet the Devs</i></h1>
-
     <div class="row">
       {{#each contributors}}
-        <div class="col-3 card border-dark mb-3">
+        <div class="col-3 card border-dark mb-3" style="background-color: #4B0082; color:white; padding:5px">
             <img src={{avatar}} class="card-img-top", alt="dev">
-          <div class="card-body">
+          <div class="card-body" >
             <h5 class="card-title"><i style="font-weight: bolder;">{{name}}</i></h5>
             <div class="card-text" style="font-size:medium;">
-            <li>Github: {{github}}</li>
-            <li>{{email}}</li>
-            <li>{{technologies}}</li>
+            <li>Github: <a href={{github}}>{{github}}</a></li>
+            <li>Email: <a href=mailto:{{email}}>{{email}}</a></li>
+            <li>Technologies: {{technologies}}</li>
             </div>
             </div>
         </div>
