@@ -46,8 +46,6 @@ module.exports = (app) => {
 
 			],
 		}).then((dbProject) => {
-			console.log("hdkfjdjk");
-			//console.log(dbProject);
 			res.json(dbProject)
 		});
 	});

@@ -45,12 +45,16 @@
 
     <div class="row">
       {{#each contributors}}
-        <div class="col-3">
-            <img src={{avatar}}>
-            <li>{{name}}</li>
-            <li>{{github}}</li>
+        <div class="col-3 card border-dark mb-3">
+            <img src={{avatar}} class="card-img-top", alt="dev">
+          <div class="card-body">
+            <h5 class="card-title"><i style="font-weight: bolder;">{{name}}</i></h5>
+            <div class="card-text" style="font-size:medium;">
+            <li>Github: {{github}}</li>
             <li>{{email}}</li>
             <li>{{technologies}}</li>
+            </div>
+            </div>
         </div>
       {{/each}}
     </div>

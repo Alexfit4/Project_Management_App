@@ -38,30 +38,30 @@ module.exports = (app) => {
         const dev = {
             contributors : [
                 {
-                    avatar: "../images/devs/me.jpg",
+                    avatar: '/me.jpg',
                     name: "Johnnie Simpson",
-                    github: "Github: https://github.com/balokdecoy",
+                    github: "https://github.com/balokdecoy",
                     email: "Email: johnniesimpson88@gmail.com",
                     technologies: "Technologies: MySQL, CRUD, Handlebars, Linter",
                 },
                 {
-                    avatar: "file path",
+                    avatar: "/amir.jpeg",
                     name: "Amir Ashtiany",
-                    github: "Github: https://github.com/Alexfit4",
+                    github: "https://github.com/Alexfit4",
                     email: "Email: amir@gmail.com",
                     technologies: "Technologies: MySQL, CRUD, Validation",
                 },
                 {
-                    avatar: "file path",
+                    avatar: "/lu.jpeg",
                     name: "Lu Hao",
-                    github: "Github: https://github.com/lhaodev",
+                    github: "https://github.com/lhaodev",
                     email: "Email: lu@gmail.com",
                     technologies: "Technologies: Javascript, CSS",
                 },
                 {   
-                    avatar: "file path",
+                    avatar: "/mengyue.jpeg",
                     name: "Mengyue Zhang",
-                    github: "Github: https://github.com/mengyue-z",
+                    github: "https://github.com/mengyue-z",
                     email: "Email: mengyue@gmail.com",
                     technologies: "Technologies: Javascript, CSS"
                 }
