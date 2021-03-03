@@ -17,7 +17,7 @@ module.exports = (sequelize, DataTypes) => {
 
 			this.hasMany(Manager, { foreignKey: "manager_id" });
 
-			this.hasMany(Employee, { foreignKey: "project_id" })
+			this.belongsTo(Employee, { foreignKey: "employee_id" })
 			
 		
 		}
