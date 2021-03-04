@@ -47,19 +47,19 @@ $(document).ready(() => {
 						var newRow = $("<tr>").append(
 							$("<td>").text(empFirstName),
 							$("<td>").text(empLastName),
-							$("<td>").text(empTitle).addClass("title-row"),
+							$("<td>").text(empTitle),
 							$("<td>").text(empSalary),
 							$("<td>").text(empEmail),
 							$("<select>").attr("data-id", empId).addClass("project-list"),
 							$("<button>")
 								.text("Update")
-								.addClass("update-emp-btn btn-outline-dark btn")
+								.addClass("update-emp-btn btn-outline-dark btn btn-sm")
 								.val(empId)
 								.on("click",updateProject),
 							
 							$("<button>")
 								.text("Delete")
-								.addClass("delete-emp-btn btn-outline-dark btn")
+								.addClass("delete-emp-btn btn-outline-dark btn btn-sm")
 								.val(empId)
 						);
 						// Append the new row to the table
@@ -97,12 +97,12 @@ $(document).ready(() => {
 						var newRow = $("<tr>").append(
 							$("<td>").text(managerFirstName),
 							$("<td>").text(managerLastName),
-							$("<td>").text(managerTitle).addClass("title-row"),
+							$("<td>").text(managerTitle),
 							$("<td>").text(managerSalary),
 							$("<td>").text(managerEmail),
 							$("<button>")
 								.text("Delete")
-								.addClass("delete-manager-btn btn-outline-dark btn")
+								.addClass("delete-manager-btn btn-outline-dark btn btn-sm")
 								.val(managerId)
 						);
 						// Append the new row to the table
@@ -125,7 +125,11 @@ $(document).ready(() => {
 			email: $("#employee-email").val().trim(),
 			password: $("#employee-password").val().trim(),
 		};
+
+		console.log($("#employee-projects").val());
+
 		// console.log(project_id);
+
 		//console.log(newEmployee.role_id)
 		if (newEmployee) {
 			fetch("/api/employees", {
@@ -140,7 +144,10 @@ $(document).ready(() => {
 				.catch((err) => console.error(err));
 		}
 	};
+
+	//$("#add-employee-btn").on("click", addEmployee);
 	// $("#add-employee-btn").on("click", addEmployee);
+
 
 	//Add Employee
 	const addManager = (e) => {

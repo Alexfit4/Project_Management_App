@@ -125,3 +125,31 @@ body {
 
  }
 
+ .update-emp-btn {
+  margin:3px;
+}
+
+.delete-emp-btn {
+  margin:3px;
+}
+
+#employee-table th {
+			display: inline-block;
+			width: 15%;
+		}
+#employee-table td {
+			display: inline-block;
+			width: 15%;
+		}
+  
+#manager-table th
+		{
+			display: inline-block;
+			width: 15%;
+		}
+#manager-table td
+		{
+			display: inline-block;
+			width: 15%;
+		}
+  
