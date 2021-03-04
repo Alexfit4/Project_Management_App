@@ -140,7 +140,7 @@ $(document).ready(() => {
 				.catch((err) => console.error(err));
 		}
 	};
-	$("#add-employee-btn").on("click", addEmployee);
+	// $("#add-employee-btn").on("click", addEmployee);
 
 	//Add Employee
 	const addManager = (e) => {
@@ -429,6 +429,7 @@ $(document).ready(() => {
 		);
 
 		getEmployees();
+		location.reload();
 	};
 
 	$("#add-employee-btn").on("click", getAllLogins2);
