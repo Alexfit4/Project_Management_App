@@ -121,7 +121,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             if (updating) {
                 newProject.id = projectId;
-                updateProject(newProject);
+                updateProject(newProject[i]);
             } else {
                 submitProject(newProject[i]);
             }
