@@ -480,8 +480,36 @@ $(document).ready(() => {
 	$("#add-manager-btn").on("click", getAllLoginsManagers);
 
 	// put
+	// const updateProject = (e) => {
+	// 	empId = e.target.value;
+	// 	let employeeFirst = e.target
+	// 	console.log(employeeFirst);
+	// 	console.log(e.target.value);
+	// 	selectedProjectId = $(`select[data-id=${empId}]`).val();
+	// 	console.log(selectedProjectId);
+	// 	fetch("/api/employee", {
+	// 		method: "PUT",
+	// 		headers: {
+	// 			"Content-Type": "application/json",
+	// 		},
+	// 		body: JSON.stringify({
+	// 			ProjectId: selectedProjectId,
+	// 			EmployeeId: empId,
+	// 		}),
+	// 	})
+	// 		.then((data) => {
+	// 			console.log(data);
+	// 			console.log("Updated employee project! ");
+	// 			alert(`Successfully updated employee's project!`);
+	// 		})
+	// 		.catch((err) => console.error(err));
+	// };
+
+	//* Amir Update
 	const updateProject = (e) => {
 		empId = e.target.value;
+		let employeeFirst = e.target;
+		console.log(employeeFirst);
 		console.log(e.target.value);
 		selectedProjectId = $(`select[data-id=${empId}]`).val();
 		console.log(selectedProjectId);
@@ -496,9 +524,19 @@ $(document).ready(() => {
 			}),
 		})
 			.then(() => {
-				console.log("Updated employee project! ");
-				alert(`Successfully updated employee's project!`);
+				fetch(`/api/employees/${empId}`, {
+					method: "GET",
+					headers: {
+						"Content-Type": "application/json",
+					},
+				})
+					.then((response) => response.json())
+					.then((data) => {
+						console.log(data);
+						alert(`Successfully updated ${data.first_name}'s project!`);
+					});
 			})
+
 			.catch((err) => console.error(err));
 	};
 

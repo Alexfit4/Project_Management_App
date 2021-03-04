@@ -26,7 +26,7 @@ module.exports = (app) => {
 		// In this case, just db.Post
 		db.Employee.findOne({
 			where: {
-				email: req.params.id,
+				id: req.params.id,
 			},
 			include: [
 				{
