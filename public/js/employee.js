@@ -1,3 +1,5 @@
+//const { Json } = require("sequelize/types/lib/utils");
+
 $(document).ready(() => {
 	console.log("DOM loaded! 🚀");
 	feather.replace();
@@ -48,12 +50,18 @@ $(document).ready(() => {
 							$("<td>").text(empTitle).addClass("title-row"),
 							$("<td>").text(empSalary),
 							$("<td>").text(empEmail),
+							$("<select>").attr("data-id", empId).addClass("project-list"),
+							$("<button>")
+								.text("Update")
+								.addClass("update-emp-btn btn-outline-dark btn")
+								.val(empId)
+								.on("click",updateProject),
+							
 							$("<button>")
 								.text("Delete")
 								.addClass("delete-emp-btn btn-outline-dark btn")
 								.val(empId)
 						);
-
 						// Append the new row to the table
 						$("#employee-table > tbody").append(newRow);
 					}
@@ -77,6 +85,7 @@ $(document).ready(() => {
 					console.log("Success in getting post:", data);
 					console.log(data);
 					$("#manager-table > tbody").empty();
+					console.log(data);
 					// Populate the form
 					for (i = 0; i < data.length; i++) {
 						managerFirstName = data[i].first_name;
@@ -116,7 +125,7 @@ $(document).ready(() => {
 			email: $("#employee-email").val().trim(),
 			password: $("#employee-password").val().trim(),
 		};
-		console.log(project_id);
+		// console.log(project_id);
 		//console.log(newEmployee.role_id)
 		if (newEmployee) {
 			fetch("/api/employees", {
@@ -131,7 +140,7 @@ $(document).ready(() => {
 				.catch((err) => console.error(err));
 		}
 	};
-	// $("#add-employee-btn").on("click", addEmployee);
+	$("#add-employee-btn").on("click", addEmployee);
 
 	//Add Employee
 	const addManager = (e) => {
@@ -157,7 +166,9 @@ $(document).ready(() => {
 				.catch((err) => console.error(err));
 		}
 	};
-	// $("#add-manager-btn").on("click", addManager);
+
+	//$("#add-manager-btn").on("click", addManager);
+	$(document).on("click", "#add-manager-btn", addManager);
 
 	//Delete Employee
 	const deleteEmployees = (e) => {
@@ -219,6 +230,23 @@ $(document).ready(() => {
 		ManagerTitleSelect.value = titleId;
 	};
 
+		// Render a list of projects in table
+		
+		const renderTableProjectList = (data) => {
+			const tableProjectSelect = $(".project-list");
+			console.log("renderTableProjectList -> data", data);
+	
+			const rowsToAdd = [];
+	
+			data.forEach((project) => rowsToAdd.push(createProjectListRow(project)));
+	
+			console.log("renderTableProjectList -> rowsToAdd", rowsToAdd);
+			console.log("tableProjectSelect", tableProjectSelect);
+	
+			rowsToAdd.forEach((row) => tableProjectSelect.append(row));
+			tableProjectSelect.value = projectId;
+		};
+
 	// Build title dropdown
 	const createEmpTitleRow = ({ id, title }) => {
 		const listOption = $("<option>");
@@ -229,6 +257,14 @@ $(document).ready(() => {
 
 	//*  Build title dropdown
 	const createEmpProjectRow = ({ id, name }) => {
+		const listOption = $("<option>");
+		listOption.val(id);
+		listOption.text(name);
+		return listOption;
+	};
+
+	// Build title dropdown in table - Mengyue
+	const createProjectListRow = ({ id, name }) => {
 		const listOption = $("<option>");
 		listOption.val(id);
 		listOption.text(name);
@@ -253,6 +289,7 @@ $(document).ready(() => {
 			.then((response) => response.json())
 			.then((data) => {
 				titleId = data.id;
+				console.log(titleId)
 				renderEmpTitleList(data);
 			})
 			.catch((err) => console.error(err));
@@ -269,6 +306,7 @@ $(document).ready(() => {
 		})
 			.then((response) => response.json())
 			.then((data) => {
+				console.log(data)
 				titleId = data.id;
 				console.log(titleId);
 				renderManagerTitleList(data);
@@ -311,6 +349,25 @@ $(document).ready(() => {
 
 	getEmpProject();
 
+	const getProjectList = () => {
+		fetch("api/project", {
+			method: "GET",
+			headers: {
+				"Content-Type": "application/json",
+			},
+		})
+			.then((response) => response.json())
+			.then((data) => {
+				console.log(data);
+				projectId = data.id;
+				console.log(projectId);
+				renderTableProjectList(data);
+			})
+			.catch((err) => console.error(err));
+	};
+
+	getProjectList();
+
 	// * Update employee
 
 	const updateEmployees = (e) => {
@@ -338,74 +395,103 @@ $(document).ready(() => {
 	};
 
 	$("#update-employee-btn").on("click", updateEmployees);
-});
 
-// * Testing fetching two api's
+	// * Testing fetching two api's
 
-// ! Amir's Branch
+	// ! Amir's Branch
 
-const getAllLogins2 = (e) => {
-	const newEmployee = {
-		first_name: $("#employee-first-name").val().trim(),
-		last_name: $("#employee-last-name").val().trim(),
-		role_id: $("#employee-title").val(),
-		project_id: $("#employee-projects").val(),
-		email: $("#employee-email").val().trim(),
-		password: $("#employee-password").val().trim(),
+	const getAllLogins2 = (e) => {
+		const newEmployee = {
+			first_name: $("#employee-first-name").val().trim(),
+			last_name: $("#employee-last-name").val().trim(),
+			role_id: $("#employee-title").val(),
+			project_id: $("#employee-projects").val(),
+			email: $("#employee-email").val().trim(),
+			password: $("#employee-password").val().trim(),
+		};
+
+		// store urls to fetch in an array
+		const urls = ["/api/employees", "/api/users"];
+
+		// use map() to perform a fetch and handle the response for each url
+		Promise.all(
+			urls.map((url) =>
+				fetch(url, {
+					method: "POST",
+					headers: {
+						"Content-Type": "application/json",
+					},
+					body: JSON.stringify(newEmployee),
+				})
+					.then((response) => response.json())
+					.catch((err) => console.error(err))
+			)
+		);
+
+		getEmployees();
 	};
 
-	// store urls to fetch in an array
-	const urls = ["/api/employees", "/api/users"];
+	$("#add-employee-btn").on("click", getAllLogins2);
 
-	// use map() to perform a fetch and handle the response for each url
-	Promise.all(
-		urls.map((url) =>
-			fetch(url, {
-				method: "POST",
-				headers: {
-					"Content-Type": "application/json",
-				},
-				body: JSON.stringify(newEmployee),
-			})
-				.then((response) => response.json())
-				.catch((err) => console.error(err))
-		)
-	);
+	const getAllLoginsManagers = (e) => {
+		const newManager = {
+			first_name: $("#manager-first-name").val().trim(),
+			last_name: $("#manager-last-name").val().trim(),
+			role_id: $("#manager-title").val(),
+			email: $("#manager-email").val().trim(),
+			password: $("#manager-password").val().trim(),
+		};
+		console.log(first_name);
+		console.log(last_name);
+		console.log(role_id);
+		console.log(email);
+		console.log(password);
+		// store urls to fetch in an array
+		const urls = ["/api/managers", "/api/users"];
 
-	getEmployees();
-};
+		// use map() to perform a fetch and handle the response for each url
+		Promise.all(
+			urls.map((url) =>
+				fetch(url, {
+					method: "POST",
+					headers: {
+						"Content-Type": "application/json",
+					},
+					body: JSON.stringify(newManager),
+				})
+					.then((response) => response.json())
+					.catch((err) => console.error(err))
+			)
+		);
 
-$("#add-employee-btn").on("click", getAllLogins2);
-
-const getAllLoginsManagers = (e) => {
-	const newManager = {
-		first_name: $("#manager-first-name").val().trim(),
-		last_name: $("#manager-last-name").val().trim(),
-		role_id: ManagerTitleSelect.val(),
-
-		email: $("#manager-email").val().trim(),
-		password: $("#manager-password").val().trim(),
+		getManager();
 	};
-	console.log(project_id);
-	// store urls to fetch in an array
-	const urls = ["/api/managers", "/api/users"];
 
-	// use map() to perform a fetch and handle the response for each url
-	Promise.all(
-		urls.map((url) =>
-			fetch(url, {
-				method: "POST",
-				headers: {
-					"Content-Type": "application/json",
-				},
-				body: JSON.stringify(newManager),
-			})
-				.then((response) => response.json())
-				.catch((err) => console.error(err))
-		)
-	);
-
-	getManager();
-};
 
 $("#add-manager-btn").on("click", getAllLoginsManagers);
+
+// put 
+const updateProject = (e) => {
+	empId = e.target.value;
+	console.log(e.target.value);
+	selectedProjectId = $(`select[data-id=${empId}]`).val();
+	console.log(selectedProjectId)
+    fetch('/api/employee', {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+	  body: JSON.stringify({
+		ProjectId: selectedProjectId,
+		EmployeeId: empId
+	  })
+    })
+      .then(() => {
+        console.log("Updated employee project! ")
+      })
+      .catch((err) => console.error(err));
+  };
+
+	$("#add-manager-btn").on("click", getAllLoginsManagers);
+});
+

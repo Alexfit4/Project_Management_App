@@ -88,18 +88,17 @@ document.addEventListener("DOMContentLoaded", () => {
         // Object that will be sent to the db
         //for (var i = 0; i < employeeSelect.length; i++) {
         //console.log(employeeSelect.value)
-        var selected = Array.from(employeeSelect.options)
-        console.log(selected)
+        var selected = Array.from(employeeSelect.options);
+        console.log(selected);
         var selectedIds = [];
 
-        selected.forEach(selection => {
+        selected.forEach((selection) => {
             if (selection.selected) {
-                selectedIds.push(selection.value)
+                selectedIds.push(selection.value);
             }
-
         });
 
-        console.log(selectedIds)
+        console.log(selectedIds);
         var newProject = [];
         for (var i = 0; i < selectedIds.length; i++) {
             const singleProject = {
@@ -107,9 +106,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 description: bodyInput.value.trim(),
                 manager_id: managerSelect.value,
                 employee_id: selectedIds[i],
-
-            }
-            newProject.push(singleProject)
+            };
+            newProject.push(singleProject);
         }
         //allEmployee.push(newProject);
         console.log(newProject);
@@ -118,7 +116,6 @@ document.addEventListener("DOMContentLoaded", () => {
         console.log(updating);
         // Update a post if flag is true, otherwise submit a new one
         for (let i = 0; i < newProject.length; i++) {
-
             if (updating) {
                 newProject.id = projectId;
                 updateProject(newProject[i]);
@@ -133,7 +130,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Submits new project then redirects
     const submitProject = (project) => {
-        const urls = ["/api/project", "/api/employee_projects",];
+        const urls = ["/api/project", "/api/employee_projects"];
         Promise.all(
             urls.map((url) =>
                 fetch(url, {
@@ -269,37 +266,33 @@ document.addEventListener("DOMContentLoaded", () => {
         // .catch((err) => console.error(err));
     };
 
-    const getAllLogins2 = (e) => {
+    // const getAllLogins2 = (e) => {
+    //     const newEmployee = {
+    //         first_name: $("#employee-first-name").val().trim(),
+    //         last_name: $("#employee-last-name").val().trim(),
+    //         role_id: $("#employee-title").val(),
+    //         email: $("#employee-email").val().trim(),
+    //         password: $("#employee-password").val().trim(),
+    //     };
 
-        const newEmployee = {
-            first_name: $("#employee-first-name").val().trim(),
-            last_name: $("#employee-last-name").val().trim(),
-            role_id: $("#employee-title").val(),
-            email: $("#employee-email").val().trim(),
-            password: $("#employee-password").val().trim(),
-        };
+    //     // store urls to fetch in an array
+    //     const urls = ["/api/employee_projects", "/api/project"];
 
-        // store urls to fetch in an array
-        const urls = ["/api/employee_projects", "/api/project",];
+    //     // use map() to perform a fetch and handle the response for each url
+    //     Promise.all(
+    //         urls.map((url) =>
+    //             fetch(url, {
+    //                 method: "POST",
+    //                 headers: {
+    //                     "Content-Type": "application/json",
+    //                 },
+    //                 body: JSON.stringify(newEmployee),
+    //             })
+    //                 .then((response) => response.json())
+    //                 .catch((err) => console.error(err))
+    //         )
+    //     );
 
-        // use map() to perform a fetch and handle the response for each url
-        Promise.all(
-            urls.map((url) =>
-                fetch(url, {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify(newEmployee),
-                })
-                    .then((response) => response.json())
-                    .catch((err) => console.error(err))
-            )
-        );
-
-        getEmployees()
-
-    };
+    //     getEmployees();
+    // };
 });
-
-
