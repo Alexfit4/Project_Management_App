@@ -54,7 +54,7 @@ module.exports = (app) => {
 	});
 
 	// * DELETE route for deleting todos using the ID (req.params.id)
-	app.delete("/api/managers:id", (req, res) => {
+	app.delete("/api/managers/:id", (req, res) => {
 		// We just have to specify which todo we want to destroy with "where"
 		db.Manager.destroy({
 			where: {
