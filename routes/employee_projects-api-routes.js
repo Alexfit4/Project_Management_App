@@ -86,17 +86,4 @@ module.exports = (app) => {
 		).then((dbEmployee) => res.json(dbEmployee));
 	});
 
-	app.put("/api/employee", (req, res) => {
-		console.log(req.body)
-		db.Employee.update(
-			{
-				project_id: parseInt(req.body.ProjectId)
-			},
-			{
-				where: {
-					id: parseInt(req.body.EmployeeId)
-				},
-			}
-		).then((dbEmployee) => res.json(dbEmployee));
-	});
 };
