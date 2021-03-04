@@ -4,7 +4,7 @@ const { Op } = require("sequelize");
 module.exports = (app) => {
 	// * GET route for getting all of the projects
 	app.get("/api/project", (req, res) => {
-		
+
 		// const query = {};
 		// if (req.query.employee_id) {
 		// 	query.EmployeeId = req.query.employee_id;
@@ -14,6 +14,14 @@ module.exports = (app) => {
 			include: [
 				{
 					model: db.Employee,
+
+				},
+				{
+					model: db.Manager,
+
+				},
+				{
+					model: db.Manager,
 					
 				},
 			],
@@ -68,17 +76,17 @@ module.exports = (app) => {
 	});
 
 	app.put("/api/project/:id", (req, res) => {
-		console.log(req.body);
+		console.log(req.body)
 		db.Project.update(
 			{
 				name: req.body.name,
 				description: req.body.description,
 				manager_id: req.body.manager_id,
-				employee_id: req.body.employee_id,
+				employee_id: req.body.employee_id
 			},
 			{
 				where: {
-					id: req.body.id,
+					id: req.params.id,
 				},
 			}
 		).then((data) => res.json(data));

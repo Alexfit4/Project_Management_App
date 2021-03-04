@@ -22,6 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Variable to hold our projects
     let projects;
+    let projEmpName;
 
     const getProjects = (id) => {
         // employeeId = employee || '';
@@ -53,10 +54,11 @@ document.addEventListener('DOMContentLoaded', () => {
                         projMngLast = data[i].Manager.last_name;
                         projMngName = `${projMngFirst} ${projMngLast}`
 
-                        // THIS IS IMPORTANT
-                        // projEmpFirst = data[i].Employee.first_name;
-                        // projEmpLast = data[i].Employee.last_name;
-                        // projEmpName = `${projEmpFirst} ${projEmpLast}`
+                       
+                        projEmpFirst = data[i].Employees[0].first_name;
+                        projEmpLast = data[i].Employees[0].last_name;
+                        projEmpName = `${projEmpFirst} ${projEmpLast}`
+                        console.log(projEmpName);
 
                         console.log(projDescript)
                         var newRow = $("<tr>").append(
@@ -66,7 +68,9 @@ document.addEventListener('DOMContentLoaded', () => {
                             $("<td>").text(projName),
                             $("<td>").text(projDescript),
                             $("<td>").text(projMngName),
-                            // $("<td>").text(projEmpName),
+
+                            $("<td>").text(projEmpName),
+
                             console.log(projDescript)
                             // $("<td>").text(empSalary),
                             // $("<td>").text(empEmail),
@@ -77,7 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         // // Append the new row to the table
                         $("#projectTable > tbody").append(newRow);
 
-                      
+
 
 
                     }
@@ -111,10 +115,10 @@ document.addEventListener('DOMContentLoaded', () => {
             }).then((response) => response.json())
                 .then((data) => {
                     console.log(data);
-                    var result = Object.keys(data).map((key) => [String(key), data[key]]);
-                    console.log(result);
+                    // var result = Object.keys(data).map((key) => [String(key), data[key]]);
+                    // console.log(result);
                     projectTitle.textContent = data.name;
-                    console.log(data.Employee.first_name);
+                    console.log(data.Employee);
                     $(projectTitle).attr('style', 'font-style: italic; font-weight: bold');
                     let employee;
                     var desc = data.description;
@@ -127,17 +131,17 @@ document.addEventListener('DOMContentLoaded', () => {
                     var update = data.updatedAt.substring(0, 10);
                     var updateDisplay = "Last updated: " + update;
                     let showEmployee;
-                    for (var i=0; i<data.Employee.length; i++) {
-                        employee = "Employee: " + data.Employee[i].first_name + " " + data.Employee[i].last_name;
-                        employeeEmail = "Employee contact: " + data.Employee[i].email;
+                    for (var i = 0; i < data.Employees.length; i++) {
+                        employee = "Employee: " + data.Employees[i].first_name + " " + data.Employees[i].last_name;
+                        employeeEmail = "Employee contact: " + data.Employees[i].email;
                         showEmployee = $("<div>").append(
-                            $("<div>").text(employee),
+                            $("<div>").text(employee).attr('style', 'font-weight: bold'),
                             $("<div>").text(employeeEmail),
                         );
                         $(employeeDetail).append(showEmployee);
                         console.log(showEmployee);
                     }
-                    
+
                     var showDesc = $("<div>").append(
                         $("<div>").text(desc),
                     );
@@ -145,14 +149,14 @@ document.addEventListener('DOMContentLoaded', () => {
                         $("<div>").text(manager).attr('style', 'font-weight: bold'),
                         $("<div>").text(managerEmail)
                     );
-                   
+
                     var showTimeline = $("<div>").append(
                         $("<div>").text(createdDisplay),
                         $("<div>").text(updateDisplay),
                     );
                     $(projectDescriptor).append(showDesc);
                     $(managerDetail).append(showManager);
-                    
+
                     $(timeline).append(showTimeline);
                 })
 
@@ -230,6 +234,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
+
     const editProject = (e) => {
         id = e.target.value;
         // const updatedProject = {
@@ -260,6 +265,7 @@ document.addEventListener('DOMContentLoaded', () => {
     $(document).on("click", '.edit-proj-btn', editProject);
 
 
+
     const getAllStuff = () => {
         // employeeId = employee || '';
         // if (employeeId) {
@@ -274,16 +280,18 @@ document.addEventListener('DOMContentLoaded', () => {
         })
             .then((response) => response.json())
             .then((data) => {
-              console.log(data[0].Project);
-              console.log(data[0].Employee);
-  
 
-                })
+                console.log(data[0].Project);
+                console.log(data[0].Employee);
 
 
-            }
-        // .catch((error) => console.error('Error:', error));
-    
-        getAllStuff()
+
+            })
+
+
+    }
+    // .catch((error) => console.error('Error:', error));
+
+    getAllStuff()
 
 });
