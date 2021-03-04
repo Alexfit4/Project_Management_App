@@ -125,7 +125,11 @@ $(document).ready(() => {
 			email: $("#employee-email").val().trim(),
 			password: $("#employee-password").val().trim(),
 		};
+
 		console.log($("#employee-projects").val());
+
+		// console.log(project_id);
+
 		//console.log(newEmployee.role_id)
 		if (newEmployee) {
 			fetch("/api/employees", {
@@ -140,7 +144,10 @@ $(document).ready(() => {
 				.catch((err) => console.error(err));
 		}
 	};
+
 	//$("#add-employee-btn").on("click", addEmployee);
+	// $("#add-employee-btn").on("click", addEmployee);
+
 
 	//Add Employee
 	const addManager = (e) => {
@@ -429,6 +436,7 @@ $(document).ready(() => {
 		);
 
 		getEmployees();
+		location.reload();
 	};
 
 	$("#add-employee-btn").on("click", getAllLogins2);
