@@ -12,8 +12,6 @@
 
   - [Developers](#developers)
 
-  - [Installation](#installation)
-
   - [Usage](#usage)
 
   - [Contributing](#contributing)
@@ -21,8 +19,6 @@
   - [Technologies](#technologies)
 
   - [Questions](#questions)
-
-  - [Acknowledgments](#acknowledgments)
 
   - [Licenses](#licenses)
 
@@ -47,18 +43,13 @@
   3. Amir Ashtiany: MySQL, CRUD, Validation
   4. Johnnie Simpson: MySQL, CRUD, Handlebars, Linter
 
-  ## Installation
-
-  ```bash
-  npm i
-  ```
   ## Usage
 
-  Coming soon!
+  Sprinter is designed with you and your development sprints in mind. Use the app to add sprints, add employees and managers to sprints, and keep track of your progress and division of labor as your project progresses. 
 
   ## Contributing
 
-  This project is free and open source software (FOSS). Please contact the developers for more information.
+  This project is free and open source software (FOSS).
 
   ## Technologies
 
@@ -80,10 +71,6 @@
   2. Johnnie Simpson: http://www.github.com/balokdecoy.
   3. Lu Hao: https://github.com/lhaodev 
   4. Mengyue Zhang: https://github.com/mengyue-z 
-
-  ## Acknowledgments
-
-  Coming soon!
 
   ## Licenses
  Licensed under [GPL v3](https://www.gnu.org/licenses/gpl-3.0)
