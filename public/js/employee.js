@@ -55,8 +55,8 @@ $(document).ready(() => {
 								.text("Update")
 								.addClass("update-emp-btn btn-outline-dark btn btn-sm")
 								.val(empId)
-								.on("click",updateProject),
-							
+								.on("click", updateProject),
+
 							$("<button>")
 								.text("Delete")
 								.addClass("delete-emp-btn btn-outline-dark btn btn-sm")
@@ -148,7 +148,6 @@ $(document).ready(() => {
 	//$("#add-employee-btn").on("click", addEmployee);
 	// $("#add-employee-btn").on("click", addEmployee);
 
-
 	//Add Employee
 	const addManager = (e) => {
 		e.preventDefault();
@@ -187,6 +186,7 @@ $(document).ready(() => {
 				"Content-Type": "application/json",
 			},
 		}).then(getEmployees());
+		location.reload();
 	};
 
 	$(document).on("click", ".delete-emp-btn", deleteEmployees);
@@ -201,6 +201,8 @@ $(document).ready(() => {
 				"Content-Type": "application/json",
 			},
 		}).then(getManager());
+
+		location.reload();
 	};
 
 	$(document).on("click", ".delete-manager-btn", deleteManagers);
@@ -237,22 +239,22 @@ $(document).ready(() => {
 		ManagerTitleSelect.value = titleId;
 	};
 
-		// Render a list of projects in table
-		
-		const renderTableProjectList = (data) => {
-			const tableProjectSelect = $(".project-list");
-			console.log("renderTableProjectList -> data", data);
-	
-			const rowsToAdd = [];
-	
-			data.forEach((project) => rowsToAdd.push(createProjectListRow(project)));
-	
-			console.log("renderTableProjectList -> rowsToAdd", rowsToAdd);
-			console.log("tableProjectSelect", tableProjectSelect);
-	
-			rowsToAdd.forEach((row) => tableProjectSelect.append(row));
-			tableProjectSelect.value = projectId;
-		};
+	// Render a list of projects in table
+
+	const renderTableProjectList = (data) => {
+		const tableProjectSelect = $(".project-list");
+		console.log("renderTableProjectList -> data", data);
+
+		const rowsToAdd = [];
+
+		data.forEach((project) => rowsToAdd.push(createProjectListRow(project)));
+
+		console.log("renderTableProjectList -> rowsToAdd", rowsToAdd);
+		console.log("tableProjectSelect", tableProjectSelect);
+
+		rowsToAdd.forEach((row) => tableProjectSelect.append(row));
+		tableProjectSelect.value = projectId;
+	};
 
 	// Build title dropdown
 	const createEmpTitleRow = ({ id, title }) => {
@@ -296,7 +298,7 @@ $(document).ready(() => {
 			.then((response) => response.json())
 			.then((data) => {
 				titleId = data.id;
-				console.log(titleId)
+				console.log(titleId);
 				renderEmpTitleList(data);
 			})
 			.catch((err) => console.error(err));
@@ -313,7 +315,7 @@ $(document).ready(() => {
 		})
 			.then((response) => response.json())
 			.then((data) => {
-				console.log(data)
+				console.log(data);
 				titleId = data.id;
 				console.log(titleId);
 				renderManagerTitleList(data);
@@ -475,31 +477,30 @@ $(document).ready(() => {
 		getManager();
 	};
 
+	$("#add-manager-btn").on("click", getAllLoginsManagers);
 
-$("#add-manager-btn").on("click", getAllLoginsManagers);
-
-// put 
-const updateProject = (e) => {
-	empId = e.target.value;
-	console.log(e.target.value);
-	selectedProjectId = $(`select[data-id=${empId}]`).val();
-	console.log(selectedProjectId)
-    fetch('/api/employee', {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-	  body: JSON.stringify({
-		ProjectId: selectedProjectId,
-		EmployeeId: empId
-	  })
-    })
-      .then(() => {
-        console.log("Updated employee project! ")
-      })
-      .catch((err) => console.error(err));
-  };
+	// put
+	const updateProject = (e) => {
+		empId = e.target.value;
+		console.log(e.target.value);
+		selectedProjectId = $(`select[data-id=${empId}]`).val();
+		console.log(selectedProjectId);
+		fetch("/api/employee", {
+			method: "PUT",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({
+				ProjectId: selectedProjectId,
+				EmployeeId: empId,
+			}),
+		})
+			.then(() => {
+				console.log("Updated employee project! ");
+				alert(`Successfully updated employee's project!`);
+			})
+			.catch((err) => console.error(err));
+	};
 
 	$("#add-manager-btn").on("click", getAllLoginsManagers);
 });
-
