@@ -7,7 +7,7 @@ var passport = require("./config/passport");
 
 // Sets up the Express App
 const app = express();
-
+connection;
 if (process.env.JAWSDB_URL) {
 	var connection = mysql.createConnection(process.env.JAWSDB_URL);
 } else {
