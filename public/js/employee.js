@@ -77,6 +77,7 @@ $(document).ready(() => {
 					console.log("Success in getting post:", data);
 					console.log(data);
 					$("#manager-table > tbody").empty();
+					console.log(data);
 					// Populate the form
 					for (i = 0; i < data.length; i++) {
 						managerFirstName = data[i].first_name;
@@ -338,74 +339,77 @@ $(document).ready(() => {
 	};
 
 	$("#update-employee-btn").on("click", updateEmployees);
+
+	// * Testing fetching two api's
+
+	// ! Amir's Branch
+
+	const getAllLogins2 = (e) => {
+		const newEmployee = {
+			first_name: $("#employee-first-name").val().trim(),
+			last_name: $("#employee-last-name").val().trim(),
+			role_id: $("#employee-title").val(),
+			project_id: $("#employee-projects").val(),
+			email: $("#employee-email").val().trim(),
+			password: $("#employee-password").val().trim(),
+		};
+
+		// store urls to fetch in an array
+		const urls = ["/api/employees", "/api/users"];
+
+		// use map() to perform a fetch and handle the response for each url
+		Promise.all(
+			urls.map((url) =>
+				fetch(url, {
+					method: "POST",
+					headers: {
+						"Content-Type": "application/json",
+					},
+					body: JSON.stringify(newEmployee),
+				})
+					.then((response) => response.json())
+					.catch((err) => console.error(err))
+			)
+		);
+
+		getEmployees();
+	};
+
+	$("#add-employee-btn").on("click", getAllLogins2);
+
+	const getAllLoginsManagers = (e) => {
+		const newManager = {
+			first_name: $("#manager-first-name").val().trim(),
+			last_name: $("#manager-last-name").val().trim(),
+			role_id: $("#manager-title").val(),
+			email: $("#manager-email").val().trim(),
+			password: $("#manager-password").val().trim(),
+		};
+		console.log(first_name);
+		console.log(last_name);
+		console.log(role_id);
+		console.log(email);
+		console.log(password);
+		// store urls to fetch in an array
+		const urls = ["/api/managers", "/api/users"];
+
+		// use map() to perform a fetch and handle the response for each url
+		Promise.all(
+			urls.map((url) =>
+				fetch(url, {
+					method: "POST",
+					headers: {
+						"Content-Type": "application/json",
+					},
+					body: JSON.stringify(newManager),
+				})
+					.then((response) => response.json())
+					.catch((err) => console.error(err))
+			)
+		);
+
+		getManager();
+	};
+
+	$("#add-manager-btn").on("click", getAllLoginsManagers);
 });
-
-// * Testing fetching two api's
-
-// ! Amir's Branch
-
-const getAllLogins2 = (e) => {
-	const newEmployee = {
-		first_name: $("#employee-first-name").val().trim(),
-		last_name: $("#employee-last-name").val().trim(),
-		role_id: $("#employee-title").val(),
-		project_id: $("#employee-projects").val(),
-		email: $("#employee-email").val().trim(),
-		password: $("#employee-password").val().trim(),
-	};
-
-	// store urls to fetch in an array
-	const urls = ["/api/employees", "/api/users"];
-
-	// use map() to perform a fetch and handle the response for each url
-	Promise.all(
-		urls.map((url) =>
-			fetch(url, {
-				method: "POST",
-				headers: {
-					"Content-Type": "application/json",
-				},
-				body: JSON.stringify(newEmployee),
-			})
-				.then((response) => response.json())
-				.catch((err) => console.error(err))
-		)
-	);
-
-	getEmployees();
-};
-
-$("#add-employee-btn").on("click", getAllLogins2);
-
-const getAllLoginsManagers = (e) => {
-	const newManager = {
-		first_name: $("#manager-first-name").val().trim(),
-		last_name: $("#manager-last-name").val().trim(),
-		role_id: ManagerTitleSelect.val(),
-
-		email: $("#manager-email").val().trim(),
-		password: $("#manager-password").val().trim(),
-	};
-	console.log(project_id);
-	// store urls to fetch in an array
-	const urls = ["/api/managers", "/api/users"];
-
-	// use map() to perform a fetch and handle the response for each url
-	Promise.all(
-		urls.map((url) =>
-			fetch(url, {
-				method: "POST",
-				headers: {
-					"Content-Type": "application/json",
-				},
-				body: JSON.stringify(newManager),
-			})
-				.then((response) => response.json())
-				.catch((err) => console.error(err))
-		)
-	);
-
-	getManager();
-};
-
-$("#add-manager-btn").on("click", getAllLoginsManagers);
