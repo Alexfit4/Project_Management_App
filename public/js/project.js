@@ -264,7 +264,7 @@ document.addEventListener("DOMContentLoaded", () => {
             },
             body: JSON.stringify(project),
         }).then(() => {
-            window.location.href = "/dashboard";
+            // window.location.href = "/dashboard";
         });
         // .catch((err) => console.error(err));
     };
@@ -301,3 +301,4 @@ document.addEventListener("DOMContentLoaded", () => {
 
     };
 });
+
