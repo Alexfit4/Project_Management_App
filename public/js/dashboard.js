@@ -65,7 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             $("<button>").text("Edit").addClass("edit-proj-btn btn-outline-dark btn").val(projId),
                             $("<td>").text(projName),
                             $("<td>").text(projDescript),
-                            $("<td>").text(projMngName),
+                            // $("<td>").text(projMngName),
                             // $("<td>").text(projEmpName),
                             console.log(projDescript)
                             // $("<td>").text(empSalary),
@@ -114,7 +114,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     var result = Object.keys(data).map((key) => [String(key), data[key]]);
                     console.log(result);
                     projectTitle.textContent = data.name;
-                    console.log(data.Employee.first_name);
+                    console.log(data.Employee);
                     $(projectTitle).attr('style', 'font-style: italic; font-weight: bold');
                     let employee;
                     var desc = data.description;
@@ -127,9 +127,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     var update = data.updatedAt.substring(0, 10);
                     var updateDisplay = "Last updated: " + update;
                     let showEmployee;
-                    for (var i=0; i<data.Employee.length; i++) {
-                        employee = "Employee: " + data.Employee[i].first_name + " " + data.Employee[i].last_name;
-                        employeeEmail = "Employee contact: " + data.Employee[i].email;
+                    for (var i=0; i < data.Employees.length; i++) {
+                        employee = "Employee: " + data.Employees[i].first_name + " " + data.Employees[i].last_name;
+                        employeeEmail = "Employee contact: " + data.Employees[i].email;
                         showEmployee = $("<div>").append(
                             $("<div>").text(employee),
                             $("<div>").text(employeeEmail),

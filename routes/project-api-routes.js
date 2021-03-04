@@ -16,6 +16,10 @@ module.exports = (app) => {
 					model: db.Employee,
 					
 				},
+				{
+					model: db.Manager,
+					
+				},
 			],
 		}).then((Project) => {
 			res.json(Project);
