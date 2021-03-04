@@ -22,6 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Variable to hold our projects
     let projects;
+    let projEmpName;
 
     const getProjects = (id) => {
         // employeeId = employee || '';
@@ -53,10 +54,11 @@ document.addEventListener('DOMContentLoaded', () => {
                         projMngLast = data[i].Manager.last_name;
                         projMngName = `${projMngFirst} ${projMngLast}`
 
-                        // THIS IS IMPORTANT
-                        // projEmpFirst = data[i].Employee.first_name;
-                        // projEmpLast = data[i].Employee.last_name;
-                        // projEmpName = `${projEmpFirst} ${projEmpLast}`
+                       
+                        projEmpFirst = data[i].Employees[0].first_name;
+                        projEmpLast = data[i].Employees[0].last_name;
+                        projEmpName = `${projEmpFirst} ${projEmpLast}`
+                        console.log(projEmpName);
 
                         console.log(projDescript)
                         var newRow = $("<tr>").append(
@@ -66,7 +68,9 @@ document.addEventListener('DOMContentLoaded', () => {
                             $("<td>").text(projName),
                             $("<td>").text(projDescript),
                             $("<td>").text(projMngName),
-                            // $("<td>").text(projEmpName),
+
+                            $("<td>").text(projEmpName),
+
                             console.log(projDescript)
                             // $("<td>").text(empSalary),
                             // $("<td>").text(empEmail),
@@ -131,7 +135,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         employee = "Employee: " + data.Employees[i].first_name + " " + data.Employees[i].last_name;
                         employeeEmail = "Employee contact: " + data.Employees[i].email;
                         showEmployee = $("<div>").append(
-                            $("<div>").text(employee),
+                            $("<div>").text(employee).attr('style', 'font-weight: bold'),
                             $("<div>").text(employeeEmail),
                         );
                         $(employeeDetail).append(showEmployee);
@@ -276,8 +280,10 @@ document.addEventListener('DOMContentLoaded', () => {
         })
             .then((response) => response.json())
             .then((data) => {
+
                 console.log(data[0].Project);
                 console.log(data[0].Employee);
+
 
 
             })
