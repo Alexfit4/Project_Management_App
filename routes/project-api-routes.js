@@ -82,7 +82,7 @@ module.exports = (app) => {
 			},
 			{
 				where: {
-					id: req.params.id,
+					id: req.body.id,
 				},
 			}
 		).then((data) => res.json(data));

@@ -121,7 +121,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             if (updating) {
                 newProject.id = projectId;
-                updateProject(newProject);
+                updateProject(newProject[i]);
             } else {
                 submitProject(newProject[i]);
             }
@@ -264,7 +264,7 @@ document.addEventListener("DOMContentLoaded", () => {
             },
             body: JSON.stringify(project),
         }).then(() => {
-            // window.location.href = "/dashboard";
+            window.location.href = "/dashboard";
         });
         // .catch((err) => console.error(err));
     };
