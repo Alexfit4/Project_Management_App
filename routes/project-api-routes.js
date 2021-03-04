@@ -20,6 +20,10 @@ module.exports = (app) => {
 					model: db.Manager,
 
 				},
+				{
+					model: db.Manager,
+					
+				},
 			],
 		}).then((Project) => {
 			res.json(Project);
