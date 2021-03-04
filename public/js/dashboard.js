@@ -266,32 +266,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
-    const getAllStuff = () => {
-        // employeeId = employee || '';
-        // if (employeeId) {
-        //     employeeId = `/?employee_id=${employeeId}`;
-        // }
-
-        fetch('/api/employee_projects', {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        })
-            .then((response) => response.json())
-            .then((data) => {
-
-                console.log(data[0].Project);
-                console.log(data[0].Employee);
-
-
-
-            })
-
-
-    }
+  
     // .catch((error) => console.error('Error:', error));
 
-    getAllStuff()
+    
 
 });
