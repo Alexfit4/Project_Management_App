@@ -20,10 +20,6 @@ module.exports = (app) => {
 					model: db.Manager,
 
 				},
-				{
-					model: db.Manager,
-					
-				},
 			],
 		}).then((Project) => {
 			res.json(Project);
@@ -44,7 +40,6 @@ module.exports = (app) => {
 			include: [
 				{
 					model: db.Employee,
-					required: true,
 				},
 				{
 					model: db.Manager,
