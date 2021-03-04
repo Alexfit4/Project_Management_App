@@ -71,7 +71,7 @@ module.exports = (app) => {
 		}).then((dbEmployee) => res.json(dbEmployee));
 	});
 
-	// * PUT route for updating Employees. We can get the updated Employee data from req.body
+	//* PUT route for updating Employees. We can get the updated Employee data from req.body
 	app.put("/api/employee_projects", (req, res) => {
 		db.Employee_Projects.update(
 			{
@@ -81,6 +81,20 @@ module.exports = (app) => {
 			{
 				where: {
 					id: req.body.id,
+				},
+			}
+		).then((dbEmployee) => res.json(dbEmployee));
+	});
+
+	app.put("/api/employee", (req, res) => {
+		console.log(req.body)
+		db.Employee.update(
+			{
+				project_id: parseInt(req.body.ProjectId)
+			},
+			{
+				where: {
+					id: parseInt(req.body.EmployeeId)
 				},
 			}
 		).then((dbEmployee) => res.json(dbEmployee));

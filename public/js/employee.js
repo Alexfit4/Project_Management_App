@@ -1,3 +1,5 @@
+//const { Json } = require("sequelize/types/lib/utils");
+
 $(document).ready(() => {
 	console.log("DOM loaded! 🚀");
 	feather.replace();
@@ -48,12 +50,18 @@ $(document).ready(() => {
 							$("<td>").text(empTitle).addClass("title-row"),
 							$("<td>").text(empSalary),
 							$("<td>").text(empEmail),
+							$("<select>").attr("data-id", empId).addClass("project-list"),
+							$("<button>")
+								.text("Update")
+								.addClass("update-emp-btn btn-outline-dark btn")
+								.val(empId)
+								.on("click",updateProject),
+							
 							$("<button>")
 								.text("Delete")
 								.addClass("delete-emp-btn btn-outline-dark btn")
 								.val(empId)
 						);
-
 						// Append the new row to the table
 						$("#employee-table > tbody").append(newRow);
 					}
@@ -131,7 +139,7 @@ $(document).ready(() => {
 				.catch((err) => console.error(err));
 		}
 	};
-	// $("#add-employee-btn").on("click", addEmployee);
+	$("#add-employee-btn").on("click", addEmployee);
 
 	//Add Employee
 	const addManager = (e) => {
@@ -157,8 +165,8 @@ $(document).ready(() => {
 				.catch((err) => console.error(err));
 		}
 	};
-	// $("#add-manager-btn").on("click", addManager);
-
+	//$("#add-manager-btn").on("click", addManager);
+	$(document).on("click", "#add-manager-btn", addManager);
 	//Delete Employee
 	const deleteEmployees = (e) => {
 		id = e.target.value;
@@ -219,6 +227,23 @@ $(document).ready(() => {
 		ManagerTitleSelect.value = titleId;
 	};
 
+		// Render a list of projects in table
+		
+		const renderTableProjectList = (data) => {
+			const tableProjectSelect = $(".project-list");
+			console.log("renderTableProjectList -> data", data);
+	
+			const rowsToAdd = [];
+	
+			data.forEach((project) => rowsToAdd.push(createProjectListRow(project)));
+	
+			console.log("renderTableProjectList -> rowsToAdd", rowsToAdd);
+			console.log("tableProjectSelect", tableProjectSelect);
+	
+			rowsToAdd.forEach((row) => tableProjectSelect.append(row));
+			tableProjectSelect.value = projectId;
+		};
+
 	// Build title dropdown
 	const createEmpTitleRow = ({ id, title }) => {
 		const listOption = $("<option>");
@@ -229,6 +254,14 @@ $(document).ready(() => {
 
 	//*  Build title dropdown
 	const createEmpProjectRow = ({ id, name }) => {
+		const listOption = $("<option>");
+		listOption.val(id);
+		listOption.text(name);
+		return listOption;
+	};
+
+	// Build title dropdown in table - Mengyue
+	const createProjectListRow = ({ id, name }) => {
 		const listOption = $("<option>");
 		listOption.val(id);
 		listOption.text(name);
@@ -253,6 +286,7 @@ $(document).ready(() => {
 			.then((response) => response.json())
 			.then((data) => {
 				titleId = data.id;
+				console.log(titleId)
 				renderEmpTitleList(data);
 			})
 			.catch((err) => console.error(err));
@@ -269,6 +303,7 @@ $(document).ready(() => {
 		})
 			.then((response) => response.json())
 			.then((data) => {
+				console.log(data)
 				titleId = data.id;
 				console.log(titleId);
 				renderManagerTitleList(data);
@@ -310,6 +345,25 @@ $(document).ready(() => {
 	};
 
 	getEmpProject();
+
+	const getProjectList = () => {
+		fetch("api/project", {
+			method: "GET",
+			headers: {
+				"Content-Type": "application/json",
+			},
+		})
+			.then((response) => response.json())
+			.then((data) => {
+				console.log(data);
+				projectId = data.id;
+				console.log(projectId);
+				renderTableProjectList(data);
+			})
+			.catch((err) => console.error(err));
+	};
+
+	getProjectList();
 
 	// * Update employee
 
@@ -409,3 +463,25 @@ const getAllLoginsManagers = (e) => {
 };
 
 $("#add-manager-btn").on("click", getAllLoginsManagers);
+
+// put 
+const updateProject = (e) => {
+	empId = e.target.value;
+	console.log(e.target.value);
+	selectedProjectId = $(`select[data-id=${empId}]`).val();
+	console.log(selectedProjectId)
+    fetch('/api/employee', {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+	  body: JSON.stringify({
+		ProjectId: selectedProjectId,
+		EmployeeId: empId
+	  })
+    })
+      .then(() => {
+        console.log("Updated employee project! ")
+      })
+      .catch((err) => console.error(err));
+  };
