@@ -105,8 +105,8 @@ document.addEventListener("DOMContentLoaded", () => {
             const singleProject = {
                 name: titleInput.value.trim(),
                 description: bodyInput.value.trim(),
-                manager_id: managerSelect.value,           
-                EmployeeId: selectedIds[i],
+                manager_id: managerSelect.value,
+                employee_id: selectedIds[i],
 
             }
             newProject.push(singleProject)
@@ -121,7 +121,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             if (updating) {
                 newProject.id = projectId;
-                updateProject(newProject);
+                updateProject(newProject[i]);
             } else {
                 submitProject(newProject[i]);
             }
@@ -133,7 +133,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Submits new project then redirects
     const submitProject = (project) => {
-        const urls = ["/api/project", "/api/employee_projects",  ];
+        const urls = ["/api/project", "/api/employee_projects",];
         Promise.all(
             urls.map((url) =>
                 fetch(url, {
@@ -270,7 +270,7 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     const getAllLogins2 = (e) => {
- 
+
         const newEmployee = {
             first_name: $("#employee-first-name").val().trim(),
             last_name: $("#employee-last-name").val().trim(),
@@ -278,10 +278,10 @@ document.addEventListener("DOMContentLoaded", () => {
             email: $("#employee-email").val().trim(),
             password: $("#employee-password").val().trim(),
         };
-    
+
         // store urls to fetch in an array
         const urls = ["/api/employee_projects", "/api/project",];
-    
+
         // use map() to perform a fetch and handle the response for each url
         Promise.all(
             urls.map((url) =>
@@ -296,10 +296,8 @@ document.addEventListener("DOMContentLoaded", () => {
                     .catch((err) => console.error(err))
             )
         );
-    
-      getEmployees()
-      
+
+        getEmployees()
+
     };
 });
-
-

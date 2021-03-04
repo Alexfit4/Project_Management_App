@@ -260,30 +260,30 @@ document.addEventListener('DOMContentLoaded', () => {
     $(document).on("click", '.edit-proj-btn', editProject);
 
 
-    const getAllStuff = () => {
-        // employeeId = employee || '';
-        // if (employeeId) {
-        //     employeeId = `/?employee_id=${employeeId}`;
-        // }
+    // const getAllStuff = () => {
+    //     // employeeId = employee || '';
+    //     // if (employeeId) {
+    //     //     employeeId = `/?employee_id=${employeeId}`;
+    //     // }
 
-        fetch('/api/employee_projects', {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        })
-            .then((response) => response.json())
-            .then((data) => {
-              console.log(data[0].Project);
-              console.log(data[0].Employee);
+    //     fetch('/api/employee_projects', {
+    //         method: 'GET',
+    //         headers: {
+    //             'Content-Type': 'application/json',
+    //         },
+    //     })
+    //         .then((response) => response.json())
+    //         .then((data) => {
+    //           console.log(data[0].Project);
+    //           console.log(data[0].Employee);
   
 
-                })
+    //             })
 
 
-            }
-        // .catch((error) => console.error('Error:', error));
+    //         }
+    //     // .catch((error) => console.error('Error:', error));
     
-        getAllStuff()
+    //     getAllStuff()
 
 });
