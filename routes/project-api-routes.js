@@ -40,7 +40,6 @@ module.exports = (app) => {
 			include: [
 				{
 					model: db.Employee,
-					required: true,
 				},
 				{
 					model: db.Manager,
