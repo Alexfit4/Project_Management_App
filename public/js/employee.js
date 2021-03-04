@@ -125,7 +125,7 @@ $(document).ready(() => {
 			email: $("#employee-email").val().trim(),
 			password: $("#employee-password").val().trim(),
 		};
-		console.log(project_id);
+		// console.log(project_id);
 		//console.log(newEmployee.role_id)
 		if (newEmployee) {
 			fetch("/api/employees", {
