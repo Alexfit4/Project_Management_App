@@ -30,11 +30,17 @@
 
   Github repo: https://github.com/Alexfit4/Project_Management_App 
 
-  Deployed application: Coming soon!
+  Deployed application: https://fast-everglades-95030.herokuapp.com/ 
 
   ## Screenshots
 
-  Coming soon!
+  ![login](./screenshots/login.png)
+
+  ![dashboard](./screenshots/dashboard.png)
+
+  ![project](./screenshots/project.png)
+
+  ![employee](./screenshots/employee.png)
 
   ## Developers
 
@@ -44,6 +50,10 @@
   4. Johnnie Simpson: MySQL, CRUD, Handlebars, Linter
 
   ## Usage
+  
+  To log in use:
+  - email: amir@gmail.com
+  - password: 1234
 
   Sprinter is designed with you and your development sprints in mind. Use the app to add sprints, add employees and managers to sprints, and keep track of your progress and division of labor as your project progresses. 
 
