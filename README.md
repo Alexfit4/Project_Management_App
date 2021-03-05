@@ -34,7 +34,13 @@
 
   ## Screenshots
 
-  Coming soon!
+  ![login](./screenshots/login.png)
+
+  ![dashboard](./screenshots/dashboard.png)
+
+  ![project](./screenshots/project.png)
+
+  ![employee](./screenshots/employee.png)
 
   ## Developers
 
