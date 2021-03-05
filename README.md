@@ -30,7 +30,7 @@
 
   Github repo: https://github.com/Alexfit4/Project_Management_App 
 
-  Deployed application: Coming soon!
+  Deployed application: https://fast-everglades-95030.herokuapp.com/ 
 
   ## Screenshots
 
